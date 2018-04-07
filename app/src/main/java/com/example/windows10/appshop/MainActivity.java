@@ -3,13 +3,16 @@ package com.example.windows10.appshop;
 import android.app.ActionBar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
+    private MainFragment mainFragment;
     private ProductFragment productFragment;
     private FragmentManager fragmentManager;
 
+    public static int PAGE_MAIN = 0;
     public static int PAGE_PRODUCT = 2;
     private static MainActivity instance;
 
@@ -19,17 +22,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //inisisalisasi semua fragment
+<<<<<<< HEAD
         this.productFragment = ProductFragment.newInstance("Product Fragment");
         this.fragmentManager = getSupportFragmentManager();
 //        FragmentTransaction ft = this.fragmentManager.beginTransaction();
 
         changePage(PAGE_PRODUCT);
         instance = this;
+=======
+        this.mainFragment = MainFragment.newInstance(this);
+        this.productFragment = new ProductFragment();
+        this.fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction ft = this.fragmentManager.beginTransaction();
+
+        changePage(PAGE_MAIN);
+        //changePage(PAGE_PRODUCT);
+>>>>>>> a67d99daa91dfd99f9037e7c31bcd3041c1c2d9b
     }
 
     public void changePage(int i){
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
+<<<<<<< HEAD
         if(i == PAGE_PRODUCT){
+=======
+        if(i == PAGE_MAIN){
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if(productFragment.isAdded()){
+                ft.show(mainFragment);
+            }else{
+                ft.add(R.id.fragment_container,mainFragment);
+            }
+        }if(i == PAGE_PRODUCT){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+>>>>>>> a67d99daa91dfd99f9037e7c31bcd3041c1c2d9b
             if(productFragment.isAdded()){
                 ft.show(productFragment);
             }else{

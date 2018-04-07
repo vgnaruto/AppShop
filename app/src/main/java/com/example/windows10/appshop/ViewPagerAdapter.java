@@ -17,7 +17,11 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
+<<<<<<< HEAD
     private Integer [] images = {R.drawable.cart_icon,R.drawable.calendar_icon,R.drawable.cart_icon};
+=======
+    private Integer [] images = {R.drawable.test_img1,R.drawable.test_img2,R.drawable.test_img3};
+>>>>>>> a67d99daa91dfd99f9037e7c31bcd3041c1c2d9b
 
     public ViewPagerAdapter(Context context) {
         this.context = context;
