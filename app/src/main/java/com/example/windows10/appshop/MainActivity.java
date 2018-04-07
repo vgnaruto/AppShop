@@ -1,10 +1,8 @@
 package com.example.windows10.appshop;
 
-import android.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,11 +13,19 @@ public class MainActivity extends AppCompatActivity {
     private MainFragment mainFragment;
     private ProductFragment productFragment;
     private FragmentManager fragmentManager;
-    private ShoppingFragment shoppingFragment;
+    private CartFragment cartFragment;
+    private WishlistFragment wishlistFragment;
+    private OrderHistoryFragment orderHistoryFragment;
+    private NewsListFragment newsListFragment;
+    private NotificationFragment notificationFragment;
 
     public static int PAGE_MAIN = 0;
     public static int PAGE_PRODUCT = 2;
-    public static int PAGE_SHOPPING_CART = 8;
+    public static int PAGE_CART = 8;
+    public static int PAGE_WISHLIST = 9;
+    public static int PAGE_ORDER_HISTORY = 10;
+    public static int PAGE_NEWS_LIST = 11;
+    public static int PAGE_NOTIFICATION = 12;
     private static MainActivity instance;
 
     @Override
@@ -30,17 +36,25 @@ public class MainActivity extends AppCompatActivity {
         fragments = new ArrayList<>();
         //inisisalisasi semua fragment
         this.productFragment = ProductFragment.newInstance(this,"Product Fragment");
-        this.shoppingFragment = ShoppingFragment.newInstance(this, "Shopping Fragment");
+        this.cartFragment = CartFragment.newInstance(this, "Shopping Fragment");
+        this.wishlistFragment = WishlistFragment.newInstance(this, "Wishlist Fragment");
+        this.orderHistoryFragment = OrderHistoryFragment.newInstance(this, "Order History Fragment");
+        this.newsListFragment = NewsListFragment.newInstance(this, "News Info Fragment");
+        this.notificationFragment = NotificationFragment.newInstance(this, "Notification Fragment");
         this.mainFragment = MainFragment.newInstance(this);
 
         fragments.add(productFragment);
-        fragments.add(shoppingFragment);
+        fragments.add(cartFragment);
         fragments.add(mainFragment);
+        fragments.add(wishlistFragment);
+        fragments.add(orderHistoryFragment);
+        fragments.add(newsListFragment);
+        fragments.add(notificationFragment);
 
         this.fragmentManager = getSupportFragmentManager();
         instance = this;
 
-        changePage(PAGE_SHOPPING_CART);
+        changePage(PAGE_NEWS_LIST);
     }
 
     public void changePage(int i) {
@@ -61,13 +75,45 @@ public class MainActivity extends AppCompatActivity {
             }
             hideOtherFrag(productFragment, ft);
         }
-        if(i == PAGE_SHOPPING_CART){
-            if(shoppingFragment.isAdded()){
-                ft.show(shoppingFragment);
+        if(i == PAGE_CART){
+            if(cartFragment.isAdded()){
+                ft.show(cartFragment);
             }else{
-                ft.add(R.id.fragment_container, shoppingFragment);
+                ft.add(R.id.fragment_container, cartFragment);
             }
-            hideOtherFrag(shoppingFragment,ft);
+            hideOtherFrag(cartFragment,ft);
+        }
+        if(i == PAGE_WISHLIST){
+            if(wishlistFragment.isAdded()){
+                ft.show(wishlistFragment);
+            }else{
+                ft.add(R.id.fragment_container, wishlistFragment);
+            }
+            hideOtherFrag(wishlistFragment,ft);
+        }
+        if(i == PAGE_ORDER_HISTORY){
+            if(orderHistoryFragment.isAdded()){
+                ft.show(orderHistoryFragment);
+            }else{
+                ft.add(R.id.fragment_container,orderHistoryFragment);
+            }
+            hideOtherFrag(orderHistoryFragment,ft);
+        }
+        if(i == PAGE_NEWS_LIST){
+            if(newsListFragment.isAdded()){
+                ft.show(newsListFragment);
+            }else{
+                ft.add(R.id.fragment_container, newsListFragment);
+            }
+            hideOtherFrag(newsListFragment,ft);
+        }
+        if(i == PAGE_NOTIFICATION){
+            if(notificationFragment.isAdded()){
+                ft.show(notificationFragment);
+            }else{
+                ft.add(R.id.fragment_container,notificationFragment);
+            }
+            hideOtherFrag(notificationFragment,ft);
         }
         ft.commit();
     }

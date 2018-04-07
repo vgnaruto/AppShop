@@ -9,21 +9,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ShoppingFragment extends Fragment {
+public class NotificationFragment extends Fragment {
     private MainActivity ui;
-    public ShoppingFragment(){}
+    public NotificationFragment(){}
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_shopping,container, false);
+        View view = inflater.inflate(R.layout.fragment_notification,container,false);
         Toolbar customToolbar = view.findViewById(R.id.custom_toolbar);
         ui.setSupportActionBar(customToolbar);
         ui.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         return view;
     }
-    public static ShoppingFragment newInstance(MainActivity ui,String title){
-        ShoppingFragment fragment = new ShoppingFragment();
+
+    public static NotificationFragment newInstance(MainActivity ui,String title){
+        NotificationFragment fragment = new NotificationFragment();
         Bundle args = new Bundle();
         args.putString("title",title);
         fragment.setArguments(args);

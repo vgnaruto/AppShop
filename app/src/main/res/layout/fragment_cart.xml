@@ -26,15 +26,47 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/trash_icon"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:paddingRight="@dimen/_10sdp"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button_check_out"
                 android:src="@drawable/cb_icon"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:paddingRight="@dimen/_5sdp"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:padding="@dimen/_10sdp">
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Total "
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13sdp"/>
+        <TextView
+            android:id="@+id/tv_before_tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Before tax)"
+            android:textSize="@dimen/_13sdp"
+            android:layout_toRightOf="@id/tv_total"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold"
+            android:textColor="@color/green"
+            android:text="0.00 IDR"/>
+    </RelativeLayout>
 
 </RelativeLayout>
