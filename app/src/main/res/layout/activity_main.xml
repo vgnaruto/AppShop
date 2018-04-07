@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
     android:id="@+id/drawer"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -14,9 +13,3 @@
         android:layout_height="match_parent">
     </FrameLayout>
 </android.support.v4.widget.DrawerLayout>
-=======
-    android:id="@+id/fragment_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</FrameLayout>
->>>>>>> a67d99daa91dfd99f9037e7c31bcd3041c1c2d9b

@@ -22,49 +22,40 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //inisisalisasi semua fragment
-<<<<<<< HEAD
         this.productFragment = ProductFragment.newInstance("Product Fragment");
-        this.fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction ft = this.fragmentManager.beginTransaction();
-
-        changePage(PAGE_PRODUCT);
-        instance = this;
-=======
         this.mainFragment = MainFragment.newInstance(this);
-        this.productFragment = new ProductFragment();
         this.fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction ft = this.fragmentManager.beginTransaction();
+        instance = this;
 
         changePage(PAGE_MAIN);
-        //changePage(PAGE_PRODUCT);
->>>>>>> a67d99daa91dfd99f9037e7c31bcd3041c1c2d9b
     }
 
-    public void changePage(int i){
+    public void changePage(int i) {
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
-<<<<<<< HEAD
-        if(i == PAGE_PRODUCT){
-=======
-        if(i == PAGE_MAIN){
+        if (i == PAGE_MAIN) {
             //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            if(productFragment.isAdded()){
+            if (mainFragment.isAdded()) {
                 ft.show(mainFragment);
-            }else{
-                ft.add(R.id.fragment_container,mainFragment);
+            } else {
+                ft.add(R.id.fragment_container, mainFragment);
             }
-        }if(i == PAGE_PRODUCT){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
->>>>>>> a67d99daa91dfd99f9037e7c31bcd3041c1c2d9b
             if(productFragment.isAdded()){
+                ft.hide(productFragment);
+            }
+        }
+        if (i == PAGE_PRODUCT) {
+            if (productFragment.isAdded()) {
                 ft.show(productFragment);
-            }else{
-                ft.add(R.id.fragment_container,productFragment);
+            } else {
+                ft.add(R.id.fragment_container, productFragment);
+            }
+            if(mainFragment.isAdded()){
+                ft.hide(mainFragment);
             }
         }
         ft.commit();
     }
-
-    public static MainActivity getInstance(){
+    public static MainActivity getInstance () {
         return instance;
     }
 }
