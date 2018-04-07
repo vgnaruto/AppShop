@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
 
         //inisisalisasi semua fragment
         this.productFragment = new ProductFragment();
@@ -37,7 +36,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         ft.commit();
-=======
->>>>>>> dc57d82bc4ab104ab83b42b28a15f8b8a61040da
     }
 }
