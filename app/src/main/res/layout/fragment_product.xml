@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_judul_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JUDUL"
+        android:background="@color/green"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:padding="@dimen/_10sdp"/>
+    <ImageView
+        android:id="@+id/iv_gambar_product"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_harga_product"
+            android:paddingLeft="@dimen/_4sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150000 IDR"
+            android:textSize="@dimen/_18sdp"
+            android:textStyle="bold"
+            android:textColor="@color/green"/>
+        <TextView
+            android:paddingLeft="@dimen/_4sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_harga_product"
+            android:drawableLeft="@drawable/calendar_icon"
+            android:text=" September 02, 2017 09:10"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="READY STOCK"
+            android:background="@color/gray"
+            android:textStyle="bold"
+            android:padding="@dimen/_4sdp"
+            android:layout_marginRight="@dimen/_4sdp"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_deskripsi_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:padding="@dimen/_4sdp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_4sdp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="CATEGORIES :"/>
+    <TextView
+        android:id="@+id/tv_categories_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_4sdp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/orange"
+        android:gravity="center"
+        android:clickable="true">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cart_icon"
+            android:scaleType="fitCenter"/>
+        <TextView
+            android:paddingLeft="@dimen/_8sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD TO CART"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+</LinearLayout>
