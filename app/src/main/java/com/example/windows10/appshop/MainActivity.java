@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static int PAGE_MAIN = 0;
     public static int PAGE_PRODUCT = 2;
+    private static MainActivity instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,32 +22,40 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //inisisalisasi semua fragment
+        this.productFragment = ProductFragment.newInstance("Product Fragment");
         this.mainFragment = MainFragment.newInstance(this);
-        this.productFragment = new ProductFragment();
         this.fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction ft = this.fragmentManager.beginTransaction();
+        instance = this;
 
         changePage(PAGE_MAIN);
-        //changePage(PAGE_PRODUCT);
     }
 
-    public void changePage(int i){
+    public void changePage(int i) {
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
-        if(i == PAGE_MAIN){
+        if (i == PAGE_MAIN) {
             //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            if(productFragment.isAdded()){
+            if (mainFragment.isAdded()) {
                 ft.show(mainFragment);
-            }else{
-                ft.add(R.id.fragment_container,mainFragment);
+            } else {
+                ft.add(R.id.fragment_container, mainFragment);
             }
-        }if(i == PAGE_PRODUCT){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             if(productFragment.isAdded()){
+                ft.hide(productFragment);
+            }
+        }
+        if (i == PAGE_PRODUCT) {
+            if (productFragment.isAdded()) {
                 ft.show(productFragment);
-            }else{
-                ft.add(R.id.fragment_container,productFragment);
+            } else {
+                ft.add(R.id.fragment_container, productFragment);
+            }
+            if(mainFragment.isAdded()){
+                ft.hide(mainFragment);
             }
         }
         ft.commit();
+    }
+    public static MainActivity getInstance () {
+        return instance;
     }
 }

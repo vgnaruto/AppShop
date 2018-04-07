@@ -58,7 +58,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         this.mDrawerLayout.addDrawerListener(this.mToggle);
 
         this.mToggle.syncState();
-        this.mainActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        this.mainActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         viewPager = view.findViewById(R.id.viewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this.mainActivity);
