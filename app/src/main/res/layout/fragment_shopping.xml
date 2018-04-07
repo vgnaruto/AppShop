@@ -20,7 +20,20 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_20sdp"/>
-
+            <ImageView
+                android:id="@+id/button_trash"
+                android:layout_toLeftOf="@id/button_check_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/trash_icon"
+                android:layout_centerVertical="true" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_check_out"
+                android:src="@drawable/cb_icon"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 

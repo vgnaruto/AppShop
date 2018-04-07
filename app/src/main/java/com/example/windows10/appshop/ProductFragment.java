@@ -15,6 +15,7 @@ import android.widget.TextView;
 public class ProductFragment extends Fragment implements View.OnClickListener{
     private LinearLayout cartButton;
     private TextView cartTv;
+    private MainActivity ui;
 
     public ProductFragment(){}
 
@@ -25,8 +26,8 @@ public class ProductFragment extends Fragment implements View.OnClickListener{
         this.cartButton = view.findViewById(R.id.button_cart);
         this.cartTv = view.findViewById(R.id.tv_cart);
         Toolbar customToolbar = view.findViewById(R.id.custom_toolbar);
-        MainActivity.getInstance().setSupportActionBar(customToolbar);
-        MainActivity.getInstance().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ui.setSupportActionBar(customToolbar);
+        ui.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         cartButton.setOnClickListener(this);
         return view;
@@ -46,11 +47,15 @@ public class ProductFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public static ProductFragment newInstance(String title){
+    public static ProductFragment newInstance(MainActivity ui,String title){
         ProductFragment fragment = new ProductFragment();
         Bundle args = new Bundle();
         args.putString("title",title);
         fragment.setArguments(args);
+        fragment.setUI(ui);
         return fragment;
+    }
+    public void setUI(MainActivity ui){
+        this.ui = ui;
     }
 }
