@@ -4,7 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/green"
+        android:elevation="4dp" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/cart_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cart_icon"
+                android:background="@null"
+                android:layout_toLeftOf="@id/wishlist_button"
+                android:paddingRight="@dimen/_10sdp"
+                android:layout_centerVertical="true"/>
+            <ImageButton
+                android:id="@+id/wishlist_button"
+                android:paddingLeft="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/wishlist_off"
+                android:background="@null"
+                android:layout_alignParentRight="true"
+                android:paddingRight="@dimen/_4sdp"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
     <TextView
+        android:layout_below="@id/custom_toolbar"
         android:id="@+id/tv_judul_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

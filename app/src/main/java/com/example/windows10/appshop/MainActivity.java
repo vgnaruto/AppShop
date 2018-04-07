@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
 
     public static int PAGE_PRODUCT = 2;
+    private static MainActivity instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,23 +19,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //inisisalisasi semua fragment
-        this.productFragment = new ProductFragment();
+        this.productFragment = ProductFragment.newInstance("Product Fragment");
         this.fragmentManager = getSupportFragmentManager();
 //        FragmentTransaction ft = this.fragmentManager.beginTransaction();
 
         changePage(PAGE_PRODUCT);
+        instance = this;
     }
 
     public void changePage(int i){
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
         if(i == PAGE_PRODUCT){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             if(productFragment.isAdded()){
                 ft.show(productFragment);
             }else{
-                ft.add(R.id.container_fragment,productFragment);
+                ft.add(R.id.fragment_container,productFragment);
             }
         }
         ft.commit();
+    }
+
+    public static MainActivity getInstance(){
+        return instance;
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,9 @@ public class ProductFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_product,container, false);
         this.cartButton = view.findViewById(R.id.button_cart);
         this.cartTv = view.findViewById(R.id.tv_cart);
+        Toolbar customToolbar = view.findViewById(R.id.custom_toolbar);
+        MainActivity.getInstance().setSupportActionBar(customToolbar);
+        MainActivity.getInstance().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         cartButton.setOnClickListener(this);
         return view;
@@ -40,5 +44,13 @@ public class ProductFragment extends Fragment implements View.OnClickListener{
                 cartTv.setText("ADD TO CART");
             }
         }
+    }
+
+    public static ProductFragment newInstance(String title){
+        ProductFragment fragment = new ProductFragment();
+        Bundle args = new Bundle();
+        args.putString("title",title);
+        fragment.setArguments(args);
+        return fragment;
     }
 }
