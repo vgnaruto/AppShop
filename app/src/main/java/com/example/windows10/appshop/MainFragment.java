@@ -29,14 +29,10 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
     private MainActivity mainActivity;
     private ViewPager viewPager;
 
-    //private static Menu instances;
-    //private GridAdapter gridAdapter;
-    //private GridView gridView;
+    private GridAdapter gridAdapter;
+    private GridView gridView;
 
     //private ArrayList<Item> itemMenu;
-
-    private LinearLayout cartButton;
-    private TextView cartTv;
 
     public MainFragment() {
     }
@@ -74,16 +70,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void onClick(View v) {
-        if (v == cartButton) {
-            String currentText = cartTv.getText().toString();
-            if (currentText.contains("ADD")) {
-                cartButton.setBackgroundColor(getResources().getColor(R.color.gray_old));
-                cartTv.setText("REMOVE FROM CART");
-            } else if (currentText.contains("REMOVE")) {
-                cartButton.setBackgroundColor(getResources().getColor(R.color.orange));
-                cartTv.setText("ADD TO CART");
-            }
-        }
+
     }
 
     @Override
