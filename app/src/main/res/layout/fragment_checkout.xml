@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/green"
+        android:elevation="4dp" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Checkout"
+                android:layout_centerVertical="true"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20sdp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <ScrollView
+        android:layout_below="@id/custom_toolbar"
+        android:id="@+id/sv_checkout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/button_check_out"
+        android:background="@color/gray"
+        android:padding="@dimen/_8sdp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_cost_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/tv_cost_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cost Details"
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold"
+                        android:textColor="@color/gray"/>
+                    <TextView
+                        android:id="@+id/tv_total_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/_15sdp"
+                        android:layout_below="@id/tv_cost_detail"
+                        android:text="Total Order :"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/tv_price_total_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="350,000.00 IDR"
+                        android:paddingTop="@dimen/_15sdp"
+                        android:layout_below="@id/tv_cost_detail"
+                        android:textColor="@color/green"/>
+                    <TextView
+                        android:id="@+id/tv_tax"
+                        android:layout_below="@id/tv_total_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:text="Tax 11.0%"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/tv_price_tax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="38,500.00 IDR"
+                        android:layout_below="@id/tv_price_total_order"
+                        android:textColor="@color/green"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Fees :"
+                        android:textStyle="bold"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:layout_below="@id/tv_price_tax"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:paddingTop="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@id/tv_price_tax"
+                        android:text="388,500.00 IDR"
+                        android:textStyle="bold"
+                        android:textColor="@color/green"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_buyer_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_below="@id/cv_cost_detail">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/tv_buyer_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Buyer Profile"
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold"
+                        android:textColor="@color/gray"/>
+                    <TextView
+                        android:paddingTop="@dimen/_5sdp"
+                        android:id="@+id/tv_buyer_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_buyer_profile"
+                        android:text="Name"
+                        android:hint="Name"/>
+                    <EditText
+                        android:layout_below="@id/tv_buyer_name"
+                        android:id="@+id/et_buyer_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_buyer_email"
+                        android:layout_below="@id/et_buyer_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"/>
+                    <EditText
+                        android:id="@+id/et_buyer_email"
+                        android:layout_below="@id/tv_buyer_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_buyer_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/et_buyer_email"
+                        android:text="Phone"/>
+                    <EditText
+                        android:inputType="number"
+                        android:id="@+id/et_buyer_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_buyer_phone"/>
+
+                    <TextView
+                        android:id="@+id/tv_buyer_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/et_buyer_phone"
+                        android:text="Address"/>
+                    <EditText
+                        android:layout_below="@id/tv_buyer_address"
+                        android:id="@+id/et_buyer_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <Spinner
+                        android:id="@+id/spinner_shipping"
+                        android:layout_below="@id/et_buyer_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <EditText
+                        android:id="@+id/et_date_shipping"
+                        android:layout_below="@id/spinner_shipping"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:hint="Date Shipping"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/et_date_shipping"
+                        android:text="Comment"/>
+                    <EditText
+                        android:layout_below="@id/tv_comment"
+                        android:id="@+id/et_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_buyer_profile"
+                android:layout_marginTop="@dimen/_8sdp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/tv_product_order_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Product Order List"
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold"
+                        android:textColor="@color/gray"
+                        android:paddingTop="@dimen/_8sdp"/>
+
+                    <ListView
+                        android:id="@+id/list_view_product"
+                        android:layout_below="@id/tv_product_order_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/button_check_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/red"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/_5sdp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cb_icon" />
+
+        <TextView
+            android:id="@+id/tv_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/_8sdp"
+            android:text="PROCESS CHECKOUT"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

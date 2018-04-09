@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private OrderHistoryFragment orderHistoryFragment;
     private NewsListFragment newsListFragment;
     private NotificationFragment notificationFragment;
+    private CheckoutFragment checkoutFragment;
 
     public static int PAGE_MAIN = 0;
     public static int PAGE_PRODUCT = 2;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public static int PAGE_ORDER_HISTORY = 10;
     public static int PAGE_NEWS_LIST = 11;
     public static int PAGE_NOTIFICATION = 12;
+    public static int PAGE_CHECKOUT = 13;
     private static MainActivity instance;
 
     @Override
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         this.orderHistoryFragment = OrderHistoryFragment.newInstance(this, "Order History Fragment");
         this.newsListFragment = NewsListFragment.newInstance(this, "News Info Fragment");
         this.notificationFragment = NotificationFragment.newInstance(this, "Notification Fragment");
+        this.checkoutFragment = CheckoutFragment.newInstance(this, "Checkout Fragment");
         this.mainFragment = MainFragment.newInstance(this);
 
         fragments.add(productFragment);
@@ -50,11 +53,12 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(orderHistoryFragment);
         fragments.add(newsListFragment);
         fragments.add(notificationFragment);
+        fragments.add(checkoutFragment);
 
         this.fragmentManager = getSupportFragmentManager();
         instance = this;
 
-        changePage(PAGE_NEWS_LIST);
+        changePage(PAGE_CHECKOUT);
     }
 
     public void changePage(int i) {
@@ -114,6 +118,14 @@ public class MainActivity extends AppCompatActivity {
                 ft.add(R.id.fragment_container,notificationFragment);
             }
             hideOtherFrag(notificationFragment,ft);
+        }
+        if(i == PAGE_CHECKOUT){
+            if(checkoutFragment.isAdded()){
+                ft.show(checkoutFragment);
+            }else{
+                ft.add(R.id.fragment_container,checkoutFragment);
+            }
+            hideOtherFrag(checkoutFragment,ft);
         }
         ft.commit();
     }
