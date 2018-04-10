@@ -5,10 +5,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements FragmentListener {
+public class MainActivity extends AppCompatActivity implements FragmentListener{
     private ArrayList<Fragment> fragments;
     private MainFragment mainFragment;
     private ProductFragment productFragment;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         this.notificationFragment = NotificationFragment.newInstance(this, "Notification Fragment");
         this.checkoutFragment = CheckoutFragment.newInstance(this, "Checkout Fragment");
         this.settingFragment = SettingFragment.newInstance(this, "Setting Fragment");
-        this.mainFragment = MainFragment.newInstance(this);
+        this.mainFragment = MainFragment.newInstance(this, "Main Fragment");
 
         fragments.add(productFragment);
         fragments.add(cartFragment);
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         this.fragmentManager = getSupportFragmentManager();
         instance = this;
 
-        changePage(PAGE_CHECKOUT);
+        changePage(PAGE_MAIN);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             if (mainFragment.isAdded()) {
                 ft.show(mainFragment);
             } else {
-                ft.add(R.id.fragment_container, mainFragment);
+                ft.add(R.id.fragment_container, mainFragment).addToBackStack("MAIN FRAGMENT");
             }
             hideOtherFrag(mainFragment,ft);
         }
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             if (productFragment.isAdded()) {
                 ft.show(productFragment);
             } else {
-                ft.add(R.id.fragment_container, productFragment);
+                ft.add(R.id.fragment_container, productFragment).addToBackStack("PRODUCT FRAGMENT");
             }
             hideOtherFrag(productFragment, ft);
         }
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             if(cartFragment.isAdded()){
                 ft.show(cartFragment);
             }else{
-                ft.add(R.id.fragment_container, cartFragment);
+                ft.add(R.id.fragment_container, cartFragment).addToBackStack("CART FRAGMENT");
             }
             hideOtherFrag(cartFragment,ft);
         }
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             if(wishlistFragment.isAdded()){
                 ft.show(wishlistFragment);
             }else{
-                ft.add(R.id.fragment_container, wishlistFragment);
+                ft.add(R.id.fragment_container, wishlistFragment).addToBackStack("WISHLIST FRAGMENT");
             }
             hideOtherFrag(wishlistFragment,ft);
         }
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             if(orderHistoryFragment.isAdded()){
                 ft.show(orderHistoryFragment);
             }else{
-                ft.add(R.id.fragment_container,orderHistoryFragment);
+                ft.add(R.id.fragment_container,orderHistoryFragment).addToBackStack("ORDER HISTORY FRAGMENT");
             }
             hideOtherFrag(orderHistoryFragment,ft);
         }
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             if(newsListFragment.isAdded()){
                 ft.show(newsListFragment);
             }else{
-                ft.add(R.id.fragment_container, newsListFragment);
+                ft.add(R.id.fragment_container, newsListFragment).addToBackStack("NEWS LIST FRAGMENT");
             }
             hideOtherFrag(newsListFragment,ft);
         }
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             if(notificationFragment.isAdded()){
                 ft.show(notificationFragment);
             }else{
-                ft.add(R.id.fragment_container,notificationFragment);
+                ft.add(R.id.fragment_container,notificationFragment).addToBackStack("NOTIFICATION FRAGMENT");
             }
             hideOtherFrag(notificationFragment,ft);
         }
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             if(checkoutFragment.isAdded()){
                 ft.show(checkoutFragment);
             }else{
-                ft.add(R.id.fragment_container,checkoutFragment);
+                ft.add(R.id.fragment_container,checkoutFragment).addToBackStack("CHECKOUT FRAGMENT");
             }
             hideOtherFrag(checkoutFragment,ft);
         }
@@ -136,14 +137,11 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             if(settingFragment.isAdded()){
                 ft.show(settingFragment);
             }else{
-                ft.add(R.id.fragment_container,settingFragment);
+                ft.add(R.id.fragment_container,settingFragment).addToBackStack("SETTING FRAGMENT");
             }
             hideOtherFrag(settingFragment,ft);
         }
         ft.commit();
-    }
-    public static MainActivity getInstance () {
-        return instance;
     }
 
     private void hideOtherFrag(Fragment visible, FragmentTransaction ft){
@@ -154,5 +152,15 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                 }
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getSupportFragmentManager().popBackStack();
+                return true;
+        }
+        return false;
     }
 }

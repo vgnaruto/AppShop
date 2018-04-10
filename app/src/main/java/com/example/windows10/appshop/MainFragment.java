@@ -1,5 +1,6 @@
 package com.example.windows10.appshop;
 
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,6 +47,8 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
 
     private ArrayList<Category> categoryList;
 
+    private FragmentListener listener;
+
     public MainFragment() {
     }
 
@@ -53,7 +56,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         MainFragment fragment = new MainFragment();
         fragment.setMainActivity(mainActivity);
         Bundle args = new Bundle();
-        args.putString("title",title);
+        args.putString("title", title);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,7 +66,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         this.mDrawerLayout = view.findViewById(R.id.drawer);
-        sliderDotspanel =  view.findViewById(R.id.SliderDots);
+        sliderDotspanel = view.findViewById(R.id.SliderDots);
         NavigationView mNavigationView = view.findViewById(R.id.nav_view);
 
         mNavigationView.setNavigationItemSelectedListener(this);
@@ -82,7 +85,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         dotscount = viewPagerAdapter.getCount();
         dots = new ImageView[dotscount];
 
-        for(int i = 0; i < dotscount; i++){
+        for (int i = 0; i < dotscount; i++) {
 
             dots[i] = new ImageView(mainActivity);
             dots[i].setImageDrawable(ContextCompat.getDrawable(mainActivity.getApplicationContext(), R.drawable.non_active_dot));
@@ -106,7 +109,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
             @Override
             public void onPageSelected(int position) {
 
-                for(int i = 0; i< dotscount; i++){
+                for (int i = 0; i < dotscount; i++) {
                     dots[i].setImageDrawable(ContextCompat.getDrawable(mainActivity.getApplicationContext(), R.drawable.non_active_dot));
                 }
 
@@ -128,9 +131,9 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
 
         categoryList = new ArrayList<>();
 
-        for(int i=0;i<8;i++){
+        for (int i = 0; i < 8; i++) {
             Category item = new Category(BitmapFactory.decodeResource(getResources(),
-                    R.drawable.test_img1),"Judul_"+i,"Deskripsi_"+i);
+                    R.drawable.test_img1), "Judul_" + i, "Deskripsi_" + i);
             categoryList.add(item);
         }
         gridAdapter.setItems(categoryList);
@@ -162,6 +165,39 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.item_shopping_cart:
+                listener.changePage(MainActivity.PAGE_CART);
+                this.mDrawerLayout.closeDrawers();
+                break;
+            case R.id.item_wish_list:
+                listener.changePage(MainActivity.PAGE_WISHLIST);
+                this.mDrawerLayout.closeDrawers();
+                break;
+            case R.id.item_order_history:
+                listener.changePage(MainActivity.PAGE_ORDER_HISTORY);
+                this.mDrawerLayout.closeDrawers();
+                break;
+            case R.id.item_news_info:
+                listener.changePage(MainActivity.PAGE_NEWS_LIST);
+                this.mDrawerLayout.closeDrawers();
+                break;
+            case R.id.item_notifications:
+                listener.changePage(MainActivity.PAGE_NOTIFICATION);
+                this.mDrawerLayout.closeDrawers();
+                break;
+            case R.id.item_instructions:
+                break;
+            case R.id.item_settings:
+                listener.changePage(MainActivity.PAGE_SETTING);
+                this.mDrawerLayout.closeDrawers();
+                break;
+            case R.id.item_our_website:
+                this.mDrawerLayout.closeDrawers();
+                break;
+            case R.id.item_About:
+                break;
+        }
         /*
         if(id == R.id.calculator){
             this.changePage(1);
@@ -177,19 +213,31 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         return false;
     }
 
-    private class ImageTimer extends TimerTask{
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof FragmentListener){
+            this.listener = (FragmentListener)context;
+        }else{
+            throw new ClassCastException(context.toString() + " must implement FragmentListener");
+        }
+    }
+
+
+
+    private class ImageTimer extends TimerTask {
 
         @Override
-        public void run(){
+        public void run() {
             mainActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
 
-                    if(viewPager.getCurrentItem() == 0){
+                    if (viewPager.getCurrentItem() == 0) {
                         viewPager.setCurrentItem(1);
-                    } else if(viewPager.getCurrentItem() == 1){
+                    } else if (viewPager.getCurrentItem() == 1) {
                         viewPager.setCurrentItem(2);
-                    } else{
+                    } else {
                         viewPager.setCurrentItem(0);
                     }
                 }

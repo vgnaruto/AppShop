@@ -1,9 +1,11 @@
 package com.example.windows10.appshop;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.ListView;
 public class CheckoutFragment extends Fragment {
     private MainActivity ui;
     private ListView lvProduct;
+    private FragmentListener listener;
     public CheckoutFragment(){}
 
     @Nullable
@@ -36,5 +39,15 @@ public class CheckoutFragment extends Fragment {
     }
     public void setUI(MainActivity ui){
         this.ui = ui;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof FragmentListener){
+            this.listener = (FragmentListener)context;
+        }else{
+            throw new ClassCastException(context.toString() + " must implement FragmentListener");
+        }
     }
 }
