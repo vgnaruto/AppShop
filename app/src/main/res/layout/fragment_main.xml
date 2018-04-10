@@ -8,10 +8,78 @@
     android:layout_width="match_parent"
     android:fitsSystemWindows="true">
 
+
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/custom_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/green"
+            android:elevation="4dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"/>
+
+                <ImageButton
+                    android:id="@+id/cart_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/navbar_icon"
+                    android:background="@color/white"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_7sdp"
+                    android:layout_weight="1.4"
+                    android:translationY="@dimen/_2sdp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="APPSHOP"
+                    android:background="@color/white"
+                    android:textSize="22dp"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:padding="@dimen/_8sdp"
+                    android:translationY="@dimen/_1sdp"
+                    android:layout_weight="5"/>
+
+                <ImageButton
+                    android:id="@+id/search_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_search"
+                    android:background="@color/white"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:layout_weight="1.4"
+                    android:translationY="@dimen/_2sdp"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What's New"
+            android:textSize="18dp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:id="@+id/tv_whats_new"
+            android:layout_below="@id/custom_toolbar"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
@@ -19,26 +87,29 @@
             android:layout_height="190dp"
             android:layout_marginBottom="8dp"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp"
+            android:layout_below="@id/tv_whats_new"/>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/SliderDots"
             android:layout_below="@+id/viewPager"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/viewPager">
+            android:layout_below="@id/SliderDots">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Categories"
                 android:textSize="18dp"
+                android:paddingLeft="@dimen/_10sdp"
                 android:id="@+id/tv_category"/>
 
             <GridView

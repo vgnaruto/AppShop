@@ -30,5 +30,28 @@
         android:title="Notifications">
     </item>
 
+    <item
+        android:id="@+id/item_instructions"
+        android:icon="@android:drawable/divider_horizontal_dim_dark"
+        android:title="Instructions">
+    </item>
+
+    <item
+        android:id="@+id/item_settings"
+        android:icon="@android:drawable/divider_horizontal_dim_dark"
+        android:title="Settings">
+    </item>
+
+    <item
+        android:id="@+id/item_our_website"
+        android:icon="@android:drawable/divider_horizontal_dim_dark"
+        android:title="Our Website">
+    </item>
+
+    <item
+        android:id="@+id/item_About"
+        android:icon="@android:drawable/divider_horizontal_dim_dark"
+        android:title="About">
+    </item>
 
 </menu>
