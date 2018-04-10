@@ -33,7 +33,6 @@
                 android:layout_alignParentRight="true"
                 android:paddingRight="@dimen/_4sdp"
                 android:layout_centerVertical="true"/>
-
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
