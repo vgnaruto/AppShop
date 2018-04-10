@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentListener {
     private ArrayList<Fragment> fragments;
     private MainFragment mainFragment;
     private ProductFragment productFragment;
@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private NewsListFragment newsListFragment;
     private NotificationFragment notificationFragment;
     private CheckoutFragment checkoutFragment;
+    private SettingFragment settingFragment;
 
     public static int PAGE_MAIN = 0;
     public static int PAGE_PRODUCT = 2;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public static int PAGE_NEWS_LIST = 11;
     public static int PAGE_NOTIFICATION = 12;
     public static int PAGE_CHECKOUT = 13;
+    public static int PAGE_SETTING = 14;
     private static MainActivity instance;
 
     @Override
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         this.newsListFragment = NewsListFragment.newInstance(this, "News Info Fragment");
         this.notificationFragment = NotificationFragment.newInstance(this, "Notification Fragment");
         this.checkoutFragment = CheckoutFragment.newInstance(this, "Checkout Fragment");
+        this.settingFragment = SettingFragment.newInstance(this, "Setting Fragment");
         this.mainFragment = MainFragment.newInstance(this);
 
         fragments.add(productFragment);
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(newsListFragment);
         fragments.add(notificationFragment);
         fragments.add(checkoutFragment);
+        fragments.add(settingFragment);
 
         this.fragmentManager = getSupportFragmentManager();
         instance = this;
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         changePage(PAGE_CHECKOUT);
     }
 
+    @Override
     public void changePage(int i) {
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
         if (i == PAGE_MAIN) {
@@ -126,6 +131,14 @@ public class MainActivity extends AppCompatActivity {
                 ft.add(R.id.fragment_container,checkoutFragment);
             }
             hideOtherFrag(checkoutFragment,ft);
+        }
+        if(i == PAGE_SETTING){
+            if(settingFragment.isAdded()){
+                ft.show(settingFragment);
+            }else{
+                ft.add(R.id.fragment_container,settingFragment);
+            }
+            hideOtherFrag(settingFragment,ft);
         }
         ft.commit();
     }

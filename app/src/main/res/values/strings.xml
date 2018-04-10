@@ -2,4 +2,6 @@
     <string name="app_name">AppShop</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="copyright">Copyright &#169; 2018 vg-henry.\nAll right reserved</string>
+    <string name="term_policies">Term &amp; Policies</string>
 </resources>

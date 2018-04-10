@@ -9,13 +9,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ProductFragment extends Fragment implements View.OnClickListener{
-    private LinearLayout cartButton;
+    private LinearLayout addCartButton;
     private TextView cartTv;
     private MainActivity ui;
+    private ImageButton shoppingCartButton;
+    private ImageButton wishlistButton;
 
     public ProductFragment(){}
 
@@ -23,27 +26,34 @@ public class ProductFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product,container, false);
-        this.cartButton = view.findViewById(R.id.button_cart);
+        this.addCartButton = view.findViewById(R.id.button_cart);
         this.cartTv = view.findViewById(R.id.tv_cart);
+        this.shoppingCartButton = view.findViewById(R.id.cart_button);
+        this.wishlistButton = view.findViewById(R.id.wishlist_button);
         Toolbar customToolbar = view.findViewById(R.id.custom_toolbar);
         ui.setSupportActionBar(customToolbar);
         ui.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        cartButton.setOnClickListener(this);
+        shoppingCartButton.setOnClickListener(this);
+        addCartButton.setOnClickListener(this);
+        wishlistButton.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void onClick(View v) {
-        if(v == cartButton){
+        if(v == addCartButton){
             String currentText = cartTv.getText().toString();
             if(currentText.contains("ADD")){
-                cartButton.setBackgroundColor(getResources().getColor(R.color.gray_old));
+                addCartButton.setBackgroundColor(getResources().getColor(R.color.gray_old));
                 cartTv.setText("REMOVE FROM CART");
             }else if(currentText.contains("REMOVE")) {
-                cartButton.setBackgroundColor(getResources().getColor(R.color.orange));
+                addCartButton.setBackgroundColor(getResources().getColor(R.color.orange));
                 cartTv.setText("ADD TO CART");
             }
+        }
+        if(v == shoppingCartButton){
+
         }
     }
 
