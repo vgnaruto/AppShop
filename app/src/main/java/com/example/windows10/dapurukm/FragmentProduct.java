@@ -19,10 +19,11 @@ public class FragmentProduct extends Fragment {
     private MainActivity ctx;
     private ViewPager imagePager;
     private ImageButton backButton,btnAdd,btnMin;
-    private TextView prodNama,prodPrice,prodDeskripsi;
+    private TextView prodNama,prodPrice;
     private ImageView star1,star2,star3,star4,star5;
     private EditText totalOrder;
     private TextView sellerName,sellerAddress;
+    private ExpandableTextView prodDeskripsi;
 
     public FragmentProduct(){}
 
@@ -44,7 +45,7 @@ public class FragmentProduct extends Fragment {
 
         prodNama = view.findViewById(R.id.prod_nama);
         prodPrice = view.findViewById(R.id.prod_price);
-        prodDeskripsi = view.findViewById(R.id.prod_deskripsi);
+        prodDeskripsi = (ExpandableTextView)view.findViewById(R.id.expand_tv).findViewById(R.id.expanded_text_view);
         star1 = view.findViewById(R.id.star1);
         star2 = view.findViewById(R.id.star2);
         star3 = view.findViewById(R.id.star3);
