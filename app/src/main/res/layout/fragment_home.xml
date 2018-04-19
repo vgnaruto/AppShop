@@ -52,6 +52,7 @@
             android:orientation="vertical">
 
             <android.support.v4.view.ViewPager
+                android:background="@color/white"
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_160sdp" />
@@ -141,18 +142,16 @@
                     android:paddingTop="@dimen/_4sdp"
                     android:text="Produk Terlaris"
                     android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:background="@drawable/border_bottom_thin"/>
 
                 <com.example.windows10.dapurukm.ExpandableHeightGridView
                     android:id="@+id/grid_view"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_produklaris"
-                    android:layout_margin="4dp"
                     android:gravity="center"
-                    android:numColumns="2"
-                    android:stretchMode="columnWidth"
-                    android:verticalSpacing="10dp" />
+                    android:numColumns="2"/>
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
@@ -205,6 +204,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cart_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

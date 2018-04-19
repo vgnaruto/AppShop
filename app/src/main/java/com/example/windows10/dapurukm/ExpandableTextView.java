@@ -13,7 +13,7 @@ import android.widget.TextView;
  */
 @SuppressLint("AppCompatCustomView")
 public class ExpandableTextView extends TextView{
-    private static final int DEFAULT_TRIM_LENGTH = 200;
+    private static final int DEFAULT_TRIM_LENGTH = 100;
     private static final String ELLIPSIS = ".....";
 
     private CharSequence originalText;

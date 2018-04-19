@@ -14,11 +14,13 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     private ArrayList<Fragment> fragments;
     private FragmentHome fragmentHome;
     private FragmentProduct fragmentProduct;
+    private FragmentShoppingCart fragmentShoppingCart;
 
     private FragmentManager fragmentManager;
 
     public static int PAGE_HOME = 0;
     public static int PAGE_PRODUCT = 1;
+    public static int PAGE_SHOPPING_CART = 2;
 
     public static MainActivity instance;
     private Product selected;
@@ -31,9 +33,11 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         fragments = new ArrayList<>();
         fragmentHome = FragmentHome.newInstance(this, "HOME FRAGMENT");
         fragmentProduct = FragmentProduct.newInstance(this, "PRODUCT FRAGMENT");
+        fragmentShoppingCart = FragmentShoppingCart.newInstance(this, "SHOPPING CART FRAGMENT");
 
         fragments.add(fragmentHome);
         fragments.add(fragmentProduct);
+        fragments.add(fragmentShoppingCart);
 
         frameLayout = findViewById(R.id.fragment_container);
 
@@ -46,31 +50,46 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     @Override
     public void changePage(int page) {
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
-        if(page == PAGE_HOME){
+        if (page == PAGE_HOME) {
             if (fragmentHome.isAdded()) {
                 ft.show(fragmentHome);
             } else {
                 ft.add(R.id.fragment_container, fragmentHome).addToBackStack("HOME FRAGMENT");
             }
-            hideOtherFrag(fragmentHome,ft);
-        }else if(page == PAGE_PRODUCT){
+            hideOtherFrag(fragmentHome, ft);
+        } else if (page == PAGE_PRODUCT) {
             if (fragmentProduct.isAdded()) {
                 ft.show(fragmentProduct);
             } else {
                 ft.add(R.id.fragment_container, fragmentProduct).addToBackStack("PRODUCT FRAGMENT");
             }
-            hideOtherFrag(fragmentProduct,ft);
+            hideOtherFrag(fragmentProduct, ft);
+        } else if (page == PAGE_SHOPPING_CART) {
+            if (fragmentShoppingCart.isAdded()) {
+                ft.show(fragmentShoppingCart);
+            } else {
+                ft.add(R.id.fragment_container, fragmentShoppingCart).addToBackStack("SHOPPING CART FRAGMENT");
+            }
+            hideOtherFrag(fragmentShoppingCart, ft);
         }
         ft.commit();
     }
 
-    private void hideOtherFrag(Fragment visible, FragmentTransaction ft){
-        for(Fragment f : fragments){
-            if(f != visible){
-                if(f.isAdded()) {
+    private void hideOtherFrag(Fragment visible, FragmentTransaction ft) {
+        for (Fragment f : fragments) {
+            if (f != visible) {
+                if (f.isAdded()) {
                     ft.hide(f);
                 }
             }
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            finish();
         }
     }
 
@@ -78,10 +97,15 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         return instance;
     }
 
-    public void setProduct(Product selected){
-        this.selected = selected;
+    public void sendToCart(Product selected) {
+        fragmentShoppingCart.addProduct(selected);
     }
-    public Product getSelected(){
+
+    public void setProduct(Product selected) {
+        FragmentProduct.setSelected(selected);
+    }
+
+    public Product getSelected() {
         return this.selected;
     }
 }

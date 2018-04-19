@@ -6,7 +6,9 @@
     android:paddingTop="@dimen/_10sdp"
     android:paddingLeft="@dimen/_10sdp"
     android:paddingRight="@dimen/_10sdp"
-    android:orientation="vertical">
+    android:paddingBottom="@dimen/_5sdp"
+    android:orientation="vertical"
+    android:background="@drawable/border_bottom_right_thin">
     <ImageView
         android:id="@+id/prod_gambar"
         android:src="@drawable/product"

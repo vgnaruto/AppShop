@@ -11,6 +11,7 @@ public class Product {
     private String productDetails;
     private Seller seller;
     private int rating;
+    private int total;
 
     public Product(ArrayList<Bitmap> foto, String harga, String nama, String productDetails, Seller seller, int rating) {
         this.foto = foto;
@@ -19,6 +20,15 @@ public class Product {
         this.productDetails = productDetails;
         this.seller = seller;
         this.rating = rating;
+        this.total = 1;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     public int getRating() {

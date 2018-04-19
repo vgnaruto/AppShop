@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class FragmentProduct extends Fragment {
@@ -20,10 +21,14 @@ public class FragmentProduct extends Fragment {
     private ViewPager imagePager;
     private ImageButton backButton,btnAdd,btnMin;
     private TextView prodNama,prodPrice;
-    private ImageView star1,star2,star3,star4,star5;
+    private ImageView[] bintang = new ImageView[5];
     private EditText totalOrder;
     private TextView sellerName,sellerAddress;
     private ExpandableTextView prodDeskripsi;
+    private TextView priceTotal,priceEach;
+    private LinearLayout checkOutBtn;
+    private MainPresenter presenter;
+    private static Product selected;
 
     public FragmentProduct(){}
 
@@ -36,70 +41,88 @@ public class FragmentProduct extends Fragment {
         return fragment;
     }
 
+    public static void setSelected(Product prod){
+        selected = prod;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
-        Product prod = ctx.getSelected();
+        presenter= new MainPresenter();
 
         prodNama = view.findViewById(R.id.prod_nama);
         prodPrice = view.findViewById(R.id.prod_price);
         prodDeskripsi = (ExpandableTextView)view.findViewById(R.id.expand_tv).findViewById(R.id.expanded_text_view);
-        star1 = view.findViewById(R.id.star1);
-        star2 = view.findViewById(R.id.star2);
-        star3 = view.findViewById(R.id.star3);
-        star4 = view.findViewById(R.id.star4);
-        star5 = view.findViewById(R.id.star5);
+        for(int i =0;i < bintang.length;i++){
+            switch (i){
+                case 0:
+                    bintang[i] = view.findViewById(R.id.star1);
+                    break;
+                case 1:
+                    bintang[i] = view.findViewById(R.id.star2);
+                    break;
+                case 2:
+                    bintang[i] = view.findViewById(R.id.star3);
+                    break;
+                case 3:
+                    bintang[i] = view.findViewById(R.id.star4);
+                    break;
+                case 4:
+                    bintang[i] = view.findViewById(R.id.star5);
+                    break;
+            }
+        }
         sellerName = view.findViewById(R.id.seller_name);
         sellerAddress = view.findViewById(R.id.seller_address);
         imagePager = view.findViewById(R.id.viewPager);
         totalOrder = view.findViewById(R.id.total_buy);
         btnAdd = view.findViewById(R.id.btn_add);
         btnMin = view.findViewById(R.id.btn_min);
+        priceTotal = view.findViewById(R.id.tv_price_total);
+        priceEach = view.findViewById(R.id.tv_price_each);
+        checkOutBtn = view.findViewById(R.id.cart_button);
 
-        ImagePagerAdapter viewPagerAdapter = new ImagePagerAdapter(ctx, prod.getFoto().size() ,
-                prod.getFoto().toArray(new Bitmap[prod.getFoto().size()]));
+        ImagePagerAdapter viewPagerAdapter = new ImagePagerAdapter(ctx, selected.getFoto().size() ,
+                selected.getFoto().toArray(new Bitmap[selected.getFoto().size()]));
         imagePager.setAdapter(viewPagerAdapter);
 
-        sellerName.setText(prod.getSeller().getName());
-        sellerAddress.setText(prod.getSeller().getAddress());
-        prodNama.setText(prod.getNama());
-        prodPrice.setText(prod.getHarga());
-        prodDeskripsi.setText(prod.getProductDetails());
-        int rating = prod.getRating();
+        sellerName.setText(selected.getSeller().getName());
+        sellerAddress.setText(selected.getSeller().getAddress());
+        prodNama.setText(selected.getNama());
+        prodPrice.setText(selected.getHarga());
+
+        priceTotal.setText(selected.getHarga());
+        priceEach.setText("@ "+selected.getHarga());
+        prodDeskripsi.setText(selected.getProductDetails());
+        int rating = selected.getRating();
         Bitmap starOn = ((BitmapDrawable)ctx.getResources().getDrawable(R.drawable.ic_star_on)).getBitmap();
         Bitmap starOff = ((BitmapDrawable)ctx.getResources().getDrawable(R.drawable.ic_star_off)).getBitmap();
 
-        star1.setImageBitmap(starOff);
-        star2.setImageBitmap(starOff);
-        star3.setImageBitmap(starOff);
-        star4.setImageBitmap(starOff);
-        star5.setImageBitmap(starOff);
-        for(int i=1;i<=rating;i++){
-            switch (i){
-                case 1:
-                    star1.setImageBitmap(starOn);
-                    break;
-                case 2:
-                    star2.setImageBitmap(starOn);
-                    break;
-                case 3:
-                    star3.setImageBitmap(starOn);
-                    break;
-                case 4:
-                    star4.setImageBitmap(starOn);
-                    break;
-                case 5:
-                    star5.setImageBitmap(starOn);
-                    break;
-            }
+        for(ImageView b : bintang){
+            b.setImageBitmap(starOff);
         }
+        for(int i=0;i<rating;i++){
+            bintang[i].setImageBitmap(starOn);
+        }
+        checkOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selected.setTotal(Integer.parseInt(totalOrder.getText().toString()));
+                ctx.sendToCart(selected);
+                ctx.changePage(MainActivity.PAGE_SHOPPING_CART);
+            }
+        });
+
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int angka = Integer.parseInt(totalOrder.getText().toString());
                 totalOrder.setText(angka+1+"");
+                int harga = Integer.parseInt(selected.getHarga().substring(3).replaceAll("\\.",""));
+                int total = Integer.parseInt(totalOrder.getText().toString());
+                priceTotal.setText(presenter.formatRupiah(harga * total));
             }
         });
         btnMin.setOnClickListener(new View.OnClickListener() {
@@ -109,10 +132,19 @@ public class FragmentProduct extends Fragment {
                 if(angka != 1){
                     totalOrder.setText(angka-1+"");
                 }
+                int harga = Integer.parseInt(selected.getHarga().substring(3).replaceAll("\\.",""));
+                int total = Integer.parseInt(totalOrder.getText().toString());
+                priceTotal.setText(presenter.formatRupiah(harga * total));
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        totalOrder.setText("1");
     }
 
     private void setMainActivity(MainActivity ctx){
