@@ -10,12 +10,12 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class FragmentHome extends Fragment implements View.OnClickListener{
     private MainActivity ctx;
     private ViewPager newsPager;
-    private LinearLayout cartBtn;
 
     private GridProductAdapter adapter;
     private ExpandableHeightGridView gridView;
@@ -43,15 +43,14 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
                 ((BitmapDrawable)ctx.getResources().getDrawable(R.drawable.promo_dummy3)).getBitmap(),
                 ((BitmapDrawable)ctx.getResources().getDrawable(R.drawable.promo_dummy4)).getBitmap()
         });
+        CircleIndicator indicator = view.findViewById(R.id.indicator);
         newsPager.setAdapter(viewPagerAdapter);
+        indicator.setViewPager(newsPager);
 
         gridView = view.findViewById(R.id.grid_view);
         gridView.setExpanded(true);
         adapter = new GridProductAdapter(DataDummy.getProduct(), ctx);
         gridView.setAdapter(adapter);
-        cartBtn = view.findViewById(R.id.cart_btn);
-
-        cartBtn.setOnClickListener(this);
 
         return view;
     }
@@ -62,8 +61,5 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if(v == cartBtn){
-            ctx.changePage(MainActivity.PAGE_SHOPPING_CART);
-        }
     }
 }

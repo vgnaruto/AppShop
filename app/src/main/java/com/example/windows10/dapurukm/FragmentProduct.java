@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import me.relex.circleindicator.CircleIndicator;
+
 public class FragmentProduct extends Fragment {
     private MainActivity ctx;
     private ViewPager imagePager;
@@ -86,6 +88,8 @@ public class FragmentProduct extends Fragment {
 
         ImagePagerAdapter viewPagerAdapter = new ImagePagerAdapter(ctx, selected.getFoto().size() ,
                 selected.getFoto().toArray(new Bitmap[selected.getFoto().size()]));
+        CircleIndicator indicator = view.findViewById(R.id.indicator);
+        indicator.setViewPager(imagePager);
         imagePager.setAdapter(viewPagerAdapter);
 
         sellerName.setText(selected.getSeller().getName());

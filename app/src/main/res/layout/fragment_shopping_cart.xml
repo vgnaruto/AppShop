@@ -59,8 +59,9 @@
         android:id="@+id/llBawah"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true">
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
         <LinearLayout
             android:id="@+id/ll_keterangan"
             android:layout_width="match_parent"
@@ -119,8 +120,7 @@
             android:paddingTop="@dimen/_7sdp"
             android:background="@color/orange"
             android:gravity="center"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:visibility="gone">
+            android:layout_marginTop="@dimen/_5sdp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
