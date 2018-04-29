@@ -12,6 +12,7 @@ public class Product {
     private Seller seller;
     private int rating;
     private int total;
+    private boolean inCart;
 
     public Product(ArrayList<Bitmap> foto, String harga, String nama, String productDetails, Seller seller, int rating) {
         this.foto = foto;
@@ -21,6 +22,15 @@ public class Product {
         this.seller = seller;
         this.rating = rating;
         this.total = 1;
+        inCart = false;
+    }
+
+    public boolean isInCart() {
+        return inCart;
+    }
+
+    public void setInCart(boolean inCart) {
+        this.inCart = inCart;
     }
 
     public int getTotal() {

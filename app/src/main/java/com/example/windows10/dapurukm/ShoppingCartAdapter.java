@@ -31,6 +31,9 @@ public class ShoppingCartAdapter extends BaseAdapter {
         }
         return "("+total+")";
     }
+    public int getTotalJenisBarang(){
+        return products.size();
+    }
 
     public String getTotalHarga(){
         int total = 0;
@@ -82,6 +85,9 @@ public class ShoppingCartAdapter extends BaseAdapter {
         this.products.add(product);
     }
 
+    public void removeProduct(Product product){
+        this.products.remove(product);
+    }
     private class ViewHolder {
         protected TextView namaPerus, judulProduct, hargaProduct;
         protected EditText totalOrder;

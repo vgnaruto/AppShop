@@ -1,5 +1,6 @@
 package com.example.windows10.dapurukm;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ import android.view.ViewGroup;
 
 import me.relex.circleindicator.CircleIndicator;
 
-public class FragmentHome extends Fragment implements View.OnClickListener{
+public class FragmentHome extends Fragment{
     private MainActivity ctx;
     private ViewPager newsPager;
 
@@ -57,9 +58,5 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
 
     private void setMainActivity(MainActivity ctx){
         this.ctx = ctx;
-    }
-
-    @Override
-    public void onClick(View v) {
     }
 }

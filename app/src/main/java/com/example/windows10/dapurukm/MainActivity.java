@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.felix.bottomnavygation.BadgeIndicator;
 import com.felix.bottomnavygation.BottomNav;
 import com.felix.bottomnavygation.ItemNav;
 
@@ -32,8 +33,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     private Product selected;
 
     private BottomNav bottomNav;
-    private Stack<Integer> stack;
-    private int currentPage = -1;
+    private BadgeIndicator badgeCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +52,21 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         frameLayout = findViewById(R.id.fragment_container);
 
         fragmentManager = getSupportFragmentManager();
-
-        stack = new Stack<>();
-
+        fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if(fragmentManager.getBackStackEntryCount()==0){
+                    showNavBar();
+                    bottomNav.selectTab(0);
+                    badgeCart.updateCount(fragmentShoppingCart.getTotalItems());
+                }
+            }
+        });
         bottomNav = findViewById(R.id.llmenu);
+        badgeCart = new BadgeIndicator(this, android.R.color.holo_red_dark, android.R.color.white);
         bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_home, "Home").addColorAtive(R.color.white));
         bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_transaction, "Transaction").addColorAtive(R.color.white));
-        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_cart, "Cart").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_cart, "Cart").addColorAtive(R.color.white).addBadgeIndicator(badgeCart));
         bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_promo2, "Promo").addColorAtive(R.color.white));
         bottomNav.build();
 
@@ -102,35 +110,26 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
         if (page == PAGE_HOME) {
             showNavBar();
-            if(currentPage == -1){
-                currentPage = PAGE_HOME;
-            }else{
-                stack.push(currentPage);
-            }
             if (fragmentHome.isAdded()) {
                 ft.show(fragmentHome);
             } else {
-                ft.add(R.id.fragment_container, fragmentHome).addToBackStack(null);
+                ft.add(R.id.fragment_container, fragmentHome);
             }
             hideOtherFrag(fragmentHome, ft);
         } else if (page == PAGE_PRODUCT) {
             hideNavBar();
-            stack.push(currentPage);
-            currentPage = PAGE_PRODUCT;
             if (fragmentProduct.isAdded()) {
                 ft.show(fragmentProduct);
             } else {
-                ft.add(R.id.fragment_container, fragmentProduct).addToBackStack(null);
+                ft.add(R.id.fragment_container, fragmentProduct).addToBackStack("fragment_product");
             }
             hideOtherFrag(fragmentProduct, ft);
         } else if (page == PAGE_SHOPPING_CART) {
             hideNavBar();
-            stack.push(currentPage);
-            currentPage = PAGE_SHOPPING_CART;
             if (fragmentShoppingCart.isAdded()) {
                 ft.show(fragmentShoppingCart);
             } else {
-                ft.add(R.id.fragment_container, fragmentShoppingCart).addToBackStack(null);
+                ft.add(R.id.fragment_container, fragmentShoppingCart).addToBackStack("fragment_cart");
             }
             hideOtherFrag(fragmentShoppingCart, ft);
         }
@@ -155,13 +154,15 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             super.onBackPressed();
         }
     }
-
     public static MainActivity getInstance() {
         return instance;
     }
 
     public void sendToCart(Product selected) {
         fragmentShoppingCart.addProduct(selected);
+    }
+    public void removeFromCart(Product selected){
+        fragmentShoppingCart.remove(selected);
     }
 
     public void setProduct(Product selected) {
@@ -171,4 +172,5 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     public Product getSelected() {
         return this.selected;
     }
+
 }

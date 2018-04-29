@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -295,25 +295,14 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout
+    <Button
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18sdp"
+        android:gravity="center"
+        android:background="@color/orange"
+        android:layout_alignParentBottom="true"
         android:id="@+id/cart_button"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/orange"
-        android:clickable="true"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/_7sdp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Buy Now"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_18sdp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        android:text="Buy Now"/>
 </RelativeLayout>
