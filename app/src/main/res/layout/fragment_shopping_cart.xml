@@ -8,7 +8,7 @@
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
-        android:background="@color/orange"
+        android:background="@drawable/border_with_shadow_orange"
         android:paddingBottom="@dimen/_6sdp"
         android:paddingLeft="@dimen/_10sdp"
         android:paddingRight="@dimen/_10sdp"
@@ -45,7 +45,8 @@
         android:layout_above="@id/llBawah"
         android:id="@+id/list_cart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"/>
     <ImageView
         android:background="@color/white"
         android:src="@drawable/empty_image"

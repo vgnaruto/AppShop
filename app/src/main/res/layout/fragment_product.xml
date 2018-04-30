@@ -8,7 +8,7 @@
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
-        android:background="@color/orange"
+        android:background="@drawable/border_with_shadow_orange"
         android:elevation="3dp"
         android:paddingBottom="@dimen/_6sdp"
         android:paddingLeft="@dimen/_10sdp"
@@ -173,16 +173,16 @@
                             android:layout_toRightOf="@id/tv_total"
                             android:background="@drawable/layout_bg">
 
-                            <EditText
+                            <TextView
                                 android:id="@+id/total_buy"
                                 android:layout_width="@dimen/_40sdp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/_5sdp"
                                 android:background="@android:color/transparent"
-                                android:inputType="number"
-                                android:maxLines="1"
                                 android:text="1"
+                                android:textColor="@color/black"
                                 android:textAlignment="center"
+                                android:gravity="center_vertical"
                                 android:textSize="@dimen/_13sdp" />
 
                             <ImageButton

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:background="@drawable/border_with_shadow">
     <LinearLayout
         android:id="@+id/lltop"
         android:layout_width="match_parent"
@@ -69,18 +69,16 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/layout_bg">
 
-                <EditText
+                <TextView
                     android:id="@+id/total_buy"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:background="@android:color/transparent"
                     android:gravity="center"
-                    android:inputType="number"
-                    android:maxLength="3"
-                    android:maxLines="1"
                     android:text="1"
-                    android:textSize="@dimen/_20sdp" />
+                    android:textSize="@dimen/_20sdp"
+                    android:textColor="@color/black"/>
 
                 <ImageButton
                     android:id="@+id/btn_min"

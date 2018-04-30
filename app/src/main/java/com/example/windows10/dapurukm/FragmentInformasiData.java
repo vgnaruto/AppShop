@@ -1,23 +1,57 @@
 package com.example.windows10.dapurukm;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import me.relex.circleindicator.CircleIndicator;
+import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
+import com.rengwuxian.materialedittext.MaterialEditText;
+
+public class FragmentInformasiData extends Fragment{
+    private MainActivity ctx;
+    private MaterialEditText etNama,etAlamat,etKodePos,etNomorTelepon,etProvinsi,etKabupaten,etKecamatan;
+    private ImageButton backButton;
+
+    public FragmentInformasiData(){}
+    public static FragmentInformasiData newInstance(MainActivity mainActivity, String title) {
+        FragmentInformasiData fragment = new FragmentInformasiData();
+        fragment.setMainActivity(mainActivity);
+        Bundle args = new Bundle();
+        args.putString("title", title);
+        fragment.setArguments(args);
+        return fragment;
+    }
+    private void setMainActivity(MainActivity ui){
+        this.ctx = ui;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_informasi_pembeli, container, false);
+
+        backButton = view.findViewById(R.id.back_button);
+        etProvinsi = view.findViewById(R.id.etProvinsi);
+        etKabupaten = view.findViewById(R.id.etKabupaten);
+        etKecamatan = view.findViewById(R.id.etKecamatan);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ctx.onBackPressed();
+            }
+        });
+        return view;
+    }
+}
+/*
 
 public class FragmentProduct extends Fragment implements View.OnClickListener {
     private MainActivity ctx;
@@ -32,22 +66,6 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
     private Button checkOutBtn;
     private MainPresenter presenter;
     private static Product selected;
-
-    public FragmentProduct() {
-    }
-
-    public static FragmentProduct newInstance(MainActivity mainActivity, String title) {
-        FragmentProduct fragment = new FragmentProduct();
-        fragment.setMainActivity(mainActivity);
-        Bundle args = new Bundle();
-        args.putString("title", title);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public static void setSelected(Product prod) {
-        selected = prod;
-    }
 
     @Nullable
     @Override
@@ -161,3 +179,5 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
         }
     }
 }
+
+* */

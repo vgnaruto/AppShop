@@ -71,10 +71,26 @@ public class FragmentShoppingCart extends Fragment implements View.OnClickListen
 
         contShoppingButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
+        checkOutBtn.setOnClickListener(this);
         return view;
     }
     public void remove(Product product){
         adapter.removeProduct(product);
+    }
+
+    public void notifData(){
+        adapter.notifyDataSetChanged();
+        if(adapter.isEmpty()){
+            emptyImage.setVisibility(View.VISIBLE);
+            llDeskripsi.setVisibility(View.GONE);
+            checkOutBtn.setVisibility(View.GONE);
+        }else{
+            llDeskripsi.setVisibility(View.VISIBLE);
+            checkOutBtn.setVisibility(View.VISIBLE);
+            emptyImage.setVisibility(View.GONE);
+        }
+        totalBarang.setText(adapter.getTotalItems());
+        totalHarga.setText(adapter.getTotalHarga());
     }
 
     public int getTotalItems(){
@@ -100,6 +116,8 @@ public class FragmentShoppingCart extends Fragment implements View.OnClickListen
             ctx.onBackPressed();
         }else if(v == backButton){
             ctx.onBackPressed();
+        }else if(v == checkOutBtn){
+            ctx.changePage(MainActivity.PAGE_INFORMASI_DATA);
         }
     }
 }

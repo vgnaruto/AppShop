@@ -7,7 +7,7 @@
         android:id="@+id/ll_search"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
-        android:background="@color/orange"
+        android:background="@drawable/border_with_shadow_orange"
         android:elevation="3dp"
         android:paddingBottom="@dimen/_6sdp"
         android:paddingLeft="@dimen/_10sdp"
@@ -68,7 +68,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@drawable/border_with_shadow"
                 android:elevation="10dp"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/_5sdp"

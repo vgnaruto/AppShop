@@ -22,12 +22,14 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     private FragmentHome fragmentHome;
     private FragmentProduct fragmentProduct;
     private FragmentShoppingCart fragmentShoppingCart;
+    private FragmentInformasiData fragmentInformasiData;
 
     private FragmentManager fragmentManager;
 
     public static int PAGE_HOME = 0;
     public static int PAGE_PRODUCT = 1;
     public static int PAGE_SHOPPING_CART = 2;
+    public static int PAGE_INFORMASI_DATA = 3;
 
     public static MainActivity instance;
     private Product selected;
@@ -44,10 +46,12 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         fragmentHome = FragmentHome.newInstance(this, "HOME FRAGMENT");
         fragmentProduct = FragmentProduct.newInstance(this, "PRODUCT FRAGMENT");
         fragmentShoppingCart = FragmentShoppingCart.newInstance(this, "SHOPPING CART FRAGMENT");
+        fragmentInformasiData = FragmentInformasiData.newInstance(this, "INFORMASI DATA FRAGMENT");
 
         fragments.add(fragmentHome);
         fragments.add(fragmentProduct);
         fragments.add(fragmentShoppingCart);
+        fragments.add(fragmentInformasiData);
 
         frameLayout = findViewById(R.id.fragment_container);
 
@@ -105,6 +109,10 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         bottomNav.setVisibility(View.VISIBLE);
     }
 
+    public void notifyShoppingCart(){
+        fragmentShoppingCart.notifData();
+    }
+
     @Override
     public void changePage(int page) {
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
@@ -132,6 +140,14 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                 ft.add(R.id.fragment_container, fragmentShoppingCart).addToBackStack("fragment_cart");
             }
             hideOtherFrag(fragmentShoppingCart, ft);
+        }else if (page == PAGE_INFORMASI_DATA) {
+            hideNavBar();
+            if (fragmentInformasiData.isAdded()) {
+                ft.show(fragmentInformasiData);
+            } else {
+                ft.add(R.id.fragment_container, fragmentInformasiData).addToBackStack("fragment_cart");
+            }
+            hideOtherFrag(fragmentInformasiData, ft);
         }
         ft.commit();
     }

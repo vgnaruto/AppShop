@@ -29,4 +29,5 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.github.felixsoares:BottomNavygation:1.8.6'
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 }

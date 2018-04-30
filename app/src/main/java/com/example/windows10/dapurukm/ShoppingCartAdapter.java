@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class ShoppingCartAdapter extends BaseAdapter {
     private MainActivity ui;
     private ArrayList<Product> products = new ArrayList<>();
+    private ViewHolder vh;
 
     public ShoppingCartAdapter(MainActivity ui) {
         this.ui = ui;
@@ -60,8 +61,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder vh;
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(ui).inflate(R.layout.cart_item, parent, false);
             vh = new ViewHolder(convertView);
@@ -70,6 +70,37 @@ public class ShoppingCartAdapter extends BaseAdapter {
             vh = (ViewHolder) convertView.getTag();
         }
         vh.updateView(getItem(position));
+        vh.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                products.get(position).setInCart(false);
+                products.remove(position);
+                ui.notifyShoppingCart();
+            }
+        });
+        vh.btnMin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int angka = products.get(position).getTotal();
+                if(angka == 1) {
+                    products.get(position).setInCart(false);
+                    products.remove(position);
+                }else{
+                    products.get(position).setTotal(angka - 1);
+                    vh.updateView(products.get(position));
+                }
+                ui.notifyShoppingCart();
+            }
+        });
+        vh.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int angka = products.get(position).getTotal();
+                products.get(position).setTotal(angka+1);
+                vh.updateView(products.get(position));
+                ui.notifyShoppingCart();
+            }
+        });
         return convertView;
     }
 
@@ -90,7 +121,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
     }
     private class ViewHolder {
         protected TextView namaPerus, judulProduct, hargaProduct;
-        protected EditText totalOrder;
+        protected TextView totalOrder;
         protected ImageButton btnMin, btnAdd, btnDelete;
         protected ImageView gambarProduct;
 
