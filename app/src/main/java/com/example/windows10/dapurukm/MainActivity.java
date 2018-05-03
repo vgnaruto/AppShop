@@ -69,9 +69,10 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         bottomNav = findViewById(R.id.llmenu);
         badgeCart = new BadgeIndicator(this, android.R.color.holo_red_dark, android.R.color.white);
         bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_home, "Home").addColorAtive(R.color.white));
-        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_transaction, "Transaction").addColorAtive(R.color.white));
-        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_cart, "Cart").addColorAtive(R.color.white).addBadgeIndicator(badgeCart));
-        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_promo2, "Promo").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_cart, "Keranjang").addColorAtive(R.color.white).addBadgeIndicator(badgeCart));
+        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_transaction, "Pemberitahuan").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_promo2, "Favorit").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_promo2, "Profile").addColorAtive(R.color.white));
         bottomNav.build();
 
         BottomNav.OnTabSelectedListener listener = new BottomNav.OnTabSelectedListener() {
@@ -82,11 +83,13 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                         changePage(MainActivity.PAGE_HOME);
                         break;
                     case 1:
-                        break;
-                    case 2:
                         changePage(MainActivity.PAGE_SHOPPING_CART);
                         break;
+                    case 2:
+                        break;
                     case 3:
+                        break;
+                    case 4:
                         break;
                 }
             }
