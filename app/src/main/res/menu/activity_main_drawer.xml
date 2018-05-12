@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_notifikasi"
+            android:icon="@drawable/ic_promo2"
+            android:title="Notifikasi" />
+        <item
+            android:id="@+id/nav_second_layout"
+            android:icon="@drawable/ic_transaction"
+            android:title="Transaksi" />
+        <item
+            android:id="@+id/nav_third_layout"
+            android:icon="@drawable/ic_star_navbar"
+            android:title="Favorit" />
+    </group>
+
+    <item android:title="Akun Saya">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_lihat_profile"
+                    android:icon="@drawable/ic_profile"
+                    android:title="Lihat Profil" />
+                <item
+                    android:id="@+id/menu_penjualan"
+                    android:icon="@drawable/ic_penjualan"
+                    android:title="Penjualan" />
+                <item
+                    android:id="@+id/menu_keluar"
+                    android:icon="@drawable/ic_keluar"
+                    android:title="Keluar" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="Pintasan Khusus">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_informasi_khusus"
+                    android:icon="@drawable/ic_home"
+                    android:title="Informasi Khusus" />
+                <item
+                    android:id="@+id/menu_event"
+                    android:icon="@drawable/ic_home"
+                    android:title="Event" />
+                <item
+                    android:id="@+id/menu_lowongan_kerja"
+                    android:icon="@drawable/ic_home"
+                    android:title="Lowongan Kerja"/>
+                <item
+                    android:id="@+id/menu_trending_topic"
+                    android:icon="@drawable/ic_home"
+                    android:title="Trending Topic"/>
+            </group>
+        </menu>
+    </item>
+
+</menu>

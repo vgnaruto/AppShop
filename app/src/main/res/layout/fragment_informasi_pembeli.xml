@@ -65,8 +65,8 @@
                     app:met_floatingLabel="normal"
                     android:textColorHighlight="@color/black"
                     app:met_textColor="@color/black"
-                    app:met_floatingLabelTextColor="@color/orange"
-                    app:met_underlineColor="@color/orange"
+                    app:met_floatingLabelTextColor="@color/purple"
+                    app:met_underlineColor="@color/purple"
                     android:hint="Nama Penerima"/>
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="match_parent"
@@ -74,8 +74,8 @@
                     app:met_floatingLabel="normal"
                     android:textColorHighlight="@color/black"
                     app:met_textColor="@color/black"
-                    app:met_floatingLabelTextColor="@color/orange"
-                    app:met_underlineColor="@color/orange"
+                    app:met_floatingLabelTextColor="@color/purple"
+                    app:met_underlineColor="@color/purple"
                     android:hint="Alamat Penerima"/>
             </LinearLayout>
             <LinearLayout
@@ -93,8 +93,8 @@
                     app:met_floatingLabel="normal"
                     android:textColorHighlight="@color/black"
                     app:met_textColor="@color/black"
-                    app:met_floatingLabelTextColor="@color/orange"
-                    app:met_underlineColor="@color/orange"
+                    app:met_floatingLabelTextColor="@color/purple"
+                    app:met_underlineColor="@color/purple"
                     android:hint="Provinsi"/>
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/etKabupaten"
@@ -104,8 +104,8 @@
                     app:met_floatingLabel="normal"
                     android:textColorHighlight="@color/black"
                     app:met_textColor="@color/black"
-                    app:met_floatingLabelTextColor="@color/orange"
-                    app:met_underlineColor="@color/orange"
+                    app:met_floatingLabelTextColor="@color/purple"
+                    app:met_underlineColor="@color/purple"
                     android:hint="Kabupaten"/>
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/etKecamatan"
@@ -115,8 +115,8 @@
                     app:met_floatingLabel="normal"
                     android:textColorHighlight="@color/black"
                     app:met_textColor="@color/black"
-                    app:met_floatingLabelTextColor="@color/orange"
-                    app:met_underlineColor="@color/orange"
+                    app:met_floatingLabelTextColor="@color/purple"
+                    app:met_underlineColor="@color/purple"
                     android:hint="Kecamatan"/>
             </LinearLayout>
             <LinearLayout
@@ -132,9 +132,9 @@
                     android:layout_height="wrap_content"
                     app:met_floatingLabel="normal"
                     android:textColorHighlight="@color/black"
-                    app:met_floatingLabelTextColor="@color/orange"
+                    app:met_floatingLabelTextColor="@color/purple"
                     app:met_textColor="@color/black"
-                    app:met_underlineColor="@color/orange"
+                    app:met_underlineColor="@color/purple"
                     android:inputType="number"
                     android:hint="Kode Pos"/>
                 <com.rengwuxian.materialedittext.MaterialEditText
@@ -144,15 +144,15 @@
                     app:met_floatingLabel="normal"
                     android:textColorHighlight="@color/black"
                     app:met_textColor="@color/black"
-                    app:met_underlineColor="@color/orange"
-                    app:met_floatingLabelTextColor="@color/orange"
+                    app:met_underlineColor="@color/purple"
+                    app:met_floatingLabelTextColor="@color/purple"
                     android:inputType="number"
                     android:hint="Nomor Telepon Penerima"/>
             </LinearLayout>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/orange"
+                android:background="@color/purple"
                 android:text="Simpan"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"

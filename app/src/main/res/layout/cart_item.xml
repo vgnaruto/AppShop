@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llkotak"
                 android:text="Rp 765.000"
-                android:textColor="@color/orange"
+                android:textColor="@color/purple"
                 android:textSize="@dimen/_15sdp" />
         </RelativeLayout>
     </RelativeLayout>

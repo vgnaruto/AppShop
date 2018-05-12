@@ -70,9 +70,9 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         badgeCart = new BadgeIndicator(this, android.R.color.holo_red_dark, android.R.color.white);
         bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_home, "Home").addColorAtive(R.color.white));
         bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_cart, "Keranjang").addColorAtive(R.color.white).addBadgeIndicator(badgeCart));
-        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_transaction, "Pemberitahuan").addColorAtive(R.color.white));
-        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_promo2, "Favorit").addColorAtive(R.color.white));
-        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_promo2, "Profile").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_promo2, "Pemberitahuan").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_star_navbar, "Favorit").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_profile, "Profile").addColorAtive(R.color.white));
         bottomNav.build();
 
         BottomNav.OnTabSelectedListener listener = new BottomNav.OnTabSelectedListener() {

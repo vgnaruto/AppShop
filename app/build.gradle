@@ -30,4 +30,6 @@ dependencies {
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.github.felixsoares:BottomNavygation:1.8.6'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
 }
