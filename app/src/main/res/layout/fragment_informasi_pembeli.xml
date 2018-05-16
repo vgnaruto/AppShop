@@ -85,39 +85,48 @@
                 android:orientation="vertical"
                 android:padding="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_15sdp">
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/etProvinsi"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/_10sdp"
-                    app:met_floatingLabel="normal"
-                    android:textColorHighlight="@color/black"
-                    app:met_textColor="@color/black"
-                    app:met_floatingLabelTextColor="@color/purple"
-                    app:met_underlineColor="@color/purple"
-                    android:hint="Provinsi"/>
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/etKabupaten"
-                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="Provinsi"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:textColor="@color/purple"/>
+                <Spinner
+                    android:id="@+id/spinner_provinsi"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/spinner_border"/>
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:met_floatingLabel="normal"
-                    android:textColorHighlight="@color/black"
-                    app:met_textColor="@color/black"
-                    app:met_floatingLabelTextColor="@color/purple"
-                    app:met_underlineColor="@color/purple"
-                    android:hint="Kabupaten"/>
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/etKecamatan"
-                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="Kabupaten"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:textColor="@color/purple"/>
+                <Spinner
+                    android:id="@+id/spinner_kabupaten"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/spinner_border"/>
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:met_floatingLabel="normal"
-                    android:textColorHighlight="@color/black"
-                    app:met_textColor="@color/black"
-                    app:met_floatingLabelTextColor="@color/purple"
-                    app:met_underlineColor="@color/purple"
-                    android:hint="Kecamatan"/>
+                    android:text="Kecamatan"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:textColor="@color/purple"/>
+                <Spinner
+                    android:id="@+id/spinner_kecamatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/spinner_border"/>
             </LinearLayout>
             <LinearLayout
                 android:background="@drawable/border_with_shadow"

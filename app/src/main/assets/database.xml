@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Lokasi>
+    <Provinsi>
+        <nama_provinsi>Aceh</nama_provinsi>
+        <Kabupaten>
+            <nama_kabupaten>Kabupaten Aceh Barat</nama_kabupaten>
+            <Kecamatan>
+                <nama_kecamatan>Johan Pahlawan,
+                    Samatiga,
+                    Bubon,
+                    Arongan Lambalek,
+                    Woyla,
+                    Woyla Barat,
+                    Woyla Timur,
+                    Meureubo,
+                    Kaway XVI,
+                    Pante Ceureumen,
+                    Panton Reu,
+                    Sungai Mas
+                </nama_kecamatan>
+            </Kecamatan>
+        </Kabupaten>
+        <Kabupaten>
+            <nama_kabupaten>Kabupaten Aceh Barat Daya</nama_kabupaten>
+            <Kecamatan>
+                <nama_kecamatan>Babahrot,
+                    Blangpidie,
+                    Jeumpa,
+                    Kuala Batee,
+                    Lembah Sabil,
+                    Manggeng,
+                    Setia,
+                    Susoh,
+                    Tangan-Tangan
+                </nama_kecamatan>
+            </Kecamatan>
+        </Kabupaten>
+        <Kabupaten>
+            <nama_kabupaten>Kabupaten Aceh Besar</nama_kabupaten>
+            <Kecamatan>
+                <nama_kecamatan>Baitussalam,
+                    Blang Bintang,
+                    Darul Imarah,
+                    Darul Kamal,
+                    Darussalam,
+                    Indrapuri,
+                    Ingin Jaya,
+                    Kota Jantho,
+                    Krueng Barona Jaya,
+                    Kuta Baro,
+                    Kuta Cot Glie,
+                    Kuta Malaka,
+                    Lembah Seulawah,
+                    Leupung,
+                    Lhoknga,
+                    Lhoong,
+                    Mesjid Raya,
+                    Montasik,
+                    Peukan Bada,
+                    Pulo Aceh,
+                    Seulimeum,
+                    Simpang Tiga,
+                    Suka Makmur
+                </nama_kecamatan>
+            </Kecamatan>
+        </Kabupaten>
+        <Kabupaten>
+            <nama_kabupaten>Kabupaten Aceh Jaya</nama_kabupaten>
+            <Kecamatan>
+                <nama_kecamatan>
+                    Jaya,
+                    Krueng Sabee,
+                    Panga,
+                    Sampoiniet,
+                    Setia Bakti,
+                    Teunom,
+                    Indra Jaya,
+                    Darul Hikmah,
+                    Pasi Raya
+                </nama_kecamatan>
+            </Kecamatan>
+        </Kabupaten>
+        <Kabupaten>
+            <nama_kabupaten>Kabupaten Aceh Selatan</nama_kabupaten>
+            <Kecamatan>
+                <nama_kecamatan>
+                    Bakongan,
+                    Bakongan Timur,
+                    Kluet Selatan,
+                    Kluet Tengah,
+                    Kota Bahagia,
+                    Kluet Timur,
+                    Kluet Utara,
+                    Labuhan Haji,
+                    Labuhan Haji Barat,
+                    Labuhan Haji Timur,
+                    Meukek,
+                    Pasie Raja
+                    Sama Dua,
+                    Sawang,
+                    Tapak Tuan,
+                    Trumon,
+                    Trumon Timur,
+                    Trumon Tengah
+                </nama_kecamatan>
+            </Kecamatan>
+        </Kabupaten>
+        <Kabupaten>
+            <nama_kabupaten>Kabupaten Aceh Singkil</nama_kabupaten>
+            <Kecamatan>
+                <nama_kecamatan>
+                    Danau Paris,
+                    Gunung Meriah,
+                    Kota Baharu,
+                    Kuala Baru,
+                    Pulau Banyak,
+                    Pulau Banyak Barat,
+                    Simpang Kanan,
+                    Singkil,
+                    Singkil Utara,
+                    Singkohor,
+                    Suro Baru
+                </nama_kecamatan>
+            </Kecamatan>
+        </Kabupaten>
+        <Kabupaten>
+            <nama_kabupaten>Kabupaten Aceh Tamiang</nama_kabupaten>
+            <Kecamatan>
+                <nama_kecamatan>
+                    Banda Mulia,
+                    Bandar Pusaka,
+                    Bendahara,
+                    Karang Baru,
+                    Kejuruan Muda,
+                    Kota Kuala Simpang,
+                    Manyak Payed,
+                    Rantau,
+                    Sekrak,
+                    Seruway,
+                    Tamiang Hulu,
+                    Tenggulun
+                </nama_kecamatan>
+            </Kecamatan>
+        </Kabupaten>
+        <Kabupaten>
+            <nama_kabupaten>Kabupaten Aceh Tengah</nama_kabupaten>
+            <Kecamatan>
+                <nama_kecamatan>
+                    Atu Lintang,
+                    Bebesen,
+                    Bies,
+                    Bintang,
+                    Celala,
+                    Jagong Jeget,
+                    Kebayakan,
+                    Ketol,
+                    Kute Panang,
+                    Linge,
+                    Laut Tawar,
+                    Pegasing,
+                    Rusip Antara,
+                    Silih Nara
+                </nama_kecamatan>
+            </Kecamatan>
+        </Kabupaten>
+        <Kabupaten>
+            <nama_kabupaten>Kabupaten Aceh Tenggara</nama_kabupaten>
+            <Kecamatan>
+                <nama_kecamatan>
+                    Babul Makmur,
+                    Babul Rahmah,
+                    Babussalam,
+                    Badar,
+                    Bambel,
+                    Bukit Tusam,
+                    Darul Hasanah,
+                    Deleng Phokisen,
+                    Ketambe,
+                    Lawe Alas,
+                    Lawe Bulan,
+                    Lawe Sigala-gala,
+                    Lawe Sumur,
+                    Leuser,
+                    Semadam,
+                    Tanah Alas
+                </nama_kecamatan>
+            </Kecamatan>
+        </Kabupaten>
+        <Kabupaten>
+            <nama_kabupaten>Kabupaten Aceh Timur</nama_kabupaten>
+            <Kecamatan>
+                <nama_kecamatan>
+                    Simpang Ulim,
+                    Julok,
+                    Nurussalam,
+                    Darul Aman,
+                    Idi Rayeuk,
+                    Peureulak,
+                    Rantau Selamat,
+                    Birem Bayeun,
+                    Serba Jadi,
+                    Rantau Peureulak,
+                    Pante Bidari,
+                    Madat,
+                    Indra Makmur,
+                    Idi Tunong,
+                    Banda Alam,
+                    Peudawa,
+                    Peurelak Timur,
+                    Peureulak Barat,
+                    Sungai Raya,
+                    Simpang Jernih,
+                    Darul Ihsan,
+                    Peunaron,
+                    Idi Timur,
+                    Darul Falah
+                </nama_kecamatan>
+            </Kecamatan>
+        </Kabupaten>
+        <Kabupaten>
+            <nama_kabupaten>Kabupaten Aceh Utara</nama_kabupaten>
+            <Kecamatan>
+                <nama_kecamatan>
+                    Baktiya,
+                    Baktiya Barat,
+                    Banda Baro,
+                    Cot Girek,
+                    Dewantara,
+                    Geuredong Pase,
+                    Kuta Makmur,
+                    Langkahan,
+                    Lapang,
+                    Lhoksukon,
+                    Matang Kuli,
+                    Meurah Mulia,
+                    Muara Batu,
+                    Nibong,
+                    Nisam,
+                    Nisam Antara,
+                    Paya Bakong,
+                    Pirak Timu,
+                    Samudera,
+                    Sawang,
+                    Seunudon,
+                    Simpang Keuramat,
+                    Syamtalira Aron,
+                    Syamtalira Bayu,
+                    Tanah Luas,
+                    Tanah Jambo Aye,
+                    Tanah Pasir
+                </nama_kecamatan>
+            </Kecamatan>
+        </Kabupaten>
+        <Kabupaten>
+            <nama_kabupaten>Kabupaten Aceh Utara</nama_kabupaten>
+            <Kecamatan>
+                <nama_kecamatan>
+                    Baktiya,
+                    Baktiya Barat,
+                    Banda Baro,
+                    Cot Girek,
+                    Dewantara,
+                    Geuredong Pase,
+                    Kuta Makmur,
+                    Langkahan,
+                    Lapang,
+                    Lhoksukon,
+                    Matang Kuli,
+                    Meurah Mulia,
+                    Muara Batu,
+                    Nibong,
+                    Nisam,
+                    Nisam Antara,
+                    Paya Bakong,
+                    Pirak Timu,
+                    Samudera,
+                    Sawang,
+                    Seunudon,
+                    Simpang Keuramat,
+                    Syamtalira Aron,
+                    Syamtalira Bayu,
+                    Tanah Luas,
+                    Tanah Jambo Aye,
+                    Tanah Pasir
+                </nama_kecamatan>
+            </Kecamatan>
+        </Kabupaten>
+    </Provinsi>
+</Lokasi>
