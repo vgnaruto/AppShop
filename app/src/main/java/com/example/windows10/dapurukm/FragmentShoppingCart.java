@@ -78,6 +78,10 @@ public class FragmentShoppingCart extends Fragment implements View.OnClickListen
         adapter.removeProduct(product);
     }
 
+    public ShoppingCartAdapter getAdapter() {
+        return adapter;
+    }
+
     public void notifData(){
         adapter.notifyDataSetChanged();
         if(adapter.isEmpty()){

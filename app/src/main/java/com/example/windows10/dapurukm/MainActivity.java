@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.felix.bottomnavygation.BadgeIndicator;
 import com.felix.bottomnavygation.BottomNav;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     private FragmentInformasiData fragmentInformasiData;
 
     private FragmentManager fragmentManager;
+
+    private FileManager fm;
 
     public static int PAGE_HOME = 0;
     public static int PAGE_PRODUCT = 1;
@@ -103,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
         changePage(PAGE_HOME);
         instance = this;
+
+        fm = new FileManager(this);
     }
 
     public void hideNavBar(){
@@ -114,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
     public void notifyShoppingCart(){
         fragmentShoppingCart.notifData();
+        fm.saveFile(fragmentShoppingCart.getAdapter().getProducts());
+        Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -190,6 +197,25 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
     public Product getSelected() {
         return this.selected;
+    }
+
+    /*
+    @Override
+    protected void onPause(){
+        Log.d("Main", "onPause12345");
+        super.onPause();
+        Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show();
+        fm.saveFile(fragmentShoppingCart.getAdapter().getProducts());
+        Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+    }
+    */
+
+    @Override
+    protected void onResume(){
+        Log.d("Main", "onResume12345");
+        super.onResume();
+        ArrayList<Product> products = fm.loadData();
+        if(products != null)fragmentShoppingCart.getAdapter().setProducts(products);
     }
 
 }

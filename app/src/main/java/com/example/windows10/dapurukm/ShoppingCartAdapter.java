@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -106,6 +107,10 @@ public class ShoppingCartAdapter extends BaseAdapter {
 
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
+    }
+
+    public ArrayList<Product> getProducts() {
+        return products;
     }
 
     public boolean isEmpty() {
