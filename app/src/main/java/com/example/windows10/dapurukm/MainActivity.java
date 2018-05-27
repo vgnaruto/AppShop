@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     private FragmentShoppingCart fragmentShoppingCart;
     private FragmentInformasiData fragmentInformasiData;
 
+    private MainPresenter presenter;
+
     private FragmentManager fragmentManager;
 
     public static int PAGE_HOME = 0;
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        presenter = new MainPresenter(this);
 
         fragments = new ArrayList<>();
         fragmentHome = FragmentHome.newInstance(this, "HOME FRAGMENT");
@@ -192,4 +196,15 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         return this.selected;
     }
 
+    public MainPresenter getPresenter() {
+        return presenter;
+    }
+
+    public void setPresenter(MainPresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    public void notifyUserChanged(){
+        fragmentHome.setUser();
+    }
 }

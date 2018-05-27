@@ -1,6 +1,5 @@
 package com.example.windows10.dapurukm;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -11,16 +10,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-
-import java.util.ArrayList;
+import android.widget.TextView;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -35,6 +31,10 @@ public class FragmentHome extends Fragment implements NavigationView.OnNavigatio
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBar actionBar;
+
+    private MainPresenter presenter;
+    private TextView tvNamaUser;
+    private TextView tvEmailUser;
 
     public FragmentHome() {
     }
@@ -51,8 +51,9 @@ public class FragmentHome extends Fragment implements NavigationView.OnNavigatio
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        presenter = ctx.getPresenter();
 
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         newsPager = view.findViewById(R.id.viewPager);
         ImagePagerAdapter viewPagerAdapter = new ImagePagerAdapter(ctx, 4, new Bitmap[]{
                 ((BitmapDrawable) ctx.getResources().getDrawable(R.drawable.promo_dummy1)).getBitmap(),
@@ -73,6 +74,10 @@ public class FragmentHome extends Fragment implements NavigationView.OnNavigatio
         ctx.setSupportActionBar(toolbar);
 
         this.navigationView = view.findViewById(R.id.nav_view);
+        View navView = navigationView.getHeaderView(0);
+        tvNamaUser = navView.findViewById(R.id.etNamaUser);
+        tvEmailUser = navView.findViewById(R.id.etEmailUser);
+
         this.drawerLayout = view.findViewById(R.id.drawer_layout);
         toolbar = view.findViewById(R.id.toolbar);
         ctx.setSupportActionBar(toolbar);
@@ -82,7 +87,7 @@ public class FragmentHome extends Fragment implements NavigationView.OnNavigatio
         actionBar.setDisplayShowTitleEnabled(false);
 
         setupDrawerContent(navigationView);
-
+        setUser();
         return view;
     }
 
@@ -111,5 +116,11 @@ public class FragmentHome extends Fragment implements NavigationView.OnNavigatio
         }
         drawerLayout.closeDrawers();
         item.setChecked(true);
+    }
+
+    public void setUser() {
+        User cUser = presenter.getUser();
+        tvNamaUser.setText(cUser.getNama());
+        tvEmailUser.setText(cUser.getEmail());
     }
 }

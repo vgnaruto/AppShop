@@ -1,29 +1,27 @@
 package com.example.windows10.dapurukm;
 
-import java.util.ArrayList;
-
 public class Provinsi {
-    private String id;
-    private String nama;
+    private String province_id;
+    private String province;
 
-    public Provinsi(String id, String nama) {
-        this.id = id;
-        this.nama = nama;
+    public Provinsi(String province_id, String province) {
+        this.province_id = province_id;
+        this.province = province;
     }
 
-    public String getId() {
-        return id;
+    public String getProvince_id() {
+        return province_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setProvince_id(String province_id) {
+        this.province_id = province_id;
     }
 
-    public String getNama() {
-        return nama;
+    public String getProvince() {
+        return province;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setProvince(String province) {
+        this.province = province;
     }
 }

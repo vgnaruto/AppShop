@@ -54,7 +54,7 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
-        presenter = new MainPresenter();
+        presenter = ctx.getPresenter();
 
         prodNama = view.findViewById(R.id.prod_nama);
         prodPrice = view.findViewById(R.id.prod_price);

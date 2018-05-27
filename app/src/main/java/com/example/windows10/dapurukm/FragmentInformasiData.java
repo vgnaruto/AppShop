@@ -10,9 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,17 +30,19 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class FragmentInformasiData extends Fragment {
+public class FragmentInformasiData extends Fragment implements View.OnClickListener {
     private MainActivity ctx;
-    private MaterialEditText etNama, etAlamat, etKodePos, etNomorTelepon;
-    private Spinner spinnerProvinsi, spinnerKabupaten, spinnerKecamatan;
+    private MaterialEditText etNama, etAlamat, etKodePos, etNomorTelepon, etEmail;
+    private Spinner spinnerProvinsi, spinnerKabupaten;
     private ImageButton backButton;
+    private Button simpanButton;
 
     private ArrayList<Provinsi> listProvinsi = new ArrayList<>();
     private ArrayList<Kabupaten> listKabupaten = new ArrayList<>();
-    private ArrayList<Kecamatan> listKecamatan = new ArrayList<>();
     private RequestQueue queue;
     private Gson gson = new Gson();
+
+    private MainPresenter presenter;
 
     public FragmentInformasiData() {
     }
@@ -61,19 +64,30 @@ public class FragmentInformasiData extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_informasi_pembeli, container, false);
+        presenter = ctx.getPresenter();
+
         queue = Volley.newRequestQueue(ctx);
         backButton = view.findViewById(R.id.back_button);
+        simpanButton = view.findViewById(R.id.btn_simpan);
+
+        etNama = view.findViewById(R.id.etNama);
+        etAlamat = view.findViewById(R.id.etAlamat);
+        etKodePos = view.findViewById(R.id.etKodePos);
+        etNomorTelepon = view.findViewById(R.id.etNoTelepon);
+        etEmail = view.findViewById(R.id.etEmail);
+
         spinnerProvinsi = view.findViewById(R.id.spinner_provinsi);
         spinnerKabupaten = view.findViewById(R.id.spinner_kabupaten);
-        spinnerKecamatan = view.findViewById(R.id.spinner_kecamatan);
 
-        getProvinsi("http://dev.farizdotid.com/api/daerahindonesia/provinsi");
+        String apiKey = getResources().getString(R.string.API_KEY);
+        getProvinsi("https://api.rajaongkir.com/starter/province?key=" + apiKey);
 
         spinnerProvinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String idProvinsi = listProvinsi.get(spinnerProvinsi.getSelectedItemPosition()).getId();
-                getKabupaten("http://dev.farizdotid.com/api/daerahindonesia/provinsi/"+idProvinsi+"/kabupaten");
+                String idProvinsi = listProvinsi.get(spinnerProvinsi.getSelectedItemPosition()).getProvince_id();
+                String apiKey = getResources().getString(R.string.API_KEY);
+                getKabupaten("https://api.rajaongkir.com/starter/city?province=" + idProvinsi + "&key=" + apiKey);
             }
 
             @Override
@@ -82,31 +96,14 @@ public class FragmentInformasiData extends Fragment {
             }
         });
 
-        spinnerKabupaten.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String idKabupaten = listKabupaten.get(spinnerKabupaten.getSelectedItemPosition()).getId();
-                getKecamatan("http://dev.farizdotid.com/api/daerahindonesia/provinsi/kabupaten/"+idKabupaten+"/kecamatan");
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ctx.onBackPressed();
-            }
-        });
+        backButton.setOnClickListener(this);
+        simpanButton.setOnClickListener(this);
 
         return view;
     }
 
     //PROVINSI-1
-    private void getProvinsi(String url){
+    private void getProvinsi(String url) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -114,15 +111,16 @@ public class FragmentInformasiData extends Fragment {
                 ArrayList<String> namaProvinsi = new ArrayList<>();
                 for (int i = 0; i < provinsis.length; i++) {
                     listProvinsi.add(provinsis[i]);
-                    namaProvinsi.add(provinsis[i].getNama());
+                    namaProvinsi.add(provinsis[i].getProvince());
                 }
                 ArrayAdapter<String> adapterProvinsi = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, namaProvinsi);
                 adapterProvinsi.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerProvinsi.setAdapter(adapterProvinsi);
 
                 //GET KABUPATEN
-                String idProvinsi = listProvinsi.get(spinnerProvinsi.getSelectedItemPosition()).getId();
-                getKabupaten("http://dev.farizdotid.com/api/daerahindonesia/provinsi/"+idProvinsi+"/kabupaten");
+                String idProvinsi = listProvinsi.get(spinnerProvinsi.getSelectedItemPosition()).getProvince_id();
+                String apiKey = getResources().getString(R.string.API_KEY);
+                getKabupaten("https://api.rajaongkir.com/starter/city?province=" + idProvinsi + "&key=" + apiKey);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -131,36 +129,38 @@ public class FragmentInformasiData extends Fragment {
         });
         queue.add(stringRequest);
     }
+
     //PROVINSI-2
-    private Provinsi[] processResultProvinsi(String content){
+    private Provinsi[] processResultProvinsi(String content) {
         try {
             JSONObject json = new JSONObject(content);
-            JSONArray data = json.getJSONArray("semuaprovinsi");
+            JSONObject obj = json.getJSONObject("rajaongkir");
+            JSONArray data = obj.getJSONArray("results");
             return this.gson.fromJson(data.toString(), Provinsi[].class);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return null;
     }
+
     //KABUPATEN-1
-    private void getKabupaten(String url){
+    private void getKabupaten(String url) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 listKabupaten = new ArrayList<>();
                 ArrayList<String> namaKabupaten = new ArrayList<>();
                 Kabupaten[] kabupatens = processResultKabupaten(response);
-                for(Kabupaten k : kabupatens){
+                for (Kabupaten k : kabupatens) {
                     listKabupaten.add(k);
-                    namaKabupaten.add(k.getNama());
+                    namaKabupaten.add(k.getCity_name() + "(" + k.getType() + ")");
                 }
                 ArrayAdapter<String> adapterKabupaten = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, namaKabupaten);
                 adapterKabupaten.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerKabupaten.setAdapter(adapterKabupaten);
 
                 //GET KECAMATAN
-                String idKabupaten = listKabupaten.get(spinnerKabupaten.getSelectedItemPosition()).getId();
-                getKecamatan("http://dev.farizdotid.com/api/daerahindonesia/provinsi/kabupaten/"+idKabupaten+"/kecamatan");
+                String idKabupaten = listKabupaten.get(spinnerKabupaten.getSelectedItemPosition()).getCity_id();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -169,49 +169,60 @@ public class FragmentInformasiData extends Fragment {
         });
         queue.add(stringRequest);
     }
+
     //KABUPATEN-2
-    private Kabupaten[] processResultKabupaten(String content){
+    private Kabupaten[] processResultKabupaten(String content) {
         try {
             JSONObject json = new JSONObject(content);
-            JSONArray data = json.getJSONArray("daftar_kecamatan");
+            JSONObject obj = json.getJSONObject("rajaongkir");
+            JSONArray data = obj.getJSONArray("results");
             return this.gson.fromJson(data.toString(), Kabupaten[].class);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return null;
     }
-    //KECAMATAN-1
-    private void getKecamatan(String url){
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listKecamatan = new ArrayList<>();
-                ArrayList<String> namaKecamatan = new ArrayList<>();
-                Kecamatan[] kecamatans = processResultKecamatan(response);
-                for(Kecamatan k : kecamatans){
-                    listKecamatan.add(k);
-                    namaKecamatan.add(k.getNama());
-                }
-                ArrayAdapter<String> adapterKecamatan = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, namaKecamatan);
-                adapterKecamatan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerKecamatan.setAdapter(adapterKecamatan);
+
+    @Override
+    public void onClick(View v) {
+        if (v == backButton) {
+            ctx.onBackPressed();
+        } else if (v == simpanButton) {
+            if(isDataValid()){
+                String nama = etNama.getText().toString();
+                String alamat = etAlamat.getText().toString();
+                String kodePos = etKodePos.getText().toString();
+                String noTelepon = etNomorTelepon.getText().toString();
+                String email = etEmail.getText().toString();
+                Provinsi provinsi = listProvinsi.get(spinnerProvinsi.getSelectedItemPosition());
+                Kabupaten kabupaten = listKabupaten.get(spinnerKabupaten.getSelectedItemPosition());
+                User user = new User(nama,alamat,provinsi,kabupaten,kodePos,noTelepon,email);
+                presenter.setUser(user);
+
+                Toast toast = Toast.makeText(ctx,"Berhasil daftar!", Toast.LENGTH_SHORT);
+                toast.show();
+
+                //TODO CHANGE TO CHECKOUT PAGE
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        queue.add(stringRequest);
-    }
-    //KECAMATAN-2
-    private Kecamatan[] processResultKecamatan(String content){
-        try {
-            JSONObject json = new JSONObject(content);
-            JSONArray data = json.getJSONArray("daftar_kecamatan");
-            return this.gson.fromJson(data.toString(), Kecamatan[].class);
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        return null;
+    }
+
+    public boolean isDataValid() {
+        if (etNama.getText().toString().isEmpty()) {
+            return false;
+        }
+        if (etAlamat.getText().toString().isEmpty()) {
+            return false;
+        }
+        if (etKodePos.getText().toString().isEmpty()) {
+            return false;
+        }
+        if (etNomorTelepon.getText().toString().isEmpty()) {
+            return false;
+        }
+        if(etEmail.getText().toString().isEmpty()) {
+            return false;
+        }
+        return true;
     }
 }

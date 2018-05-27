@@ -15,14 +15,17 @@ public class ShoppingCartAdapter extends BaseAdapter {
     private MainActivity ui;
     private ArrayList<Product> products = new ArrayList<>();
     private ViewHolder vh;
+    private MainPresenter presenter;
 
     public ShoppingCartAdapter(MainActivity ui) {
         this.ui = ui;
+        presenter = ui.getPresenter();
     }
 
     public ShoppingCartAdapter(MainActivity ui, ArrayList<Product> prod) {
         this.ui = ui;
         products = prod;
+        presenter = ui.getPresenter();
     }
 
     public String getTotalItems(){
@@ -42,7 +45,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
             int harga = Integer.parseInt(p.getHarga().substring(3).replaceAll("\\.","").trim());
             total += harga * p.getTotal();
         }
-        return new MainPresenter().formatRupiah(total);
+        return presenter.formatRupiah(total);
     }
 
     @Override
@@ -69,7 +72,8 @@ public class ShoppingCartAdapter extends BaseAdapter {
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        vh.updateView(getItem(position));
+        Product currentProduct = getItem(position);
+        vh.updateView(currentProduct);
         vh.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +145,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
             judulProduct.setText(prod.getNama());
             int harga = Integer.parseInt(prod.getHarga().substring(3).replaceAll("\\.", "").trim());
             int total = prod.getTotal();
-            hargaProduct.setText(new MainPresenter().formatRupiah(harga * total));
+            hargaProduct.setText(presenter.formatRupiah(harga * total));
             totalOrder.setText(prod.getTotal()+"");
             gambarProduct.setImageBitmap(prod.getFoto().get(0));
         }

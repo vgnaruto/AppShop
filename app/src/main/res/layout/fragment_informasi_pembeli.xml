@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -13,7 +14,6 @@
         android:paddingLeft="@dimen/_10sdp"
         android:paddingRight="@dimen/_10sdp"
         android:paddingTop="@dimen/_6sdp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,6 +60,7 @@
                 android:padding="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_15sdp">
                 <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/etNama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:met_floatingLabel="normal"
@@ -69,6 +70,7 @@
                     app:met_underlineColor="@color/purple"
                     android:hint="Nama Penerima"/>
                 <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/etAlamat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:met_floatingLabel="normal"
@@ -77,6 +79,16 @@
                     app:met_floatingLabelTextColor="@color/purple"
                     app:met_underlineColor="@color/purple"
                     android:hint="Alamat Penerima"/>
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
+                    android:textColorHighlight="@color/black"
+                    app:met_textColor="@color/black"
+                    app:met_floatingLabelTextColor="@color/purple"
+                    app:met_underlineColor="@color/purple"
+                    android:hint="E-mail Penerima"/>
             </LinearLayout>
             <LinearLayout
                 android:background="@drawable/border_with_shadow"
@@ -102,25 +114,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kabupaten"
+                    android:text="Kabupaten / Kota"
                     android:layout_marginBottom="@dimen/_4sdp"
                     android:textColor="@color/purple"/>
                 <Spinner
                     android:id="@+id/spinner_kabupaten"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:background="@drawable/spinner_border"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kecamatan"
-                    android:layout_marginBottom="@dimen/_4sdp"
-                    android:textColor="@color/purple"/>
-                <Spinner
-                    android:id="@+id/spinner_kecamatan"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:paddingTop="@dimen/_5sdp"
@@ -136,6 +134,7 @@
                 android:padding="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_15sdp">
                 <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/etKodePos"
                     android:paddingBottom="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -147,6 +146,7 @@
                     android:inputType="number"
                     android:hint="Kode Pos"/>
                 <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/etNoTelepon"
                     android:paddingBottom="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,6 +159,7 @@
                     android:hint="Nomor Telepon Penerima"/>
             </LinearLayout>
             <Button
+                android:id="@+id/btn_simpan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/purple"
