@@ -22,10 +22,8 @@ public class ShoppingCartAdapter extends BaseAdapter {
         presenter = ui.getPresenter();
     }
 
-    public ShoppingCartAdapter(MainActivity ui, ArrayList<Product> prod) {
-        this.ui = ui;
-        products = prod;
-        presenter = ui.getPresenter();
+    public ArrayList<Product> getProducts() {
+        return products;
     }
 
     public String getTotalItems(){
@@ -117,7 +115,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
     }
 
     public void addProduct(Product product) {
-        this.products.add(product);
+        products.add(product);
     }
 
     public void removeProduct(Product product){

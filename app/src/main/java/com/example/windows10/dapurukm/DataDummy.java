@@ -35,19 +35,22 @@ public class DataDummy {
                         "BIMOLI MINYAK GORENG",
                         "Bimoli minyak goreng refil 1 Liter",
                         new Seller("Nutrimart","Pagedangan, Tangerang"),
-                        3),
+                        3,
+                        300),
                 new Product(dummy2,
                         "Rp 5.000",
                         "AQUA AIR PUTIH MINERAL",
                         "Aqua air putih 550 mili",
                         new Seller("BIZ MART","Pinang(penang), Tangerang"),
-                        4),
+                        4,
+                        150),
                 new Product(dummy3,
                         "Rp 15.000",
                         "BENG BENG COKELAT",
                         "Beng-beng adalah sejenis makanan ringan yang sudah terkenal di semua kalangan karena rasanya yang nikmat dan memiliki citra rasa yang berbeda dengan cemilan berbahan dasar wafer lainnya. Dengan 4 kelezatan sekaligus pada setiap lapisannya sehingga pada setiap gigitan memberikan 'sensasi' yang membuat kita ingin memakannya lagi dan lagi .",
                         new Seller("Khaira Jaya","Penjaringang, Jakarta Utara"),
-                        5)
+                        5,
+                        50)
         };
         ArrayList<Product> result = new ArrayList<>();
         result.addAll(Arrays.asList(products));

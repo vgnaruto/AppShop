@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -14,7 +13,6 @@ import com.felix.bottomnavygation.BottomNav;
 import com.felix.bottomnavygation.ItemNav;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity implements FragmentListener {
     private FrameLayout frameLayout;
@@ -23,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     private FragmentProduct fragmentProduct;
     private FragmentShoppingCart fragmentShoppingCart;
     private FragmentInformasiData fragmentInformasiData;
+    private FragmentCheckout fragmentCheckout;
 
     private MainPresenter presenter;
 
@@ -32,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     public static int PAGE_PRODUCT = 1;
     public static int PAGE_SHOPPING_CART = 2;
     public static int PAGE_INFORMASI_DATA = 3;
+    public static int PAGE_CHECKOUT = 4;
 
     public static MainActivity instance;
     private Product selected;
@@ -39,23 +39,28 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     private BottomNav bottomNav;
     private BadgeIndicator badgeCart;
 
+    private Agent[] agents;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         presenter = new MainPresenter(this);
+        presenter.loadUser();
 
         fragments = new ArrayList<>();
         fragmentHome = FragmentHome.newInstance(this, "HOME FRAGMENT");
         fragmentProduct = FragmentProduct.newInstance(this, "PRODUCT FRAGMENT");
         fragmentShoppingCart = FragmentShoppingCart.newInstance(this, "SHOPPING CART FRAGMENT");
         fragmentInformasiData = FragmentInformasiData.newInstance(this, "INFORMASI DATA FRAGMENT");
+        fragmentCheckout = FragmentCheckout.newInstance(this, "CHECKOUT FRAGMENT");
 
         fragments.add(fragmentHome);
         fragments.add(fragmentProduct);
         fragments.add(fragmentShoppingCart);
         fragments.add(fragmentInformasiData);
+        fragments.add(fragmentCheckout);
 
         frameLayout = findViewById(R.id.fragment_container);
 
@@ -118,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
     public void notifyShoppingCart(){
         fragmentShoppingCart.notifData();
+        fragmentCheckout.notifData();
     }
 
     @Override
@@ -152,9 +158,17 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             if (fragmentInformasiData.isAdded()) {
                 ft.show(fragmentInformasiData);
             } else {
-                ft.add(R.id.fragment_container, fragmentInformasiData).addToBackStack("fragment_cart");
+                ft.add(R.id.fragment_container, fragmentInformasiData).addToBackStack("fragment_data");
             }
             hideOtherFrag(fragmentInformasiData, ft);
+        }else if(page == PAGE_CHECKOUT){
+            hideNavBar();
+            if (fragmentCheckout.isAdded()) {
+                ft.show(fragmentCheckout);
+            } else {
+                ft.add(R.id.fragment_container, fragmentCheckout).addToBackStack("fragment_checkout");
+            }
+            hideOtherFrag(fragmentCheckout, ft);
         }
         ft.commit();
     }
@@ -206,5 +220,27 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
     public void notifyUserChanged(){
         fragmentHome.setUser();
+    }
+
+    public void setKabupaten(ArrayList<Kabupaten> listKabupaten, ArrayList<String> namaKabupaten){
+        fragmentInformasiData.setKabupaten(listKabupaten,namaKabupaten);
+    }
+    public void setProvinsi(ArrayList<Provinsi> listProvinsi, ArrayList<String> namaProvinsi){
+        fragmentInformasiData.setProvinsi(listProvinsi,namaProvinsi);
+    }
+    public ArrayList<Product> getProduct(){
+        return fragmentShoppingCart.getProduct();
+    }
+
+    public void setAgents(Agent[] agents){
+        this.agents = agents;
+    }
+
+    public Agent[] getAgents() {
+        return agents;
+    }
+
+    public void notifyCheckOutAdapter(int posisi){
+        fragmentCheckout.updateSpinnerAgent(posisi);
     }
 }

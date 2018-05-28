@@ -41,18 +41,20 @@ public class FragmentHome extends Fragment implements NavigationView.OnNavigatio
 
     public static FragmentHome newInstance(MainActivity mainActivity, String title) {
         FragmentHome fragment = new FragmentHome();
-        fragment.setMainActivity(mainActivity);
+        fragment.initialize(mainActivity);
         Bundle args = new Bundle();
         args.putString("title", title);
         fragment.setArguments(args);
         return fragment;
     }
+    public void initialize(MainActivity activity){
+        ctx = activity;
+        presenter = ctx.getPresenter();
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        presenter = ctx.getPresenter();
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         newsPager = view.findViewById(R.id.viewPager);
         ImagePagerAdapter viewPagerAdapter = new ImagePagerAdapter(ctx, 4, new Bitmap[]{

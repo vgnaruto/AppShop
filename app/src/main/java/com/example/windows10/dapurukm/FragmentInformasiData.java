@@ -49,24 +49,24 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
 
     public static FragmentInformasiData newInstance(MainActivity mainActivity, String title) {
         FragmentInformasiData fragment = new FragmentInformasiData();
-        fragment.setMainActivity(mainActivity);
+        fragment.initialize(mainActivity);
         Bundle args = new Bundle();
         args.putString("title", title);
         fragment.setArguments(args);
         return fragment;
     }
 
-    private void setMainActivity(MainActivity ui) {
-        this.ctx = ui;
+    public void initialize(MainActivity activity){
+        ctx = activity;
+        presenter = ctx.getPresenter();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_informasi_pembeli, container, false);
-        presenter = ctx.getPresenter();
 
-        queue = Volley.newRequestQueue(ctx);
+//        queue = Volley.newRequestQueue(ctx);
         backButton = view.findViewById(R.id.back_button);
         simpanButton = view.findViewById(R.id.btn_simpan);
 
@@ -80,14 +80,14 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
         spinnerKabupaten = view.findViewById(R.id.spinner_kabupaten);
 
         String apiKey = getResources().getString(R.string.API_KEY);
-        getProvinsi("https://api.rajaongkir.com/starter/province?key=" + apiKey);
+        presenter.getProvinsi("https://api.rajaongkir.com/starter/province?key=" + apiKey, 0);
 
         spinnerProvinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String idProvinsi = listProvinsi.get(spinnerProvinsi.getSelectedItemPosition()).getProvince_id();
                 String apiKey = getResources().getString(R.string.API_KEY);
-                getKabupaten("https://api.rajaongkir.com/starter/city?province=" + idProvinsi + "&key=" + apiKey);
+                presenter.getKabupaten("https://api.rajaongkir.com/starter/city?province=" + idProvinsi + "&key=" + apiKey);
             }
 
             @Override
@@ -102,85 +102,18 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
         return view;
     }
 
-    //PROVINSI-1
-    private void getProvinsi(String url) {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Provinsi[] provinsis = processResultProvinsi(response);
-                ArrayList<String> namaProvinsi = new ArrayList<>();
-                for (int i = 0; i < provinsis.length; i++) {
-                    listProvinsi.add(provinsis[i]);
-                    namaProvinsi.add(provinsis[i].getProvince());
-                }
-                ArrayAdapter<String> adapterProvinsi = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, namaProvinsi);
-                adapterProvinsi.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerProvinsi.setAdapter(adapterProvinsi);
-
-                //GET KABUPATEN
-                String idProvinsi = listProvinsi.get(spinnerProvinsi.getSelectedItemPosition()).getProvince_id();
-                String apiKey = getResources().getString(R.string.API_KEY);
-                getKabupaten("https://api.rajaongkir.com/starter/city?province=" + idProvinsi + "&key=" + apiKey);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        queue.add(stringRequest);
+    public void setProvinsi(ArrayList<Provinsi> listProvinsi, ArrayList<String> namaProvinsi) {
+        this.listProvinsi = listProvinsi;
+        ArrayAdapter<String> adapterProvinsi = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, namaProvinsi);
+        adapterProvinsi.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerProvinsi.setAdapter(adapterProvinsi);
     }
 
-    //PROVINSI-2
-    private Provinsi[] processResultProvinsi(String content) {
-        try {
-            JSONObject json = new JSONObject(content);
-            JSONObject obj = json.getJSONObject("rajaongkir");
-            JSONArray data = obj.getJSONArray("results");
-            return this.gson.fromJson(data.toString(), Provinsi[].class);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    //KABUPATEN-1
-    private void getKabupaten(String url) {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listKabupaten = new ArrayList<>();
-                ArrayList<String> namaKabupaten = new ArrayList<>();
-                Kabupaten[] kabupatens = processResultKabupaten(response);
-                for (Kabupaten k : kabupatens) {
-                    listKabupaten.add(k);
-                    namaKabupaten.add(k.getCity_name() + "(" + k.getType() + ")");
-                }
-                ArrayAdapter<String> adapterKabupaten = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, namaKabupaten);
-                adapterKabupaten.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerKabupaten.setAdapter(adapterKabupaten);
-
-                //GET KECAMATAN
-                String idKabupaten = listKabupaten.get(spinnerKabupaten.getSelectedItemPosition()).getCity_id();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        queue.add(stringRequest);
-    }
-
-    //KABUPATEN-2
-    private Kabupaten[] processResultKabupaten(String content) {
-        try {
-            JSONObject json = new JSONObject(content);
-            JSONObject obj = json.getJSONObject("rajaongkir");
-            JSONArray data = obj.getJSONArray("results");
-            return this.gson.fromJson(data.toString(), Kabupaten[].class);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public void setKabupaten(ArrayList<Kabupaten> listKabupaten, ArrayList<String> namaKabupaten) {
+        this.listKabupaten = listKabupaten;
+        ArrayAdapter<String> adapterKabupaten = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, namaKabupaten);
+        adapterKabupaten.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerKabupaten.setAdapter(adapterKabupaten);
     }
 
     @Override
@@ -188,7 +121,7 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
         if (v == backButton) {
             ctx.onBackPressed();
         } else if (v == simpanButton) {
-            if(isDataValid()){
+            if (isDataValid()) {
                 String nama = etNama.getText().toString();
                 String alamat = etAlamat.getText().toString();
                 String kodePos = etKodePos.getText().toString();
@@ -196,13 +129,13 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
                 String email = etEmail.getText().toString();
                 Provinsi provinsi = listProvinsi.get(spinnerProvinsi.getSelectedItemPosition());
                 Kabupaten kabupaten = listKabupaten.get(spinnerKabupaten.getSelectedItemPosition());
-                User user = new User(nama,alamat,provinsi,kabupaten,kodePos,noTelepon,email);
+                User user = new User(nama, alamat, provinsi, kabupaten, kodePos, noTelepon, email);
                 presenter.setUser(user);
+                presenter.saveUser();
 
-                Toast toast = Toast.makeText(ctx,"Berhasil daftar!", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(ctx, "Berhasil daftar!", Toast.LENGTH_SHORT);
                 toast.show();
-
-                //TODO CHANGE TO CHECKOUT PAGE
+                ctx.onBackPressed();
             }
         }
     }
@@ -220,7 +153,7 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
         if (etNomorTelepon.getText().toString().isEmpty()) {
             return false;
         }
-        if(etEmail.getText().toString().isEmpty()) {
+        if (etEmail.getText().toString().isEmpty()) {
             return false;
         }
         return true;

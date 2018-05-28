@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 
 import java.util.ArrayList;
 
@@ -25,19 +28,24 @@ public class FragmentShoppingCart extends Fragment implements View.OnClickListen
     private Button checkOutBtn,contShoppingButton;
     private TextView totalBarang, totalHarga;
     private ImageButton backButton;
+    private MainPresenter presenter;
 
     public FragmentShoppingCart() {
     }
 
     public static FragmentShoppingCart newInstance(MainActivity mainActivity, String title) {
         FragmentShoppingCart fragment = new FragmentShoppingCart();
-        fragment.setMainActivity(mainActivity);
+        fragment.initialize(mainActivity);
         Bundle args = new Bundle();
         args.putString("title", title);
         fragment.setArguments(args);
         return fragment;
     }
-
+    public void initialize(MainActivity activity){
+        ctx = activity;
+        presenter = ctx.getPresenter();
+        adapter = new ShoppingCartAdapter(ctx);
+    }
 
     @Nullable
     @Override
@@ -101,13 +109,12 @@ public class FragmentShoppingCart extends Fragment implements View.OnClickListen
         listView.setVisibility(View.INVISIBLE);
     }
 
-    private void setMainActivity(MainActivity ctx) {
-        this.ctx = ctx;
-        adapter = new ShoppingCartAdapter(ctx);
-    }
-
     public void addProduct(Product product) {
         adapter.addProduct(product);
+    }
+
+    public ArrayList<Product> getProduct(){
+        return  adapter.getProducts();
     }
 
     @Override
@@ -117,7 +124,13 @@ public class FragmentShoppingCart extends Fragment implements View.OnClickListen
         }else if(v == backButton){
             ctx.onBackPressed();
         }else if(v == checkOutBtn){
-            ctx.changePage(MainActivity.PAGE_INFORMASI_DATA);
+            if(presenter.isLogin()){
+                Log.d("isLogin","login");
+                ctx.changePage(MainActivity.PAGE_CHECKOUT);
+            }else {
+                Log.d("isLogin","not login");
+                ctx.changePage(MainActivity.PAGE_INFORMASI_DATA);
+            }
         }
     }
 }

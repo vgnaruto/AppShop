@@ -23,7 +23,7 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
     private MainActivity ctx;
     private ViewPager imagePager;
     private ImageButton backButton, btnAdd, btnMin;
-    private TextView prodNama, prodPrice;
+    private TextView prodNama, prodPrice, prodWeight;
     private ImageView[] bintang = new ImageView[5];
     private TextView totalOrder;
     private TextView sellerName, sellerAddress;
@@ -38,7 +38,7 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
 
     public static FragmentProduct newInstance(MainActivity mainActivity, String title) {
         FragmentProduct fragment = new FragmentProduct();
-        fragment.setMainActivity(mainActivity);
+        fragment.initialize(mainActivity);
         Bundle args = new Bundle();
         args.putString("title", title);
         fragment.setArguments(args);
@@ -49,15 +49,19 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
         selected = prod;
     }
 
+    public void initialize(MainActivity activity){
+        ctx = activity;
+        presenter = ctx.getPresenter();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
-        presenter = ctx.getPresenter();
-
         prodNama = view.findViewById(R.id.prod_nama);
         prodPrice = view.findViewById(R.id.prod_price);
+        prodWeight = view.findViewById(R.id.prod_weight);
         prodDeskripsi = (ExpandableTextView) view.findViewById(R.id.expand_tv).findViewById(R.id.expanded_text_view);
         for (int i = 0; i < bintang.length; i++) {
             switch (i) {
@@ -94,7 +98,7 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
         CircleIndicator indicator = view.findViewById(R.id.indicator);
         indicator.setViewPager(imagePager);
         imagePager.setAdapter(viewPagerAdapter);
-
+        prodWeight.setText(selected.getWeight()+" gr");
         sellerName.setText(selected.getSeller().getName());
         sellerAddress.setText(selected.getSeller().getAddress());
         prodNama.setText(selected.getNama());
@@ -125,10 +129,6 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         totalOrder.setText("1");
-    }
-
-    private void setMainActivity(MainActivity ctx) {
-        this.ctx = ctx;
     }
 
     @Override

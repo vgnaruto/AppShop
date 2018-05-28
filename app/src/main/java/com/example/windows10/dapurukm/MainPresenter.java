@@ -1,12 +1,18 @@
 package com.example.windows10.dapurukm;
 
+import java.util.ArrayList;
+
 public class MainPresenter {
     private UserManager userManager;
     private MainActivity activity;
+    private WebServiceManager webServiceManager;
+    private SaveDataManager saveDataManager;
 
-    public MainPresenter(MainActivity act){
+    public MainPresenter(MainActivity act) {
         activity = act;
         userManager = new UserManager();
+        webServiceManager = new WebServiceManager(act);
+        saveDataManager = new SaveDataManager(act);
     }
 
     public void setUser(User user){
@@ -16,6 +22,13 @@ public class MainPresenter {
     }
     public User getUser(){
         return userManager.getUser();
+    }
+
+    public void saveUser(){
+        saveDataManager.saveUser(userManager.getUser());
+    }
+    public void loadUser(){
+        userManager.setUser(saveDataManager.loadUser());
     }
 
     public String formatRupiah(int angka){
@@ -37,5 +50,41 @@ public class MainPresenter {
 
     public void notifyUserChanged(){
         activity.notifyUserChanged();
+    }
+
+    public boolean isLogin(){
+        return userManager.isLogin();
+    }
+
+    public void setLogin(boolean status){
+        userManager.setLogin(status);
+    }
+
+    public void getProvinsi(String url, int index){
+        webServiceManager.getProvinsi(url,index);
+    }
+    public void getKabupaten(String url){
+        webServiceManager.getKabupaten(url);
+    }
+
+    public String formatKeterangan(User user){
+        String nama = user.getNama();
+        String alamat = user.getAlamat();
+        String kota = user.getKabupaten().getCity_name();
+        String provinsi = user.getProvinsi().getProvince();
+        String kodePost = user.getKodePos();
+        String noTelepon = user.getNomorTelepon();
+        return nama+"\n\n"+alamat+", "+kota+"\n"+provinsi+", "+kodePost+"\n"+noTelepon;
+    }
+
+    /**
+     * mengambil product dari keranjang
+    * */
+    public ArrayList<Product> getProduct(){
+        return activity.getProduct();
+    }
+
+    public void getCost(int posisi,String url,String namaAgent){
+        webServiceManager.postCost(posisi,url,namaAgent);
     }
 }

@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Dapur UKM</string>
     <string name="API_KEY">8fed1a260ee55c265268ac137f7954dd</string>
+    <string name="catatan_untuk_penjual">Catatan untuk penjual</string>
+    <string name="shippingagent">Shipping\nAgent</string>
+    <string name="shipping_cost">Shipping\nCost</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="alamat_dummy">Vincent\n\nJln Abc No 123, Andir, Bandung\nJawa Barat, 40181,\n0822123456789</string>
+    <string name="ShippingType">Shipping\nService</string>
 </resources>

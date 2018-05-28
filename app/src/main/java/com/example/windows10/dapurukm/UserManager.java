@@ -14,7 +14,14 @@ public class UserManager {
     }
 
     public void setUser(User user) {
-        this.user = user;
+        if(user != null) {
+            this.user = user;
+            if (user.getKabupaten() == null) {
+                isLogin = false;
+            } else {
+                isLogin = true;
+            }
+        }
     }
 
     public boolean isLogin() {

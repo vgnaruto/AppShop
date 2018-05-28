@@ -13,8 +13,9 @@ public class Product {
     private int rating;
     private int total;
     private boolean inCart;
+    private String weight;
 
-    public Product(ArrayList<Bitmap> foto, String harga, String nama, String productDetails, Seller seller, int rating) {
+    public Product(ArrayList<Bitmap> foto, String harga, String nama, String productDetails, Seller seller, int rating, int weight) {
         this.foto = foto;
         this.harga = harga;
         this.nama = nama;
@@ -23,6 +24,15 @@ public class Product {
         this.rating = rating;
         this.total = 1;
         inCart = false;
+        this.weight = weight + "";
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
     }
 
     public boolean isInCart() {
