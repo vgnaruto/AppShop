@@ -18,11 +18,6 @@ public class GridProductAdapter extends BaseAdapter {
     public GridProductAdapter(ArrayList<Product> products, MainActivity ui){
         this.products = products;
         this.ui = ui;
-        /*
-        for (int i = 0; i < this.products.size(); i++) {
-            this.products.set(i, this.ui.checkInCart(this.products.get(i)));
-        }
-        */
     }
 
     @Override
