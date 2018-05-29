@@ -16,6 +16,7 @@ public class SaveDataManager {
 
     public SaveDataManager(Context context){
         this.mPreferences = context.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE);
+        gson = new Gson();
     }
 
     public void saveUser(User user){
