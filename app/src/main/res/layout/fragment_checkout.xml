@@ -56,25 +56,34 @@
                 android:paddingTop="@dimen/_20sdp"
                 android:paddingLeft="@dimen/_30sdp"
                 android:paddingRight="@dimen/_30sdp"
+                android:paddingBottom="@dimen/_20sdp"
                 android:background="@drawable/border_full_with_shadow">
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Address"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp"
-                    android:paddingBottom="@dimen/_8sdp"
-                    android:background="@drawable/border_bottom_thin"/>
-                <TextView
-                    android:id="@+id/tv_keterangan_pembeli"
-                    android:paddingTop="@dimen/_10sdp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/alamat_dummy"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/black"
-                    android:paddingBottom="@dimen/_20sdp"/>
+                    android:orientation="vertical"
+                    android:background="@drawable/border_full_with_shadow"
+                    android:paddingBottom="@dimen/_4sdp">
+                    <TextView
+                        android:layout_margin="@dimen/_2sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Address"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_12sdp"
+                        android:paddingBottom="@dimen/_8sdp"
+                        android:background="@drawable/border_bottom_thin"/>
+                    <TextView
+                        android:layout_margin="@dimen/_2sdp"
+                        android:id="@+id/tv_keterangan_pembeli"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/alamat_dummy"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/black" />
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="@dimen/_7sdp"

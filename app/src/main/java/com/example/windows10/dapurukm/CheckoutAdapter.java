@@ -1,5 +1,6 @@
 package com.example.windows10.dapurukm;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ public class CheckoutAdapter extends BaseAdapter {
     private MainPresenter presenter;
     private ArrayList<Integer> totalOrder;
     private ArrayList<Integer> shippingCost;
+    private boolean updateService = false;
+    private int currentPosisi = 0;
 
     public CheckoutAdapter(MainActivity ui, ArrayList<Product> products) {
         this.ui = ui;
@@ -37,14 +40,18 @@ public class CheckoutAdapter extends BaseAdapter {
         }
     }
 
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-        item = presenter.getProduct();
-    }
+//    @Override
+//    public void notifyDataSetChanged() {
+//        super.notifyDataSetChanged();
+//        item = presenter.getProduct();
+//        vh.initService = false;
+//        vh.initAgent = false;
+//    }
 
     public void setAgents(int posisi, Agent[] agent) {
         agents.set(posisi, agent);
+        updateService = true;
+        currentPosisi = posisi;
         notifyDataSetChanged();
     }
 
@@ -72,7 +79,14 @@ public class CheckoutAdapter extends BaseAdapter {
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        vh.updateView(getItem(position), agents.get(position), position);
+        if(updateService == true) {
+            if(position == currentPosisi) {
+                vh.updateView(getItem(position), agents.get(position), position);
+            }
+        }else{
+            vh.updateView(getItem(position), agents.get(position), position);
+        }
+
 
         return convertView;
     }
@@ -85,9 +99,9 @@ public class CheckoutAdapter extends BaseAdapter {
         this.totalOrder = totalOrder;
     }
 
-    public int getTotal(){
+    public int getTotal() {
         int result = 0;
-        for(int total : totalOrder){
+        for (int total : totalOrder) {
             result += total;
         }
         return result;
@@ -101,9 +115,9 @@ public class CheckoutAdapter extends BaseAdapter {
         this.shippingCost = shippingCost;
     }
 
-    public int getTotalShipping(){
+    public int getTotalShipping() {
         int result = 0;
-        for(int total : shippingCost){
+        for (int total : shippingCost) {
             result += total;
         }
         return result;
@@ -119,6 +133,7 @@ public class CheckoutAdapter extends BaseAdapter {
         private boolean initService = false;
 
         public ViewHolder(View v, int posisi) {
+            Log.d("UPDATEVIEW", "VIEW HOLDER");
             tvNamaToko = v.findViewById(R.id.tv_nama_toko);
             tvJudulProduct = v.findViewById(R.id.tv_nama_product);
             tvTotalBarang = v.findViewById(R.id.tv_jumlah_product);
@@ -144,10 +159,14 @@ public class CheckoutAdapter extends BaseAdapter {
             String weight = (cProduct.getTotal() * Integer.parseInt(cProduct.getWeight())) + "";
             String posisiSeller = cProduct.getSeller().getKabupaten().getCity_id();
             String posisiBuyer = presenter.getUser().getKabupaten().getCity_id();
-            presenter.getCost("https://api.rajaongkir.com/starter/cost?", (String) spinnerAgent.getSelectedItem(), posisi, weight, posisiSeller, posisiBuyer);
+            if (!updateService) {
+                presenter.getCost("https://api.rajaongkir.com/starter/cost?", (String) spinnerAgent.getSelectedItem(), posisi, weight, posisiSeller, posisiBuyer);
+                flag = 1;
+            }
         }
 
         public void updateView(final Product product, final Agent[] cAgents, final int posisi) {
+            Log.d("UPDATEVIEW", "DIPANGGIL");
             ivFotoProduct.setImageBitmap(product.getFoto().get(0));
             tvNamaToko.setText(product.getSeller().getName());
             tvJudulProduct.setText(product.getNama());
@@ -156,19 +175,7 @@ public class CheckoutAdapter extends BaseAdapter {
             final int harga = Integer.parseInt(product.getHarga().substring(3).replaceAll("\\.", ""));
             tvTotalHarga.setText(presenter.formatRupiah(total * harga));
 
-            totalOrder.set(posisi,total * harga);
-
-            //SET SPINNER SERVICE
-            if (cAgents != null) {
-                ArrayList<String> namaService = new ArrayList<>();
-                Costs[] costs = cAgents[0].getCosts();
-                for (int i = 0; i < costs.length; i++) {
-                    namaService.add(costs[i].getService());
-                }
-                ArrayAdapter<String> adapterService = new ArrayAdapter<>(ui, android.R.layout.simple_spinner_item, namaService);
-                adapterService.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerService.setAdapter(adapterService);
-            }
+            totalOrder.set(posisi, total * harga);
 
 
             spinnerAgent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -179,9 +186,8 @@ public class CheckoutAdapter extends BaseAdapter {
                         String posisiSeller = product.getSeller().getKabupaten().getCity_id();
                         String posisiBuyer = presenter.getUser().getKabupaten().getCity_id();
                         String weight = (product.getTotal() * Integer.parseInt(product.getWeight())) + "";
-                        if (flag == 0) {
+                        if (flag != 1 && !updateService) {
                             presenter.getCost("https://api.rajaongkir.com/starter/cost?", namaAgent, posisi, weight, posisiSeller, posisiBuyer);
-                            flag = 1;
                         }
                     }
 
@@ -203,13 +209,14 @@ public class CheckoutAdapter extends BaseAdapter {
                             int total = product.getTotal();
                             int harga = Integer.parseInt(product.getHarga().substring(3).replaceAll("\\.", ""));
 
-                            shippingCost.set(posisi,Integer.parseInt(costs.getCosts()[0].getValue()));
+                            shippingCost.set(posisi, Integer.parseInt(costs.getCosts()[0].getValue()));
 
                             presenter.notifyCheckout();
                             tvETD.setText(etd + " hari");
                             tvShippingCost.setText("" + presenter.formatRupiah(Integer.parseInt(costs.getCosts()[0].getValue())));
                             tvSubtotal.setText(presenter.formatRupiah(total * harga + Integer.parseInt(costs.getCosts()[0].getValue())));
                             flag = 0;
+
                         }
                     }
                 }
@@ -219,6 +226,18 @@ public class CheckoutAdapter extends BaseAdapter {
 
                 }
             });
+            //SET SPINNER SERVICE
+            if (cAgents != null) {
+                ArrayList<String> namaService = new ArrayList<>();
+                Costs[] costs = cAgents[0].getCosts();
+                for (int i = 0; i < costs.length; i++) {
+                    namaService.add(costs[i].getService());
+                }
+                ArrayAdapter<String> adapterService = new ArrayAdapter<>(ui, android.R.layout.simple_spinner_item, namaService);
+                adapterService.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerService.setAdapter(adapterService);
+            }
+            updateService = false;
             initAgent = true;
             initService = true;
         }

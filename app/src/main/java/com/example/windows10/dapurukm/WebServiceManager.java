@@ -2,6 +2,7 @@ package com.example.windows10.dapurukm;
 
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -43,8 +44,7 @@ public class WebServiceManager {
                             JSONObject obj = json.getJSONObject("rajaongkir");
                             JSONArray data = obj.getJSONArray("results");
                             Agent[] agent = gson.fromJson(data.toString(), Agent[].class);
-                            ctx.setAgents(agent);
-                            ctx.notifyCheckOutAdapter(fPosisi);
+                            ctx.notifyCheckOutAdapter(fPosisi,agent);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

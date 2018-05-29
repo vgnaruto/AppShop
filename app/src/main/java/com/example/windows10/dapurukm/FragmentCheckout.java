@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
@@ -76,11 +77,9 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
         adapter.notifyDataSetChanged();
     }
 
-    public void updateSpinnerAgent(int posisi){
-        adapter.setAgents(posisi,ctx.getAgents());
-        tvTotalOrder.setText(presenter.formatRupiah(adapter.getTotal()));
-        tvExpeditionFee.setText(presenter.formatRupiah(adapter.getTotalShipping()));
-        tvTotalPayment.setText(presenter.formatRupiah(adapter.getTotal()+adapter.getTotalShipping()));
+    public void updateSpinnerAgent(int posisi, Agent[] agents){
+        adapter.setAgents(posisi,agents);
+        updatePayment();
     }
     public void updatePayment(){
         tvTotalOrder.setText(presenter.formatRupiah(adapter.getTotal()));

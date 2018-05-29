@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.felix.bottomnavygation.BadgeIndicator;
@@ -45,8 +46,6 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
     private BottomNav bottomNav;
     private BadgeIndicator badgeCart;
-
-    private Agent[] agents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -258,16 +257,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         return fragmentShoppingCart.getProduct();
     }
 
-    public void setAgents(Agent[] agents) {
-        this.agents = agents;
-    }
-
-    public Agent[] getAgents() {
-        return agents;
-    }
-
-    public void notifyCheckOutAdapter(int posisi) {
-        fragmentCheckout.updateSpinnerAgent(posisi);
+    public void notifyCheckOutAdapter(int posisi,Agent[] agent) {
+        fragmentCheckout.updateSpinnerAgent(posisi,agent);
     }
 
     public void notifyCheckOutAdapter() {
