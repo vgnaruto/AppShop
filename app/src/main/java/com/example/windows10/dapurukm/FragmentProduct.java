@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,7 +138,14 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
             ctx.onBackPressed();
         }else if(v == checkOutBtn){
             if(selected.isInCart()){
+                Product replacedSelected = new Product(selected.getFoto(), selected.getHarga(),
+                        selected.getNama(), selected.getProductDetails(), selected.getSeller(),
+                        selected.getRating(),Integer.parseInt(selected.getWeight()));
+                replacedSelected.setInCart(selected.isInCart());
+                replacedSelected.setTotal(selected.getTotal());
+                Log.d("fp12345", "masuk sini");
                 selected.setTotal(selected.getTotal()+Integer.parseInt(totalOrder.getText().toString()));
+                ctx.changeSavedProductAmount(replacedSelected, selected);
             }else {
                 selected.setTotal(Integer.parseInt(totalOrder.getText().toString()));
                 ctx.sendToCart(selected);

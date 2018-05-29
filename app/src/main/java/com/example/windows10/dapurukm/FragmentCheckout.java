@@ -39,6 +39,7 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
     public void initialize(MainActivity activity){
         ctx = activity;
         presenter = ctx.getPresenter();
+        adapter = new CheckoutAdapter(ctx,presenter.getProduct());
     }
     @Nullable
     @Override

@@ -125,4 +125,11 @@ public class FragmentHome extends Fragment implements NavigationView.OnNavigatio
         tvNamaUser.setText(cUser.getNama());
         tvEmailUser.setText(cUser.getEmail());
     }
+    public GridProductAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(GridProductAdapter adapter) {
+        this.adapter = adapter;
+    }
 }

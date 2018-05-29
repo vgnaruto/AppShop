@@ -86,6 +86,10 @@ public class FragmentShoppingCart extends Fragment implements View.OnClickListen
         adapter.removeProduct(product);
     }
 
+    public ShoppingCartAdapter getAdapter() {
+        return adapter;
+    }
+
     public void notifData(){
         adapter.notifyDataSetChanged();
         if(adapter.isEmpty()){
@@ -132,5 +136,9 @@ public class FragmentShoppingCart extends Fragment implements View.OnClickListen
                 ctx.changePage(MainActivity.PAGE_INFORMASI_DATA);
             }
         }
+    }
+
+    public void changeAmount(Product replaced, Product replacement) {
+        adapter.changeAmount(replaced, replacement);
     }
 }

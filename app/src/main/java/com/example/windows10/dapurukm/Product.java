@@ -1,11 +1,15 @@
 package com.example.windows10.dapurukm;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class Product {
-    private ArrayList<Bitmap> foto;
+    private ArrayList<String> foto;
     private String harga;
     private String nama;
     private String productDetails;
@@ -16,7 +20,14 @@ public class Product {
     private String weight;
 
     public Product(ArrayList<Bitmap> foto, String harga, String nama, String productDetails, Seller seller, int rating, int weight) {
-        this.foto = foto;
+        this.foto = new ArrayList<>();
+        ByteArrayOutputStream baos;
+        for (int i = 0; i < foto.size(); i++) {
+            baos = new ByteArrayOutputStream();
+            foto.get(i).compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] b = baos.toByteArray();
+            this.foto.add(Base64.encodeToString(b, Base64.DEFAULT));
+        }
         this.harga = harga;
         this.nama = nama;
         this.productDetails = productDetails;
@@ -60,11 +71,24 @@ public class Product {
     }
 
     public ArrayList<Bitmap> getFoto() {
-        return foto;
+        ArrayList<Bitmap> bitmaps = new ArrayList<>();
+        for (int i = 0; i < this.foto.size(); i++) {
+            byte[] b = Base64.decode(this.foto.get(i), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+            bitmaps.add(bitmap);
+        }
+        return bitmaps;
     }
 
     public void setFoto(ArrayList<Bitmap> foto) {
-        this.foto = foto;
+        this.foto = new ArrayList<>();
+        ByteArrayOutputStream baos;
+        for (int i = 0; i < foto.size(); i++) {
+            baos = new ByteArrayOutputStream();
+            foto.get(i).compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] b = baos.toByteArray();
+            this.foto.add(Base64.encodeToString(b, Base64.DEFAULT));
+        }
     }
 
     public String getHarga() {

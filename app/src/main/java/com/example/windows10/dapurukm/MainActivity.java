@@ -5,14 +5,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.felix.bottomnavygation.BadgeIndicator;
 import com.felix.bottomnavygation.BottomNav;
 import com.felix.bottomnavygation.ItemNav;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity implements FragmentListener {
     private FrameLayout frameLayout;
@@ -26,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     private MainPresenter presenter;
 
     private FragmentManager fragmentManager;
+
+    private FileManager fm;
+    private HashMap<String, Product> index;
 
     public static int PAGE_HOME = 0;
     public static int PAGE_PRODUCT = 1;
@@ -68,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
-                if(fragmentManager.getBackStackEntryCount()==0){
+                if (fragmentManager.getBackStackEntryCount() == 0) {
                     showNavBar();
                     bottomNav.selectTab(0);
                     badgeCart.updateCount(fragmentShoppingCart.getTotalItems());
@@ -86,8 +93,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
         BottomNav.OnTabSelectedListener listener = new BottomNav.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(int position){
-                switch (position){
+            public void onTabSelected(int position) {
+                switch (position) {
                     case 0:
                         changePage(MainActivity.PAGE_HOME);
                         break;
@@ -112,18 +119,29 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
         changePage(PAGE_HOME);
         instance = this;
+
+        fm = new FileManager(this);
+
+        this.index = new HashMap<>();
+        ArrayList<Product> products = DataDummy.getProduct();
+        for (int i = 0; i < products.size(); i++) {
+            this.index.put(products.get(i).getSeller().getName() + "-" + products.get(i).getNama(), products.get(i));
+        }
     }
 
-    public void hideNavBar(){
+    public void hideNavBar() {
         bottomNav.setVisibility(View.GONE);
     }
-    public void showNavBar(){
+
+    public void showNavBar() {
         bottomNav.setVisibility(View.VISIBLE);
     }
 
-    public void notifyShoppingCart(){
+    public void notifyShoppingCart() {
         fragmentShoppingCart.notifData();
         fragmentCheckout.notifData();
+        //fm.saveFile(fragmentShoppingCart.getAdapter().getSavedProducts());
+        //Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -153,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                 ft.add(R.id.fragment_container, fragmentShoppingCart).addToBackStack("fragment_cart");
             }
             hideOtherFrag(fragmentShoppingCart, ft);
-        }else if (page == PAGE_INFORMASI_DATA) {
+        } else if (page == PAGE_INFORMASI_DATA) {
             hideNavBar();
             if (fragmentInformasiData.isAdded()) {
                 ft.show(fragmentInformasiData);
@@ -161,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                 ft.add(R.id.fragment_container, fragmentInformasiData).addToBackStack("fragment_data");
             }
             hideOtherFrag(fragmentInformasiData, ft);
-        }else if(page == PAGE_CHECKOUT){
+        } else if (page == PAGE_CHECKOUT) {
             hideNavBar();
             if (fragmentCheckout.isAdded()) {
                 ft.show(fragmentCheckout);
@@ -182,15 +200,16 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             }
         }
     }
+
     @Override
     public void onBackPressed() {
-        if(getFragmentManager().getBackStackEntryCount() > 0) {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
+
     public static MainActivity getInstance() {
         return instance;
     }
@@ -198,8 +217,13 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     public void sendToCart(Product selected) {
         fragmentShoppingCart.addProduct(selected);
     }
-    public void removeFromCart(Product selected){
+
+    public void removeFromCart(Product selected) {
         fragmentShoppingCart.remove(selected);
+    }
+
+    public void changeSavedProductAmount(Product replaced, Product replacement) {
+        fragmentShoppingCart.changeAmount(replaced, replacement);
     }
 
     public void setProduct(Product selected) {
@@ -218,21 +242,23 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         this.presenter = presenter;
     }
 
-    public void notifyUserChanged(){
+    public void notifyUserChanged() {
         fragmentHome.setUser();
     }
 
-    public void setKabupaten(ArrayList<Kabupaten> listKabupaten, ArrayList<String> namaKabupaten){
-        fragmentInformasiData.setKabupaten(listKabupaten,namaKabupaten);
+    public void setKabupaten(ArrayList<Kabupaten> listKabupaten, ArrayList<String> namaKabupaten) {
+        fragmentInformasiData.setKabupaten(listKabupaten, namaKabupaten);
     }
-    public void setProvinsi(ArrayList<Provinsi> listProvinsi, ArrayList<String> namaProvinsi){
-        fragmentInformasiData.setProvinsi(listProvinsi,namaProvinsi);
+
+    public void setProvinsi(ArrayList<Provinsi> listProvinsi, ArrayList<String> namaProvinsi) {
+        fragmentInformasiData.setProvinsi(listProvinsi, namaProvinsi);
     }
-    public ArrayList<Product> getProduct(){
+
+    public ArrayList<Product> getProduct() {
         return fragmentShoppingCart.getProduct();
     }
 
-    public void setAgents(Agent[] agents){
+    public void setAgents(Agent[] agents) {
         this.agents = agents;
     }
 
@@ -240,10 +266,48 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         return agents;
     }
 
-    public void notifyCheckOutAdapter(int posisi){
+    public void notifyCheckOutAdapter(int posisi) {
         fragmentCheckout.updateSpinnerAgent(posisi);
     }
-    public void notifyCheckOutAdapter(){
+
+    public void notifyCheckOutAdapter() {
         fragmentCheckout.updatePayment();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d("Main", "onPause12345");
+        super.onPause();
+        fm.saveFile(fragmentShoppingCart.getAdapter().getSavedProducts());
+        Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    protected void onResume() {
+        Log.d("Main", "onResume12345");
+        super.onResume();
+        ArrayList<String> stringProducts = fm.loadData();
+        ArrayList<Product> products = new ArrayList<>();
+        if (stringProducts != null) {
+            fragmentShoppingCart.getAdapter().setSavedProducts(stringProducts);
+            for (int i = 0; i < stringProducts.size(); i++) {
+                String savedProduct = stringProducts.get(i);
+                int lastIndex = savedProduct.lastIndexOf('-');
+                products.add(index.get(savedProduct.substring(0, lastIndex)));
+                products.get(i).setTotal(Integer.parseInt(savedProduct.substring(lastIndex + 1)));
+                products.get(i).setInCart(true);
+            }
+            if (!products.isEmpty()) {
+                fragmentShoppingCart.getAdapter().setProducts(products);
+                for (int i = 0; i < fragmentHome.getAdapter().getProducts().size(); i++) {
+                    fragmentHome.getAdapter().getProducts().set(i, checkInCart(fragmentHome.getAdapter().getProducts().get(i)));
+                }
+            }
+        }
+    }
+
+    public Product checkInCart(Product item) {
+        return fragmentShoppingCart.getAdapter().checkInCart(item);
     }
 }
