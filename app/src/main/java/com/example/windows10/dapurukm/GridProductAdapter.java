@@ -1,5 +1,6 @@
 package com.example.windows10.dapurukm;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,11 @@ public class GridProductAdapter extends BaseAdapter {
     public GridProductAdapter(ArrayList<Product> products, MainActivity ui){
         this.products = products;
         this.ui = ui;
+        /*
+        for (int i = 0; i < this.products.size(); i++) {
+            this.products.set(i, this.ui.checkInCart(this.products.get(i)));
+        }
+        */
     }
 
     @Override
@@ -48,12 +54,21 @@ public class GridProductAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ui.setProduct(getItem(position));
+                ui.setProduct(products.get(position));
                 ui.changePage(MainActivity.PAGE_PRODUCT);
             }
         });
         return convertView;
     }
+
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
+    }
+
     private class ViewHolder{
         private ImageView foto;
         private TextView namaProduct, hargaProduct, sellerProduct;

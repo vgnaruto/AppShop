@@ -15,6 +15,7 @@ import com.felix.bottomnavygation.BottomNav;
 import com.felix.bottomnavygation.ItemNav;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity implements FragmentListener {
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     private FragmentManager fragmentManager;
 
     private FileManager fm;
+    private HashMap<String, Product> index;
 
     public static int PAGE_HOME = 0;
     public static int PAGE_PRODUCT = 1;
@@ -108,6 +110,12 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         instance = this;
 
         fm = new FileManager(this);
+
+        this.index = new HashMap<>();
+        ArrayList<Product> products = DataDummy.getProduct();
+        for (int i = 0; i < products.size(); i++) {
+            this.index.put(products.get(i).getSeller().getName() + "-" + products.get(i).getNama(), products.get(i));
+        }
     }
 
     public void hideNavBar(){
@@ -119,8 +127,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
     public void notifyShoppingCart(){
         fragmentShoppingCart.notifData();
-        fm.saveFile(fragmentShoppingCart.getAdapter().getProducts());
-        Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+        //fm.saveFile(fragmentShoppingCart.getAdapter().getSavedProducts());
+        //Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -187,8 +195,13 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     public void sendToCart(Product selected) {
         fragmentShoppingCart.addProduct(selected);
     }
+
     public void removeFromCart(Product selected){
         fragmentShoppingCart.remove(selected);
+    }
+
+    public void changeSavedProductAmount(Product replaced, Product replacement){
+        fragmentShoppingCart.changeAmount(replaced, replacement);
     }
 
     public void setProduct(Product selected) {
@@ -199,23 +212,41 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         return this.selected;
     }
 
-    /*
+
     @Override
     protected void onPause(){
         Log.d("Main", "onPause12345");
         super.onPause();
-        Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show();
-        fm.saveFile(fragmentShoppingCart.getAdapter().getProducts());
+        fm.saveFile(fragmentShoppingCart.getAdapter().getSavedProducts());
         Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
     }
-    */
+
 
     @Override
     protected void onResume(){
         Log.d("Main", "onResume12345");
         super.onResume();
-        ArrayList<Product> products = fm.loadData();
-        if(products != null)fragmentShoppingCart.getAdapter().setProducts(products);
+        ArrayList<String> stringProducts = fm.loadData();
+        ArrayList<Product> products = new ArrayList<>();
+        if(stringProducts != null) {
+            fragmentShoppingCart.getAdapter().setSavedProducts(stringProducts);
+            for (int i = 0; i < stringProducts.size(); i++) {
+                String savedProduct = stringProducts.get(i);
+                int lastIndex = savedProduct.lastIndexOf('-');
+                products.add(index.get(savedProduct.substring(0, lastIndex)));
+                products.get(i).setTotal(Integer.parseInt(savedProduct.substring(lastIndex + 1)));
+                products.get(i).setInCart(true);
+            }
+            if (!products.isEmpty()) {
+                fragmentShoppingCart.getAdapter().setProducts(products);
+                for (int i = 0; i < fragmentHome.getAdapter().getProducts().size(); i++) {
+                    fragmentHome.getAdapter().getProducts().set(i, checkInCart(fragmentHome.getAdapter().getProducts().get(i)));
+                }
+            }
+        }
     }
 
+    public Product checkInCart(Product item) {
+        return fragmentShoppingCart.getAdapter().checkInCart(item);
+    }
 }

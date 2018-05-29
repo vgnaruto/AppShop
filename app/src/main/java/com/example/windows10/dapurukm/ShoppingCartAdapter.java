@@ -1,5 +1,6 @@
 package com.example.windows10.dapurukm;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ public class ShoppingCartAdapter extends BaseAdapter {
     private ArrayList<Product> products = new ArrayList<>();
     private ViewHolder vh;
 
+    private ArrayList<String> savedProducts = new ArrayList<>();
+
     public ShoppingCartAdapter(MainActivity ui) {
         this.ui = ui;
     }
@@ -24,6 +27,9 @@ public class ShoppingCartAdapter extends BaseAdapter {
     public ShoppingCartAdapter(MainActivity ui, ArrayList<Product> prod) {
         this.ui = ui;
         products = prod;
+        for (int i = 0; i < products.size(); i++) {
+            savedProducts.add(productToKey(products.get(i)));
+        }
     }
 
     public String getTotalItems(){
@@ -76,6 +82,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
             public void onClick(View v) {
                 products.get(position).setInCart(false);
                 products.remove(position);
+                savedProducts.remove(position);
                 ui.notifyShoppingCart();
             }
         });
@@ -86,8 +93,13 @@ public class ShoppingCartAdapter extends BaseAdapter {
                 if(angka == 1) {
                     products.get(position).setInCart(false);
                     products.remove(position);
+                    savedProducts.remove(position);
                 }else{
                     products.get(position).setTotal(angka - 1);
+                    String toBeSaved = savedProducts.get(position).substring(
+                            0, savedProducts.get(position).lastIndexOf('-') + 1);
+                    savedProducts.remove(position);
+                    savedProducts.add(position, toBeSaved + (angka - 1));
                     vh.updateView(products.get(position));
                 }
                 ui.notifyShoppingCart();
@@ -98,6 +110,10 @@ public class ShoppingCartAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int angka = products.get(position).getTotal();
                 products.get(position).setTotal(angka+1);
+                String toBeSaved = savedProducts.get(position).substring(
+                        0, savedProducts.get(position).lastIndexOf('-') + 1);
+                savedProducts.remove(position);
+                savedProducts.add(position, toBeSaved + (angka + 1));
                 vh.updateView(products.get(position));
                 ui.notifyShoppingCart();
             }
@@ -109,8 +125,16 @@ public class ShoppingCartAdapter extends BaseAdapter {
         this.products = products;
     }
 
+    public void setSavedProducts(ArrayList<String> savedProducts) {
+        this.savedProducts = savedProducts;
+    }
+
     public ArrayList<Product> getProducts() {
         return products;
+    }
+
+    public ArrayList<String> getSavedProducts() {
+        return savedProducts;
     }
 
     public boolean isEmpty() {
@@ -119,11 +143,35 @@ public class ShoppingCartAdapter extends BaseAdapter {
 
     public void addProduct(Product product) {
         this.products.add(product);
+        this.savedProducts.add(productToKey(product));
     }
 
     public void removeProduct(Product product){
         this.products.remove(product);
+        this.savedProducts.remove(productToKey(product));
     }
+
+    public String productToKey(Product product){
+        return product.getSeller().getName() + "-" + product.getNama() + "-" + product.getTotal();
+    }
+
+    public void changeAmount(Product replaced, Product replacement) {
+        this.savedProducts.add(this.savedProducts.indexOf(productToKey(replaced)), productToKey(replacement));
+        this.savedProducts.remove(productToKey(replaced));
+    }
+
+    public Product checkInCart(Product item) {
+        String compared = productToKey(item).substring(0, productToKey(item).lastIndexOf('-'));
+        for (int i = 0; i < savedProducts.size(); i++) {
+            if(compared.equals(this.savedProducts.get(i).
+                    substring(0, this.savedProducts.get(i).lastIndexOf('-')))) {
+                item = this.products.get(i);
+                break;
+            }
+        }
+        return item;
+    }
+
     private class ViewHolder {
         protected TextView namaPerus, judulProduct, hargaProduct;
         protected TextView totalOrder;

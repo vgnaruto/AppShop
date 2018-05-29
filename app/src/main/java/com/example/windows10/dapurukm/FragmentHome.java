@@ -112,4 +112,12 @@ public class FragmentHome extends Fragment implements NavigationView.OnNavigatio
         drawerLayout.closeDrawers();
         item.setChecked(true);
     }
+
+    public GridProductAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(GridProductAdapter adapter) {
+        this.adapter = adapter;
+    }
 }

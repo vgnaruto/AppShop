@@ -114,6 +114,8 @@ public class FragmentShoppingCart extends Fragment implements View.OnClickListen
         adapter.addProduct(product);
     }
 
+
+
     @Override
     public void onClick(View v) {
         if(v == contShoppingButton){
@@ -123,5 +125,9 @@ public class FragmentShoppingCart extends Fragment implements View.OnClickListen
         }else if(v == checkOutBtn){
             ctx.changePage(MainActivity.PAGE_INFORMASI_DATA);
         }
+    }
+
+    public void changeAmount(Product replaced, Product replacement) {
+        adapter.changeAmount(replaced, replacement);
     }
 }

@@ -27,14 +27,14 @@ public class FileManager{
         this.gson = new Gson();
     }
 
-    public void saveFile(List<Product> pd) {
+    public void saveFile(List<String> pd) {
         SharedPreferences.Editor preferencesEditor = mPreferences.edit();
         preferencesEditor.putString("data", this.gson.toJson(pd));
         preferencesEditor.apply();
     }
 
-    public ArrayList<Product> loadData() {
+    public ArrayList<String> loadData() {
         String result = mPreferences.getString("data", "");
-        return this.gson.fromJson(result, new TypeToken<List<Product>>(){}.getType());
+        return this.gson.fromJson(result, new TypeToken<List<String>>(){}.getType());
     }
 }
