@@ -74,15 +74,6 @@
             android:text="Rp 79.200"
             android:textColor="@color/purple"
             android:textSize="@dimen/_15sdp" />
-
-        <ImageButton
-            android:id="@+id/ib_trash"
-            android:layout_width="@dimen/_15sdp"
-            android:layout_height="@dimen/_15sdp"
-            android:layout_alignParentRight="true"
-            android:background="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_trash" />
     </RelativeLayout>
 
     <TextView

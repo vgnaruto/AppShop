@@ -112,7 +112,6 @@ public class CheckoutAdapter extends BaseAdapter {
     private class ViewHolder {
         protected TextView tvNamaToko, tvJudulProduct, tvTotalBarang, tvTotalHarga, tvETD, tvShippingCost, tvSubtotal;
         protected ImageView ivFotoProduct;
-        protected ImageButton ibTrash;
         protected EditText etCatatan;
         protected Spinner spinnerAgent, spinnerService;
         private int flag = 0;
@@ -125,7 +124,6 @@ public class CheckoutAdapter extends BaseAdapter {
             tvTotalBarang = v.findViewById(R.id.tv_jumlah_product);
             tvTotalHarga = v.findViewById(R.id.tv_harga_product);
             etCatatan = v.findViewById(R.id.et_catatan);
-            ibTrash = v.findViewById(R.id.ib_trash);
             tvETD = v.findViewById(R.id.tv_ETD);
             tvShippingCost = v.findViewById(R.id.tv_shipping_cost);
             tvSubtotal = v.findViewById(R.id.tv_subtotal);
