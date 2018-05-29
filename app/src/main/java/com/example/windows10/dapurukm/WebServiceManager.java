@@ -29,7 +29,9 @@ public class WebServiceManager {
         this.ctx = ctx;
         queue = Volley.newRequestQueue(this.ctx);
     }
-    public void postCost(final int posisi, String url, final String namaAgent){
+    public void postCost(String url, String namaAgent, int posisi, final String weight, final String idSeller, final String idBuyer){
+        final int fPosisi = posisi;
+        final String fNamaAgent = namaAgent;
         final String apiKey = ctx.getResources().getString(R.string.API_KEY);
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -42,7 +44,7 @@ public class WebServiceManager {
                             JSONArray data = obj.getJSONArray("results");
                             Agent[] agent = gson.fromJson(data.toString(), Agent[].class);
                             ctx.setAgents(agent);
-                            ctx.notifyCheckOutAdapter(posisi);
+                            ctx.notifyCheckOutAdapter(fPosisi);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -59,10 +61,10 @@ public class WebServiceManager {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("key",apiKey);
-                params.put("origin", "501");
-                params.put("destination", "114");
-                params.put("weight", "1700");
-                params.put("courier", namaAgent);
+                params.put("origin", idBuyer);
+                params.put("destination", idSeller);
+                params.put("weight", weight);
+                params.put("courier", fNamaAgent);
                 return params;
             }
         };

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ShoppingCartAdapter extends BaseAdapter {
     private MainActivity ui;
@@ -20,6 +21,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
     public ShoppingCartAdapter(MainActivity ui) {
         this.ui = ui;
         presenter = ui.getPresenter();
+        HashMap<String,String> hm = new HashMap<>();
     }
 
     public ArrayList<Product> getProducts() {

@@ -77,5 +77,13 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
 
     public void updateSpinnerAgent(int posisi){
         adapter.setAgents(posisi,ctx.getAgents());
+        tvTotalOrder.setText(presenter.formatRupiah(adapter.getTotal()));
+        tvExpeditionFee.setText(presenter.formatRupiah(adapter.getTotalShipping()));
+        tvTotalPayment.setText(presenter.formatRupiah(adapter.getTotal()+adapter.getTotalShipping()));
+    }
+    public void updatePayment(){
+        tvTotalOrder.setText(presenter.formatRupiah(adapter.getTotal()));
+        tvExpeditionFee.setText(presenter.formatRupiah(adapter.getTotalShipping()));
+        tvTotalPayment.setText(presenter.formatRupiah(adapter.getTotal()+adapter.getTotalShipping()));
     }
 }

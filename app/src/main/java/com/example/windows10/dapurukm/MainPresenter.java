@@ -84,7 +84,10 @@ public class MainPresenter {
         return activity.getProduct();
     }
 
-    public void getCost(int posisi,String url,String namaAgent){
-        webServiceManager.postCost(posisi,url,namaAgent);
+    public void getCost(String url,String namaAgent,int posisi, String weight,String idSeller,String idBuyer){
+        webServiceManager.postCost(url,namaAgent,posisi,weight,idSeller,idBuyer);
+    }
+    public void notifyCheckout(){
+        activity.notifyCheckOutAdapter();
     }
 }

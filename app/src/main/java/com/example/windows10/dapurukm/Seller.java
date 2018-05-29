@@ -14,6 +14,22 @@ public class Seller {
         this.kabupaten = new Kabupaten("17","1","Bali","Kabupaten","Badung","80351");
     }
 
+    public Provinsi getProvinsi() {
+        return provinsi;
+    }
+
+    public void setProvinsi(Provinsi provinsi) {
+        this.provinsi = provinsi;
+    }
+
+    public Kabupaten getKabupaten() {
+        return kabupaten;
+    }
+
+    public void setKabupaten(Kabupaten kabupaten) {
+        this.kabupaten = kabupaten;
+    }
+
     public String getName() {
         return name;
     }

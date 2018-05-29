@@ -243,4 +243,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     public void notifyCheckOutAdapter(int posisi){
         fragmentCheckout.updateSpinnerAgent(posisi);
     }
+    public void notifyCheckOutAdapter(){
+        fragmentCheckout.updatePayment();
+    }
 }

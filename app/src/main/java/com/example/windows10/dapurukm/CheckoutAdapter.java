@@ -20,14 +20,20 @@ public class CheckoutAdapter extends BaseAdapter {
     private MainActivity ui;
     private ViewHolder vh;
     private MainPresenter presenter;
+    private ArrayList<Integer> totalOrder;
+    private ArrayList<Integer> shippingCost;
 
     public CheckoutAdapter(MainActivity ui, ArrayList<Product> products) {
         this.ui = ui;
         presenter = ui.getPresenter();
         item = products;
         agents = new ArrayList<>();
+        totalOrder = new ArrayList<>();
+        shippingCost = new ArrayList<>();
         for (int i = 0; i < products.size(); i++) {
             agents.add(null);
+            totalOrder.add(0);
+            shippingCost.add(0);
         }
     }
 
@@ -71,6 +77,38 @@ public class CheckoutAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public ArrayList<Integer> getTotalOrder() {
+        return totalOrder;
+    }
+
+    public void setTotalOrder(ArrayList<Integer> totalOrder) {
+        this.totalOrder = totalOrder;
+    }
+
+    public int getTotal(){
+        int result = 0;
+        for(int total : totalOrder){
+            result += total;
+        }
+        return result;
+    }
+
+    public ArrayList<Integer> getShippingCost() {
+        return shippingCost;
+    }
+
+    public void setShippingCost(ArrayList<Integer> shippingCost) {
+        this.shippingCost = shippingCost;
+    }
+
+    public int getTotalShipping(){
+        int result = 0;
+        for(int total : shippingCost){
+            result += total;
+        }
+        return result;
+    }
+
     private class ViewHolder {
         protected TextView tvNamaToko, tvJudulProduct, tvTotalBarang, tvTotalHarga, tvETD, tvShippingCost, tvSubtotal;
         protected ImageView ivFotoProduct;
@@ -81,7 +119,7 @@ public class CheckoutAdapter extends BaseAdapter {
         private boolean initAgent = false;
         private boolean initService = false;
 
-        public ViewHolder(View v,int posisi) {
+        public ViewHolder(View v, int posisi) {
             tvNamaToko = v.findViewById(R.id.tv_nama_toko);
             tvJudulProduct = v.findViewById(R.id.tv_nama_product);
             tvTotalBarang = v.findViewById(R.id.tv_jumlah_product);
@@ -103,7 +141,12 @@ public class CheckoutAdapter extends BaseAdapter {
             ArrayAdapter<String> adapterAgent = new ArrayAdapter<>(ui, android.R.layout.simple_spinner_item, namaAgent);
             adapterAgent.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerAgent.setAdapter(adapterAgent);
-            presenter.getCost(posisi, "https://api.rajaongkir.com/starter/cost?", (String) spinnerAgent.getSelectedItem());
+
+            Product cProduct = item.get(posisi);
+            String weight = (cProduct.getTotal() * Integer.parseInt(cProduct.getWeight())) + "";
+            String posisiSeller = cProduct.getSeller().getKabupaten().getCity_id();
+            String posisiBuyer = presenter.getUser().getKabupaten().getCity_id();
+            presenter.getCost("https://api.rajaongkir.com/starter/cost?", (String) spinnerAgent.getSelectedItem(), posisi, weight, posisiSeller, posisiBuyer);
         }
 
         public void updateView(final Product product, final Agent[] cAgents, final int posisi) {
@@ -115,6 +158,7 @@ public class CheckoutAdapter extends BaseAdapter {
             final int harga = Integer.parseInt(product.getHarga().substring(3).replaceAll("\\.", ""));
             tvTotalHarga.setText(presenter.formatRupiah(total * harga));
 
+            totalOrder.set(posisi,total * harga);
 
             //SET SPINNER SERVICE
             if (cAgents != null) {
@@ -134,12 +178,11 @@ public class CheckoutAdapter extends BaseAdapter {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if (initAgent) {
                         String namaAgent = (String) spinnerAgent.getSelectedItem();
-                        //TODO POSISI SELLER,BUYER SAMA WEIGH JADI PARAM DI GET COST BUAT DI HITUNG COSTNYA. YANG SEKARANG MASIH PAKE DATA DUMMY
-                        String posisiSeller;
-                        String posisiBuyer;
-                        String weight;
+                        String posisiSeller = product.getSeller().getKabupaten().getCity_id();
+                        String posisiBuyer = presenter.getUser().getKabupaten().getCity_id();
+                        String weight = (product.getTotal() * Integer.parseInt(product.getWeight())) + "";
                         if (flag == 0) {
-                            presenter.getCost(posisi, "https://api.rajaongkir.com/starter/cost?", namaAgent);
+                            presenter.getCost("https://api.rajaongkir.com/starter/cost?", namaAgent, posisi, weight, posisiSeller, posisiBuyer);
                             flag = 1;
                         }
                     }
@@ -156,13 +199,17 @@ public class CheckoutAdapter extends BaseAdapter {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if (initService) {
                         if (cAgents != null) {
-                            Costs costs = agents.get(posisi)[0].getCosts()[spinnerService.getSelectedItemPosition()];
+                            Costs costs = agents.get(posisi)[0].getCosts()[position];
                             String etd = costs.getCosts()[0].getEtd();
                             etd = etd.replaceAll(" HARI", "");
-                            tvETD.setText(etd + " hari");
-                            tvShippingCost.setText("" + presenter.formatRupiah(Integer.parseInt(costs.getCosts()[0].getValue())));
                             int total = product.getTotal();
                             int harga = Integer.parseInt(product.getHarga().substring(3).replaceAll("\\.", ""));
+
+                            shippingCost.set(posisi,Integer.parseInt(costs.getCosts()[0].getValue()));
+
+                            presenter.notifyCheckout();
+                            tvETD.setText(etd + " hari");
+                            tvShippingCost.setText("" + presenter.formatRupiah(Integer.parseInt(costs.getCosts()[0].getValue())));
                             tvSubtotal.setText(presenter.formatRupiah(total * harga + Integer.parseInt(costs.getCosts()[0].getValue())));
                             flag = 0;
                         }
