@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
     private FragmentManager fragmentManager;
 
-    private FileManager fm;
     private HashMap<String, Product> index;
 
     public static int PAGE_HOME = 0;
@@ -118,8 +117,6 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
         changePage(PAGE_HOME);
         instance = this;
-
-        fm = new FileManager(this);
 
         this.index = new HashMap<>();
         ArrayList<Product> products = DataDummy.getProduct();
@@ -269,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     protected void onPause() {
         Log.d("Main", "onPause12345");
         super.onPause();
-        fm.saveFile(fragmentShoppingCart.getAdapter().getSavedProducts());
+        presenter.saveItemInCart(fragmentShoppingCart.getAdapter().getSavedProducts());
         Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
     }
 
@@ -278,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     protected void onResume() {
         Log.d("Main", "onResume12345");
         super.onResume();
-        ArrayList<String> stringProducts = fm.loadData();
+        ArrayList<String> stringProducts = presenter.loadItemForCart();
         ArrayList<Product> products = new ArrayList<>();
         if (stringProducts != null) {
             fragmentShoppingCart.getAdapter().setSavedProducts(stringProducts);
@@ -296,6 +293,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                 }
             }
         }
+        badgeCart.updateCount(fragmentShoppingCart.getTotalItems());
     }
 
     public Product checkInCart(Product item) {

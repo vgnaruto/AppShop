@@ -3,6 +3,7 @@ package com.example.windows10.dapurukm;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainPresenter {
     private UserManager userManager;
@@ -91,5 +92,13 @@ public class MainPresenter {
     }
     public void notifyCheckout(){
         activity.notifyCheckOutAdapter();
+    }
+
+    public void saveItemInCart(List<String> pd){
+        saveDataManager.saveFile(pd);
+    }
+
+    public ArrayList<String> loadItemForCart(){
+        return saveDataManager.loadData();
     }
 }
