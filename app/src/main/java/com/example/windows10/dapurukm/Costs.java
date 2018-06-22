@@ -1,5 +1,7 @@
 package com.example.windows10.dapurukm;
 
+/**
+ * penamaan kelas ambigu, soalnya disesuaikan dengan API pengiriman*/
 public class Costs {
     private String service,description;
     private Cost[] cost;

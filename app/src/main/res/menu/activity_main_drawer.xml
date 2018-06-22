@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_notifikasi"
             android:icon="@drawable/ic_promo2"
             android:title="Notifikasi" />
         <item
-            android:id="@+id/nav_second_layout"
+            android:id="@+id/menu_transaksi"
             android:icon="@drawable/ic_transaction"
             android:title="Transaksi" />
         <item
-            android:id="@+id/nav_third_layout"
+            android:id="@+id/menu_favorit"
             android:icon="@drawable/ic_star_navbar"
             android:title="Favorit" />
     </group>
