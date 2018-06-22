@@ -124,7 +124,7 @@ public class FragmentShoppingCart extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if(v == contShoppingButton){
-            ctx.onBackPressed();
+            ctx.changePage(MainActivity.PAGE_HOME);
         }else if(v == backButton){
             ctx.onBackPressed();
         }else if(v == checkOutBtn){
@@ -140,5 +140,9 @@ public class FragmentShoppingCart extends Fragment implements View.OnClickListen
 
     public void changeAmount(Product replaced, Product replacement) {
         adapter.changeAmount(replaced, replacement);
+    }
+
+    public void clearCart() {
+        adapter.clearCart();
     }
 }

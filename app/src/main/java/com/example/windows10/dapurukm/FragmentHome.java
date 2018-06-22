@@ -179,4 +179,8 @@ public class FragmentHome extends Fragment/* implements NavigationView.OnNavigat
     public void setAdapter(GridProductAdapter adapter) {
         this.adapter = adapter;
     }
+
+    public void reset() {
+        adapter.resetAll();
+    }
 }

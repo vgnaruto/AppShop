@@ -33,6 +33,7 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
     private Button checkOutBtn;
     private MainPresenter presenter;
     private static Product selected;
+    private CircleIndicator indicator;
 
     public FragmentProduct() {
     }
@@ -93,10 +94,10 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
         priceEach = view.findViewById(R.id.tv_price_each);
         checkOutBtn = view.findViewById(R.id.cart_button);
         backButton = view.findViewById(R.id.back_button);
+        indicator = view.findViewById(R.id.indicator);
 
         ImagePagerAdapter viewPagerAdapter = new ImagePagerAdapter(ctx, selected.getFoto().size(),
                 selected.getFoto().toArray(new Bitmap[selected.getFoto().size()]));
-        CircleIndicator indicator = view.findViewById(R.id.indicator);
         indicator.setViewPager(imagePager);
         imagePager.setAdapter(viewPagerAdapter);
         prodWeight.setText(selected.getWeight()+" gr");
@@ -124,6 +125,32 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
         btnMin.setOnClickListener(this);
 
         return view;
+    }
+
+    public void update(){
+        ImagePagerAdapter viewPagerAdapter = new ImagePagerAdapter(ctx, selected.getFoto().size(),
+                selected.getFoto().toArray(new Bitmap[selected.getFoto().size()]));
+        indicator.setViewPager(imagePager);
+        imagePager.setAdapter(viewPagerAdapter);
+        prodWeight.setText(selected.getWeight()+" gr");
+        sellerName.setText(selected.getSeller().getName());
+        sellerAddress.setText(selected.getSeller().getAddress());
+        prodNama.setText(selected.getNama());
+        prodPrice.setText(selected.getHarga());
+
+        priceTotal.setText(selected.getHarga());
+        priceEach.setText("@ " + selected.getHarga());
+        prodDeskripsi.setText(selected.getProductDetails());
+        int rating = selected.getRating();
+        Bitmap starOn = ((BitmapDrawable) ctx.getResources().getDrawable(R.drawable.ic_star_on)).getBitmap();
+        Bitmap starOff = ((BitmapDrawable) ctx.getResources().getDrawable(R.drawable.ic_star_off)).getBitmap();
+
+        for (ImageView b : bintang) {
+            b.setImageBitmap(starOff);
+        }
+        for (int i = 0; i < rating; i++) {
+            bintang[i].setImageBitmap(starOn);
+        }
     }
 
     @Override

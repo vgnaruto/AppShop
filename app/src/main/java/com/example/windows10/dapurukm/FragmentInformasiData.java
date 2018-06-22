@@ -135,6 +135,7 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
 
                 Toast toast = Toast.makeText(ctx, "Berhasil daftar!", Toast.LENGTH_SHORT);
                 toast.show();
+                ctx.hideKeyboard();
                 ctx.onBackPressed();
             }
         }

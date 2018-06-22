@@ -20,6 +20,12 @@ public class GridProductAdapter extends BaseAdapter {
         this.ui = ui;
     }
 
+    public void resetAll(){
+        for(Product p : products){
+            p.setInCart(false);
+        }
+    }
+
     @Override
     public int getCount() {
         return products.size();

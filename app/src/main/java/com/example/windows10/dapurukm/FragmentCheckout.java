@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+
 
 public class FragmentCheckout extends Fragment implements View.OnClickListener{
     private ImageButton backButton;
@@ -52,7 +54,7 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
         tvTotalOrder = view.findViewById(R.id.tv_total_order);
         tvTotalPayment = view.findViewById(R.id.tv_total_payment);
         tvExpeditionFee = view.findViewById(R.id.tv_expedition_fee);
-        checkoutButton = view.findViewById(R.id.checkout_btn);
+        checkoutButton = view.findViewById(R.id.btnCheckout);
         listView = view.findViewById(R.id.list_view);
 
         adapter = new CheckoutAdapter(ctx,presenter.getProduct());
@@ -63,6 +65,8 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
         tvKeterangan.setText(presenter.formatKeterangan(cUser));
 
         backButton.setOnClickListener(this);
+        checkoutButton.setOnClickListener(this);
+        checkoutButton.setEnabled(false);
         return view;
     }
 
@@ -70,6 +74,34 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if(v == backButton){
             ctx.onBackPressed();
+        }else if(v == checkoutButton){
+            final NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(ctx);
+            dialogBuilder
+                    .withTitle(null)
+                    .withMessage("Silahkan lakukan transfer ke rekening XXX atas nama YYY dengan total sebesar "+ presenter.formatRupiah(adapter.getTotal()+adapter.getTotalShipping())+".")
+                    .withMessageColor("#FFFFFF")
+                    .withDialogColor("#e6005c")
+                    .withEffect(Effectstype.Fadein)
+                    .isCancelableOnTouchOutside(true)
+                    .withButton1Text("Ok")
+                    .withButton2Text("Cancel")
+                    .setButton1Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            presenter.clearCart();
+                            presenter.saveItemInCart(ctx.getSavedProducts());
+                            ctx.changePage(MainActivity.PAGE_HOME);
+                            ctx.setBottomNavIndex(0);
+                            dialogBuilder.cancel();
+                        }
+                    })
+                    .setButton2Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogBuilder.cancel();
+                        }
+                    })
+                    .show();
         }
     }
 
@@ -85,5 +117,6 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
         tvTotalOrder.setText(presenter.formatRupiah(adapter.getTotal()));
         tvExpeditionFee.setText(presenter.formatRupiah(adapter.getTotalShipping()));
         tvTotalPayment.setText(presenter.formatRupiah(adapter.getTotal()+adapter.getTotalShipping()));
+        checkoutButton.setEnabled(true);
     }
 }

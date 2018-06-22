@@ -126,7 +126,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rp 80.800"
+                        android:text="-/-"
                         android:textSize="@dimen/_15sdp"
                         android:textColor="@color/black"/>
                 </RelativeLayout>
@@ -148,7 +148,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rp 40.000"
+                        android:text="-/-"
                         android:textSize="@dimen/_15sdp"
                         android:textColor="@color/black"/>
                 </RelativeLayout>
@@ -172,7 +172,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:text="Rp 120.800"
+                        android:text="-/-"
                         android:textSize="@dimen/_15sdp"
                         android:textColor="@color/purple"/>
                 </RelativeLayout>
@@ -199,7 +199,7 @@
             android:textSize="@dimen/_13sdp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:background="@color/purple" />
+            android:background="@drawable/selector_button"/>
     </LinearLayout>
 
 </RelativeLayout>

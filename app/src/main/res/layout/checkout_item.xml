@@ -19,7 +19,7 @@
             android:layout_marginBottom="@dimen/_5sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="Nama Toko"
+            android:text="-/-"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold" />
@@ -37,8 +37,7 @@
         <ImageView
             android:id="@+id/iv_gambar_product"
             android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
-            android:src="@drawable/dummy1_1" />
+            android:layout_height="@dimen/_60sdp" />
 
         <TextView
             android:id="@+id/tv_nama_product"
@@ -47,7 +46,7 @@
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_toRightOf="@id/iv_gambar_product"
             android:maxWidth="@dimen/_125sdp"
-            android:text="FRONTE Sosis Beef Frankfurter 500gr"
+            android:text="-/-"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp" />
 
@@ -59,7 +58,7 @@
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_toRightOf="@id/iv_gambar_product"
-            android:text="2 pcs"
+            android:text="-/-"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp" />
 
@@ -71,7 +70,7 @@
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_toRightOf="@id/iv_gambar_product"
-            android:text="Rp 79.200"
+            android:text="-/-"
             android:textColor="@color/purple"
             android:textSize="@dimen/_15sdp" />
     </RelativeLayout>
@@ -139,7 +138,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:text="7-8 Days"
+                android:text="-/-"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp" />
         </LinearLayout>
@@ -194,7 +193,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_40sdp"
-                android:text="Rp 8.500"
+                android:text="-/-"
                 android:textColor="@color/purple"
                 android:textSize="@dimen/_15sdp" />
 
@@ -224,7 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="@dimen/_40sdp"
-                android:text="Rp 10.100"
+                android:text="-/-"
                 android:textColor="@color/purple"
                 android:textSize="@dimen/_15sdp" />
         </RelativeLayout>

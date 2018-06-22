@@ -38,7 +38,7 @@ public class WebServiceManager {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //TODO PROSES RESPONSE
+                        Log.d("Response",response);
                         try {
                             JSONObject json = new JSONObject(response);
                             JSONObject obj = json.getJSONObject("rajaongkir");
@@ -53,7 +53,7 @@ public class WebServiceManager {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("Error.Response", "ERROR");
+                        Log.d("Error.Response", error.getMessage());
                     }
                 }
         ) {

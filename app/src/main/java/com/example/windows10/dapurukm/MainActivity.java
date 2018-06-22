@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import com.felix.bottomnavygation.ItemNav;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity implements FragmentListener, NavigationView.OnNavigationItemSelectedListener {
@@ -172,6 +174,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     }
 
     public void showNavBar() {
+        updateBadge();
         bottomNav.setVisibility(View.VISIBLE);
     }
 
@@ -180,6 +183,10 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         fragmentCheckout.notifData();
         //fm.saveFile(fragmentShoppingCart.getAdapter().getSavedProducts());
         //Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setBottomNavIndex(int index){
+        bottomNav.selectTab(index);
     }
 
     @Override
@@ -200,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
             hideNavBar();
             if (fragmentProduct.isAdded()) {
                 ft.show(fragmentProduct);
+                fragmentProduct.update();
             } else {
                 ft.add(R.id.fragment_container, fragmentProduct).addToBackStack("fragment_product");
             }
@@ -208,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
             hideNavBar();
             if (fragmentShoppingCart.isAdded()) {
                 ft.show(fragmentShoppingCart);
+                notifyShoppingCart();
             } else {
                 ft.add(R.id.fragment_container, fragmentShoppingCart).addToBackStack("fragment_cart");
             }
@@ -338,13 +347,16 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
                 }
             }
         }
-        badgeCart.updateCount(fragmentShoppingCart.getTotalItems());
+        updateBadge();
     }
 
     public Product checkInCart(Product item) {
         return fragmentShoppingCart.getAdapter().checkInCart(item);
     }
 
+    public void updateBadge(){
+        badgeCart.updateCount(fragmentShoppingCart.getTotalItems());
+    }
 
 
     @Override
@@ -374,6 +386,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
             Log.d("NAVIGATIONDRAWER","PENJUALAN");
         }else if (id == R.id.menu_keluar) {
             Log.d("NAVIGATIONDRAWER","KELUAR");
+            presenter.saveItemInCart(getSavedProducts());
             System.exit(0);
         }else if (id == R.id.menu_informasi_khusus) {
             Log.d("NAVIGATIONDRAWER","INFORMASI KHUSUS");
@@ -410,5 +423,22 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         User cUser = presenter.getUser();
         tvNamaUser.setText(cUser.getNama());
         tvEmailUser.setText(cUser.getEmail());
+    }
+
+    public void clearCart() {
+        fragmentShoppingCart.clearCart();
+        fragmentHome.reset();
+    }
+
+    public List<String> getSavedProducts() {
+        return fragmentShoppingCart.getAdapter().getSavedProducts();
+    }
+
+    public void hideKeyboard(){
+        View view = this.getCurrentFocus();
+        if(view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

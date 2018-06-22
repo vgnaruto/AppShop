@@ -177,6 +177,15 @@ public class ShoppingCartAdapter extends BaseAdapter {
         return item;
     }
 
+    public void clearCart() {
+        for(Product p : products){
+            p.setInCart(false);
+        }
+        products = new ArrayList<>();
+        savedProducts = new ArrayList<>();
+        ui.notifyShoppingCart();
+    }
+
     private class ViewHolder {
         protected TextView namaPerus, judulProduct, hargaProduct;
         protected TextView totalOrder;

@@ -159,10 +159,10 @@ public class CheckoutAdapter extends BaseAdapter {
             String weight = (cProduct.getTotal() * Integer.parseInt(cProduct.getWeight())) + "";
             String posisiSeller = cProduct.getSeller().getKabupaten().getCity_id();
             String posisiBuyer = presenter.getUser().getKabupaten().getCity_id();
-//            if (!updateService) {
-//                presenter.getCost("https://api.rajaongkir.com/starter/cost?", (String) spinnerAgent.getSelectedItem(), posisi, weight, posisiSeller, posisiBuyer);
-//                flag = 1;
-//            }
+            if (!updateService) {
+                presenter.getCost("https://api.rajaongkir.com/starter/cost?", (String) spinnerAgent.getSelectedItem(), posisi, weight, posisiSeller, posisiBuyer);
+                flag = 1;
+            }
         }
 
         public void updateView(final Product product, final Agent[] cAgents, final int posisi) {

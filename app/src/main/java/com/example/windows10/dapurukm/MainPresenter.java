@@ -101,4 +101,8 @@ public class MainPresenter {
     public ArrayList<String> loadItemForCart(){
         return saveDataManager.loadData();
     }
+
+    public void clearCart(){
+        activity.clearCart();
+    }
 }
