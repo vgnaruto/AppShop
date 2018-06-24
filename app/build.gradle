@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     testImplementation 'junit:junit:4.12'
@@ -37,4 +37,5 @@ dependencies {
     implementation 'com.github.paolorotolo:expandableheightlistview:1.0.0'
     implementation 'com.github.sd6352051:NiftyDialogEffects:v1.0.3'
     implementation 'info.hoang8f:fbutton:1.0.5'
+    implementation files('libs/mail.jar')
 }

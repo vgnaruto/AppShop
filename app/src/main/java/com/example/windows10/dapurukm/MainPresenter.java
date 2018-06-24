@@ -34,20 +34,44 @@ public class MainPresenter {
         userManager.setUser(saveDataManager.loadUser());
     }
 
-    public String formatRupiah(int angka){
+    public String formatRupiah(double angka){
         String result = "";
-        int count = 1;
-        while(angka > 0){
-            result = (angka%10) + result;
-            angka/=10;
-            count++;
-            if(angka > 0) {
-                if (count == 4) {
-                    result = "." + result;
-                    count = 1;
+        boolean first = true;
+        String angkas = angka+"";
+        angkas = angkas.substring(0,angkas.length()-2);
+        int index = angkas.length();
+        while(index > 0){
+            int start;
+            if(index-3 > 0){
+                start = index - 3;
+                if(first){
+                    first = false;
+                }else{
+                    result = "."+result;
+                }
+            }else{
+                start = 0;
+                if(first){
+                    first = false;
+                }else{
+                    result = "."+result;
                 }
             }
+            result = angkas.substring(start,index)+ result;
+            index -= 3;
         }
+
+//        while(angka > 0){
+//            result = (angka%10) + result;
+//            angka/=10;
+//            count++;
+//            if(angka > 0) {
+//                if (count == 4) {
+//                    result = "." + result;
+//                    count = 1;
+//                }
+//            }
+//        }
         return "Rp "+result;
     }
 
@@ -104,5 +128,9 @@ public class MainPresenter {
 
     public void clearCart(){
         activity.clearCart();
+    }
+
+    public int uangToInteger(String uang){
+        return Integer.parseInt(uang.substring(3).replaceAll("\\.", ""));
     }
 }

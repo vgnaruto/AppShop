@@ -60,6 +60,12 @@ public class CheckoutAdapter extends BaseAdapter {
         return item.size();
     }
 
+    public ArrayList<Product> getItem(){
+        return this.item;
+    }
+
+
+
     @Override
     public Product getItem(int position) {
         return item.get(position);
@@ -109,6 +115,14 @@ public class CheckoutAdapter extends BaseAdapter {
 
     public ArrayList<Integer> getShippingCost() {
         return shippingCost;
+    }
+
+    public int getJumlahShipping(){
+        int result = 0;
+        for(int i : shippingCost){
+            result += i;
+        }
+        return result;
     }
 
     public void setShippingCost(ArrayList<Integer> shippingCost) {

@@ -10,4 +10,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="username_email">caurnt@gmail.com</string>
+    <string name="password_email">70036222naruto</string>
 </resources>

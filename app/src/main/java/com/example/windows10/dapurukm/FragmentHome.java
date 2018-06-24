@@ -23,21 +23,14 @@ import android.widget.TextView;
 
 import me.relex.circleindicator.CircleIndicator;
 
-public class FragmentHome extends Fragment/* implements NavigationView.OnNavigationItemSelectedListener*/ {
+public class FragmentHome extends Fragment{
     private MainActivity ctx;
     private ViewPager newsPager;
 
     private GridProductAdapter adapter;
     private ExpandableHeightGridView gridView;
 
-//    private NavigationView navigationView;
-//    private Toolbar toolbar;
-//    private DrawerLayout drawerLayout;
-//    private ActionBar actionBar;
-
     private MainPresenter presenter;
-//    private TextView tvNamaUser;
-//    private TextView tvEmailUser;
 
     public FragmentHome() {
     }
@@ -75,102 +68,12 @@ public class FragmentHome extends Fragment/* implements NavigationView.OnNavigat
         adapter = new GridProductAdapter(DataDummy.getProduct(), ctx);
         gridView.setAdapter(adapter);
 
-//        toolbar = view.findViewById(R.id.toolbar);
-//        ctx.setSupportActionBar(toolbar);
-//
-//        this.drawerLayout = view.findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                ctx, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawerLayout.setDrawerListener(toggle);
-//        toggle.syncState();
-//
-//        this.navigationView = view.findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
-//        View navView = navigationView.getHeaderView(0);
-//        tvNamaUser = navView.findViewById(R.id.etNamaUser);
-//        tvEmailUser = navView.findViewById(R.id.etEmailUser);
-//
-//        toolbar = view.findViewById(R.id.toolbar);
-//        ctx.setSupportActionBar(toolbar);
-//        actionBar = ctx.getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
-//        actionBar.setDisplayShowTitleEnabled(false);
-//
-//        setupDrawerContent(navigationView);
-//        setUser();
-
         return view;
     }
 
     private void setMainActivity(MainActivity ctx) {
         this.ctx = ctx;
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        Log.d("NAVIGATIONDRAWER","MASUK 1");
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//        Log.d("NAVIGATIONDRAWER","MASUK 2");
-//        if (id == R.id.menu_notifikasi) {
-//            Log.d("NAVIGATIONDRAWER","NOTIFIKASI");
-//        } else if (id == R.id.menu_transaksi) {
-//            Log.d("NAVIGATIONDRAWER","TRANSAKSI");
-//        } else if (id == R.id.menu_favorit) {
-//            Log.d("NAVIGATIONDRAWER","FAVORIT");
-//        } else if (id == R.id.menu_lihat_profile) {
-//            Log.d("NAVIGATIONDRAWER","LIHAT PROFILE");
-//        } else if (id == R.id.menu_penjualan) {
-//            Log.d("NAVIGATIONDRAWER","PENJUALAN");
-//        }else if (id == R.id.menu_keluar) {
-//            Log.d("NAVIGATIONDRAWER","KELUAR");
-//        }else if (id == R.id.menu_informasi_khusus) {
-//            Log.d("NAVIGATIONDRAWER","INFORMASI KHUSUS");
-//        }else if (id == R.id.menu_event) {
-//            Log.d("NAVIGATIONDRAWER","EVENT");
-//        }else if (id == R.id.menu_lowongan_kerja) {
-//            Log.d("NAVIGATIONDRAWER","LOWONGAN KERJA");
-//        }else if (id == R.id.menu_trending_topic) {
-//            Log.d("NAVIGATIONDRAWER","TRENDING TOPIC");
-//        }
-//        drawerLayout.closeDrawer(GravityCompat.START);
-//        return true;
-//    }
-//
-//    private void setupDrawerContent(NavigationView nv) {
-//        nv.setNavigationItemSelectedListener(
-//                new NavigationView.OnNavigationItemSelectedListener() {
-//                    @Override
-//                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                        selectDrawerItem(item);
-//                        return true;
-//                    }
-//                });
-//    }
-//
-//    public void selectDrawerItem(MenuItem item) {
-//        switch (item.getItemId()) {
-//        }
-//        drawerLayout.closeDrawers();
-//        item.setChecked(true);
-//    }
-//
-//    public void setUser() {
-//        User cUser = presenter.getUser();
-//        tvNamaUser.setText(cUser.getNama());
-//        tvEmailUser.setText(cUser.getEmail());
-//    }
 
     public GridProductAdapter getAdapter() {
         return adapter;
