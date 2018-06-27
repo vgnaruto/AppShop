@@ -38,6 +38,8 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
     private MainActivity ctx;
     private MainPresenter presenter;
 
+    private int index =0;
+
     public FragmentCheckout(){
 
     }
@@ -172,7 +174,13 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
         tvTotalOrder.setText(presenter.formatRupiah(adapter.getTotal()));
         tvExpeditionFee.setText(presenter.formatRupiah(adapter.getTotalShipping()));
         tvTotalPayment.setText(presenter.formatRupiah(adapter.getTotal()+adapter.getTotalShipping()));
-        checkoutButton.setEnabled(true);
+        if((adapter.getCount()-1) == index){
+            index++;
+            checkoutButton.setEnabled(false);
+        }else {
+            checkoutButton.setEnabled(true);
+            index = 0;
+        }
     }
     public String formatPesan(){
         User currentUser = presenter.getUser();
