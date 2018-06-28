@@ -88,7 +88,7 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
             this.profileEmail.setText(user.getEmail());
             this.profileAlamat.setText(user.getAlamat());
             if(user.getProvinsi() != null)this.profileProv.setText(user.getProvinsi().getProvince());
-            if(user.getKabupaten().getCity_name() != null)this.profileKab.setText(user.getKabupaten().getCity_name());
+            if(user.getKabupaten() != null)this.profileKab.setText(user.getKabupaten().getCity_name());
         }
     }
 }
