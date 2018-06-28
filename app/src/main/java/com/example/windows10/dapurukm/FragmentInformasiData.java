@@ -96,6 +96,17 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
             }
         });
 
+        if(this.presenter.isLogin()){
+            User user = this.presenter.getUser();
+            etNama.setText(user.getNama());
+            etAlamat.setText(user.getAlamat());
+            etEmail.setText(user.getEmail());
+            etNomorTelepon.setText(user.getNomorTelepon());
+            etKodePos.setText(user.getKodePos());
+            spinnerProvinsi.setSelection(listProvinsi.indexOf(user.getProvinsi()));
+            spinnerKabupaten.setSelection(listKabupaten.indexOf(user.getKabupaten()));
+        }
+
         backButton.setOnClickListener(this);
         simpanButton.setOnClickListener(this);
 
@@ -132,6 +143,9 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
                 User user = new User(nama, alamat, provinsi, kabupaten, kodePos, noTelepon, email);
                 presenter.setUser(user);
                 presenter.saveUser();
+
+                ctx.notifyUserChanged();
+                ctx.getFragmentProfile().notifyUserChanged();
 
                 Toast toast = Toast.makeText(ctx, "Berhasil daftar!", Toast.LENGTH_SHORT);
                 toast.show();

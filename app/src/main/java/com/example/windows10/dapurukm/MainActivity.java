@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     private FragmentShoppingCart fragmentShoppingCart;
     private FragmentInformasiData fragmentInformasiData;
     private FragmentCheckout fragmentCheckout;
+    private FragmentProfile fragmentProfile;
 
     private MainPresenter presenter;
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     public static int PAGE_SHOPPING_CART = 2;
     public static int PAGE_INFORMASI_DATA = 3;
     public static int PAGE_CHECKOUT = 4;
+    public static int PAGE_PROFILE = 11;
 
     public static MainActivity instance;
     private Product selected;
@@ -81,12 +83,14 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         fragmentShoppingCart = FragmentShoppingCart.newInstance(this, "SHOPPING CART FRAGMENT");
         fragmentInformasiData = FragmentInformasiData.newInstance(this, "INFORMASI DATA FRAGMENT");
         fragmentCheckout = FragmentCheckout.newInstance(this, "CHECKOUT FRAGMENT");
+        fragmentProfile = FragmentProfile.newInstance(this, "CHECKOUT FRAGMENT");
 
         fragments.add(fragmentHome);
         fragments.add(fragmentProduct);
         fragments.add(fragmentShoppingCart);
         fragments.add(fragmentInformasiData);
         fragments.add(fragmentCheckout);
+        fragments.add(fragmentProfile);
 
         frameLayout = findViewById(R.id.fragment_container);
 
@@ -125,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
                     case 3:
                         break;
                     case 4:
+                        changePage(MainActivity.PAGE_PROFILE);
                         break;
                 }
             }
@@ -237,6 +242,14 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
                 ft.add(R.id.fragment_container, fragmentCheckout).addToBackStack("fragment_checkout");
             }
             hideOtherFrag(fragmentCheckout, ft);
+        } else if (page == PAGE_PROFILE) {
+            hideNavBar();
+            if (fragmentProfile.isAdded()) {
+                ft.show(fragmentProfile);
+            } else {
+                ft.add(R.id.fragment_container, fragmentProfile).addToBackStack("fragment_profile");
+            }
+            hideOtherFrag(fragmentProfile, ft);
         }
         ft.commit();
     }
@@ -440,5 +453,9 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
             InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    public FragmentProfile getFragmentProfile() {
+        return fragmentProfile;
     }
 }
