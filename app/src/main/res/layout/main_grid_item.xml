@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingTop="@dimen/_10sdp"
     android:paddingLeft="@dimen/_10sdp"
     android:paddingRight="@dimen/_10sdp"
     android:paddingBottom="@dimen/_5sdp"
     android:orientation="vertical"
-    android:background="@drawable/border_bottom_right_thin">
+    android:background="@color/white">
     <ImageView
         android:id="@+id/prod_gambar"
         android:src="@drawable/product"
-        android:layout_width="@dimen/_140sdp"
-        android:layout_height="@dimen/_140sdp"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
         android:scaleType="fitCenter"/>
     <TextView
         android:id="@+id/prod_judul"
         android:textColor="@color/black"
-        android:layout_width="@dimen/_100sdp"
+        android:layout_width="@dimen/_120sdp"
         android:layout_height="wrap_content"
         android:text="Keripik McCain"
         android:maxWidth="@dimen/_1sdp"
         android:minLines="1"
         android:maxLines="3"
-        android:textSize="@dimen/_12sdp" />
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textSize="@dimen/_10sdp" />
     <TextView
         android:id="@+id/prod_harga"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Rp 40.000"
+        android:layout_marginTop="@dimen/_5sdp"
         android:textColor="@color/purple"
-        android:textSize="@dimen/_14sdp"/>
+        android:textSize="@dimen/_10sdp"/>
     <TextView
         android:layout_marginTop="@dimen/_15sdp"
         android:id="@+id/prod_namaperus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textSize="@dimen/_10sdp"
         android:text="McCain"/>
 
 </LinearLayout>

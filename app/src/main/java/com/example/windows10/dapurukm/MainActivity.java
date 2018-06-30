@@ -172,6 +172,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         for (int i = 0; i < products.size(); i++) {
             this.index.put(products.get(i).getSeller().getName() + "-" + products.get(i).getNama(), products.get(i));
         }
+
+
     }
 
     public void hideNavBar() {
@@ -457,5 +459,9 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
 
     public FragmentProfile getFragmentProfile() {
         return fragmentProfile;
+    }
+
+    public void openDrawer(){
+        drawerLayout.openDrawer(navigationView);
     }
 }

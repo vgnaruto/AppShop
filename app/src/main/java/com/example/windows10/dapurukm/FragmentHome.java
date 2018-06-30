@@ -5,30 +5,23 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import me.relex.circleindicator.CircleIndicator;
 
-public class FragmentHome extends Fragment{
+public class FragmentHome extends Fragment implements View.OnClickListener{
     private MainActivity ctx;
     private ViewPager newsPager;
 
     private GridProductAdapter adapter;
     private ExpandableHeightGridView gridView;
+    private ImageButton btnNavigation;
 
     private MainPresenter presenter;
 
@@ -53,6 +46,9 @@ public class FragmentHome extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         newsPager = view.findViewById(R.id.viewPager);
+
+        btnNavigation = view.findViewById(R.id.btn_navigation);
+
         ImagePagerAdapter viewPagerAdapter = new ImagePagerAdapter(ctx, 4, new Bitmap[]{
                 ((BitmapDrawable) ctx.getResources().getDrawable(R.drawable.promo_dummy1)).getBitmap(),
                 ((BitmapDrawable) ctx.getResources().getDrawable(R.drawable.promo_dummy2)).getBitmap(),
@@ -67,6 +63,8 @@ public class FragmentHome extends Fragment{
         gridView.setExpanded(true);
         adapter = new GridProductAdapter(DataDummy.getProduct(), ctx);
         gridView.setAdapter(adapter);
+
+        btnNavigation.setOnClickListener(this);
 
         return view;
     }
@@ -85,5 +83,12 @@ public class FragmentHome extends Fragment{
 
     public void reset() {
         adapter.resetAll();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == btnNavigation){
+            ctx.openDrawer();
+        }
     }
 }
