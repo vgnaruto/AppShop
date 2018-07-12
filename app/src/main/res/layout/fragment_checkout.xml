@@ -75,7 +75,7 @@
                         android:paddingBottom="@dimen/_8sdp"
                         android:background="@drawable/border_bottom_thin"/>
                     <TextView
-                        android:layout_margin="@dimen/_2sdp"
+                        android:paddingLeft="@dimen/_4sdp"
                         android:id="@+id/tv_keterangan_pembeli"
                         android:paddingTop="@dimen/_10sdp"
                         android:layout_width="match_parent"
@@ -99,82 +99,136 @@
                     android:divider="@color/white"
                     android:dividerHeight="@dimen/_5sdp"/>
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginTop="@dimen/_7sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_7sdp"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:paddingLeft="@dimen/_30sdp"
+                android:paddingBottom="@dimen/_10sdp"
                 android:paddingRight="@dimen/_30sdp"
-                android:paddingBottom="@dimen/_10sdp">
+                android:paddingLeft="@dimen/_30sdp">
+
                 <RelativeLayout
-                    android:paddingTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/border_bottom_thin"
                     android:paddingBottom="@dimen/_10sdp"
-                    android:background="@drawable/border_bottom_thin">
+                    android:paddingTop="@dimen/_10sdp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
                         android:text="Total Order"
-                        android:textSize="@dimen/_15sdp"
                         android:textColor="@color/black"
-                        android:layout_alignParentLeft="true"/>
+                        android:textSize="@dimen/_15sdp" />
+
                     <TextView
                         android:id="@+id/tv_total_order"
-                        android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
                         android:text="-/-"
-                        android:textSize="@dimen/_15sdp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15sdp" />
                 </RelativeLayout>
+
                 <RelativeLayout
-                    android:paddingTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/border_bottom_thin"
                     android:paddingBottom="@dimen/_10sdp"
-                    android:background="@drawable/border_bottom_thin">
+                    android:paddingTop="@dimen/_10sdp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
                         android:text="Expedition Fee"
-                        android:textSize="@dimen/_15sdp"
                         android:textColor="@color/black"
-                        android:layout_alignParentLeft="true"/>
+                        android:textSize="@dimen/_15sdp" />
+
                     <TextView
                         android:id="@+id/tv_expedition_fee"
-                        android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
                         android:text="-/-"
-                        android:textSize="@dimen/_15sdp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15sdp" />
                 </RelativeLayout>
+
                 <RelativeLayout
-                    android:paddingTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/border_bottom_thin"
                     android:paddingBottom="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="Administration Fee"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <TextView
+                        android:id="@+id/tv_administration_fee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="-/-"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15sdp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="Total Payment"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_total_payment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="-/-"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:background="@color/white">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Payment"
+                        android:text="Pilih Bank yang di transfer"
                         android:textStyle="bold"
-                        android:textSize="@dimen/_15sdp"
-                        android:textColor="@color/black"
-                        android:layout_alignParentLeft="true"/>
-                    <TextView
-                        android:id="@+id/tv_total_payment"
-                        android:layout_alignParentRight="true"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/black"/>
+                    <Spinner
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="-/-"
-                        android:textSize="@dimen/_15sdp"
-                        android:textColor="@color/purple"/>
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/spinner_bank"/>
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

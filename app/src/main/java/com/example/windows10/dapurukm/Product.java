@@ -18,8 +18,9 @@ public class Product {
     private int total;
     private boolean inCart;
     private String weight;
+    private String[] kategori;
 
-    public Product(ArrayList<Bitmap> foto, String harga, String nama, String productDetails, Seller seller, int rating, int weight) {
+    public Product(ArrayList<Bitmap> foto, String harga, String nama, String productDetails, String[] kategori, Seller seller, int rating, int weight) {
         this.foto = new ArrayList<>();
         ByteArrayOutputStream baos;
         for (int i = 0; i < foto.size(); i++) {
@@ -28,6 +29,7 @@ public class Product {
             byte[] b = baos.toByteArray();
             this.foto.add(Base64.encodeToString(b, Base64.DEFAULT));
         }
+        this.kategori = kategori;
         this.harga = harga;
         this.nama = nama;
         this.productDetails = productDetails;
@@ -68,6 +70,14 @@ public class Product {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public String[] getKategori() {
+        return kategori;
+    }
+
+    public void setKategori(String[] kategori) {
+        this.kategori = kategori;
     }
 
     public ArrayList<Bitmap> getFoto() {

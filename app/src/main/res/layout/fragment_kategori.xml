@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_alignParentTop="true"
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/border_with_shadow_orange"
+        android:paddingBottom="@dimen/_6sdp"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:paddingTop="@dimen/_6sdp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp">
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/ic_back"
+                android:scaleType="fitCenter"
+                android:background="@null"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/_4sdp"
+                android:paddingBottom="@dimen/_4sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Kategori"
+                android:ellipsize="marquee"
+                android:textSize="@dimen/_14sdp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <ListView
+        android:layout_below="@id/ll_top"
+        android:id="@+id/list_kategori"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>
