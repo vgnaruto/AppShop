@@ -40,8 +40,10 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     private FragmentInformasiData fragmentInformasiData;
     private FragmentCheckout fragmentCheckout;
     private FragmentProfile fragmentProfile;
+    private FragmentKategori fragmentKategori;
 
     private MainPresenter presenter;
+    private ArrayList<Product> allProduct;
 
     private FragmentManager fragmentManager;
 
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     public static int PAGE_SHOPPING_CART = 2;
     public static int PAGE_INFORMASI_DATA = 3;
     public static int PAGE_CHECKOUT = 4;
+    public static int PAGE_KATEGORI = 5;
     public static int PAGE_PROFILE = 11;
 
     public static MainActivity instance;
@@ -83,13 +86,15 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         fragmentShoppingCart = FragmentShoppingCart.newInstance(this, "SHOPPING CART FRAGMENT");
         fragmentInformasiData = FragmentInformasiData.newInstance(this, "INFORMASI DATA FRAGMENT");
         fragmentCheckout = FragmentCheckout.newInstance(this, "CHECKOUT FRAGMENT");
-        fragmentProfile = FragmentProfile.newInstance(this, "CHECKOUT FRAGMENT");
+        fragmentProfile = FragmentProfile.newInstance(this, "PROFILE FRAGMENT");
+        fragmentKategori = FragmentKategori.newInstance(this, "KATEGORI FRAGMENT");
 
         fragments.add(fragmentHome);
         fragments.add(fragmentProduct);
         fragments.add(fragmentShoppingCart);
         fragments.add(fragmentInformasiData);
         fragments.add(fragmentCheckout);
+        fragments.add(fragmentKategori);
         fragments.add(fragmentProfile);
 
         frameLayout = findViewById(R.id.fragment_container);
@@ -109,8 +114,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         badgeCart = new BadgeIndicator(this, android.R.color.holo_red_dark, android.R.color.white);
         bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_home, "Home").addColorAtive(R.color.white));
         bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_cart, "Keranjang").addColorAtive(R.color.white).addBadgeIndicator(badgeCart));
+        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_promo, "Promo").addColorAtive(R.color.white));
         bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_promo2, "Pemberitahuan").addColorAtive(R.color.white));
-        bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_star_navbar, "Favorit").addColorAtive(R.color.white));
         bottomNav.addItemNav(new ItemNav(this, R.drawable.ic_profile, "Profile").addColorAtive(R.color.white));
         bottomNav.build();
 
@@ -168,12 +173,18 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         instance = this;
 
         this.index = new HashMap<>();
-        ArrayList<Product> products = DataDummy.getProduct();
-        for (int i = 0; i < products.size(); i++) {
-            this.index.put(products.get(i).getSeller().getName() + "-" + products.get(i).getNama(), products.get(i));
+        allProduct = DataDummy.getProduct();
+        for (int i = 0; i < allProduct.size(); i++) {
+            this.index.put(allProduct.get(i).getSeller().getName() + "-" + allProduct.get(i).getNama(), allProduct.get(i));
         }
+    }
 
+    public ArrayList<Product> getAllProduct() {
+        return allProduct;
+    }
 
+    public void setAllProduct(ArrayList<Product> allProduct) {
+        this.allProduct = allProduct;
     }
 
     public void hideNavBar() {
@@ -190,6 +201,10 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         fragmentCheckout.notifData();
         //fm.saveFile(fragmentShoppingCart.getAdapter().getSavedProducts());
         //Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void notifyHome(){
+        fragmentHome.notifKategoriChanged();
     }
 
     public void setBottomNavIndex(int index){
@@ -252,6 +267,14 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
                 ft.add(R.id.fragment_container, fragmentProfile).addToBackStack("fragment_profile");
             }
             hideOtherFrag(fragmentProfile, ft);
+        } else if(page == PAGE_KATEGORI){
+            hideNavBar();
+            if (fragmentKategori.isAdded()) {
+                ft.show(fragmentKategori);
+            } else {
+                ft.add(R.id.fragment_container, fragmentKategori).addToBackStack("fragment_kategori");
+            }
+            hideOtherFrag(fragmentKategori, ft);
         }
         ft.commit();
     }
@@ -463,5 +486,9 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
 
     public void openDrawer(){
         drawerLayout.openDrawer(navigationView);
+    }
+
+    public void setSelectedKategori(String kategori){
+        fragmentHome.setSelectedKategori(kategori);
     }
 }

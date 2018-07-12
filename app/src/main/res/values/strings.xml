@@ -11,6 +11,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="text_transfer">Silahkan lakukan transfer ke rekening %1$s atas nama %2$s dengan total sebesar %3$s melalui bank %4$s.</string>
+
     <string name="username_email">caurnt@gmail.com</string>
     <string name="password_email">70036222naruto</string>
 </resources>

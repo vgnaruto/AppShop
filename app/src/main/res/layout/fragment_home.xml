@@ -75,7 +75,7 @@
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_47sdp"
                 android:background="@drawable/border_with_shadow"
                 android:elevation="10dp"
                 android:orientation="horizontal"
@@ -84,112 +84,141 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageButton
+                            android:id="@+id/button_kategori"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:scaleType="fitCenter"
+                            android:background="@null"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/ic_categories" />
 
-                    <ImageButton
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:scaleType="fitCenter"
-                        android:background="@null"
-                        android:src="@drawable/ic_categories" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Categories"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Categories"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_alignParentBottom="true"/>
+                    </RelativeLayout>
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageButton
+                            android:id="@+id/button_event"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:scaleType="fitCenter"
+                            android:background="@null"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/ic_event" />
 
-                    <ImageButton
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:scaleType="fitCenter"
-                        android:background="@null"
-                        android:src="@drawable/ic_promo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Promo"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Event"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_alignParentBottom="true"/>
+                    </RelativeLayout>
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageButton
+                            android:id="@+id/button_kurs"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:scaleType="fitCenter"
+                            android:background="@null"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/ic_kurs" />
 
-                    <ImageButton
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:scaleType="fitCenter"
-                        android:background="@null"
-                        android:src="@drawable/ic_expo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expo"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kurs"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_alignParentBottom="true"/>
+                    </RelativeLayout>
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageButton
+                            android:id="@+id/button_komoditi"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:scaleType="fitCenter"
+                            android:background="@null"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/ic_event" />
 
-                    <ImageButton
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:scaleType="fitCenter"
-                        android:background="@null"
-                        android:src="@drawable/ic_event" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Event"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Info Komoditi"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_8sdp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_alignParentBottom="true"/>
+                    </RelativeLayout>
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageButton
+                            android:id="@+id/button_loker"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:scaleType="fitCenter"
+                            android:background="@null"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/ic_categories" />
 
-                    <ImageButton
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:scaleType="fitCenter"
-                        android:background="@null"
-                        android:src="@drawable/ic_kurs" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Kurs"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Loker"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_alignParentBottom="true"/>
+                    </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -198,23 +227,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@color/white">
-
-                <TextView
-                    android:id="@+id/tv_produklaris"
+                <RelativeLayout
+                    android:id="@+id/rl_top"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/_4sdp"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingTop="@dimen/_4sdp"
-                    android:text="Produk Terlaris"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:background="@drawable/border_bottom_thin"/>
+                    android:background="@drawable/border_bottom_thin">
+                    <TextView
+                        android:id="@+id/tv_judul_kategori"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Product"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tv_clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="clear"
+                        android:textSize="@dimen/_12sdp"
+                        android:paddingRight="@dimen/_8sdp"/>
+                </RelativeLayout>
                 <com.example.windows10.dapurukm.ExpandableHeightGridView
                     android:id="@+id/grid_view"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_produklaris"
+                    android:layout_below="@id/rl_top"
                     android:gravity="center"
                     android:numColumns="2"/>
             </RelativeLayout>
