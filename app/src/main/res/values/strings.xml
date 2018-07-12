@@ -10,14 +10,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-<<<<<<< HEAD
     <string name="username_email">plokijuhygtfrdeswaqzxcvbnmm@gmail.com</string>
     <string name="password_email">1qaz2wsx..</string>
-=======
     <string name="text_transfer">Silahkan lakukan transfer ke rekening %1$s atas nama %2$s dengan total sebesar %3$s melalui bank %4$s.</string>
-
-    <string name="username_email">caurnt@gmail.com</string>
-    <string name="password_email">70036222naruto</string>
->>>>>>> ca78d4a16918af8bf9f27710e00018f81c3c14ca
 </resources>

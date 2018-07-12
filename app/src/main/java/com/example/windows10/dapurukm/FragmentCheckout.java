@@ -119,7 +119,7 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
             final Bank selectedBank = banks[spinnerBank.getSelectedItemPosition()];
             dialogBuilder
                     .withTitle(null)
-                    .withMessage(String.format(getResources().getString(R.string.text_transfer),selectedBank.getNoRek(),"YYY",presenter.formatRupiah(adapter.getTotal()+adapter.getTotalShipping()),selectedBank.getNamaBank()))
+                    .withMessage(String.format(getResources().getString(R.string.text_transfer),selectedBank.getNoRek(),"YYY",presenter.formatRupiah(adapter.getTotal()+adapter.getTotalShipping()+administrationFee),selectedBank.getNamaBank()))
                     .withMessageColor("#FFFFFF")
                     .withDialogColor("#e6005c")
                     .withEffect(Effectstype.Fadein)
