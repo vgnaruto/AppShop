@@ -26,6 +26,7 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
     private Button editBtn;
     private ImageButton backBtn;
     private MainPresenter presenter;
+    private boolean viewCreated;
 
     public FragmentProfile() {
     }
@@ -52,6 +53,7 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
 
         Log.d("fp12345", "masuk ocv");
 
+        this.viewCreated = true;
         this.profileNama = view.findViewById(R.id.tv_nama_profile);
         this.profileEmail = view.findViewById(R.id.tv_email_profile);
         this.profileNomor = view.findViewById(R.id.tv_nomor_profile);
@@ -81,14 +83,18 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
 
     public void notifyUserChanged(){
         User user;
-        if(this.presenter.getUser() != null){
+        if(this.presenter.isLogin()){
             user = this.presenter.getUser();
-            this.profileNama.setText(user.getNama());
-            this.profileNomor.setText(user.getNomorTelepon());
-            this.profileEmail.setText(user.getEmail());
-            this.profileAlamat.setText(user.getAlamat());
-            if(user.getProvinsi() != null)this.profileProv.setText(user.getProvinsi().getProvince());
-            if(user.getKabupaten() != null)this.profileKab.setText(user.getKabupaten().getCity_name());
+            if(viewCreated) {
+                this.profileNama.setText(user.getNama());
+                this.profileNomor.setText(user.getNomorTelepon());
+                this.profileEmail.setText(user.getEmail());
+                this.profileAlamat.setText(user.getAlamat());
+                if (user.getProvinsi() != null)
+                    this.profileProv.setText(user.getProvinsi().getProvince());
+                if (user.getKabupaten() != null)
+                    this.profileKab.setText(user.getKabupaten().getCity_name());
+            }
         }
     }
 }

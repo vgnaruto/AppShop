@@ -1,6 +1,7 @@
 package com.example.windows10.dapurukm;
 
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,8 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,6 +32,8 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
     private ImageButton btnNavigation;
     private TextView tvJudulKategori,tvClear;
     private ImageButton btnKategori,btnEvent,btnKurs,btnKomoditi,btnLoker;
+    private LinearLayout llDuplikat, llLeftoverMenu;
+    private ScrollView svContainer;
 
     private MainPresenter presenter;
     private String selectedKategori = "";
@@ -61,6 +67,53 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
         btnKomoditi = view.findViewById(R.id.button_komoditi);
         btnLoker = view.findViewById(R.id.button_loker);
         tvClear = view.findViewById(R.id.tv_clear);
+
+        llDuplikat = view.findViewById(R.id.ll_duplicate);
+        llLeftoverMenu = view.findViewById(R.id.ll_leftover_menu);
+        svContainer = view.findViewById(R.id.sv_container);
+
+        svContainer.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                /*if(isFullyVisible(llLeftoverMenu)){
+                    llDuplikat.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    llDuplikat.setVisibility(View.VISIBLE);
+                }*/
+
+                Rect scrollBounds = new Rect();
+                svContainer.getHitRect(scrollBounds);
+
+                if(llLeftoverMenu.getLocalVisibleRect(scrollBounds)){
+                    llDuplikat.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    llDuplikat.setVisibility(View.VISIBLE);
+                }
+            }
+
+
+
+            public boolean isFullyVisible(View v){
+                Rect scrollBounds = new Rect();
+                svContainer.getHitRect(scrollBounds);
+
+                float top = v.getY();
+                float bottom = top + v.getHeight();
+
+                Log.d("fh bounds and menu", top + " " + bottom +
+                        " " + scrollBounds.top + " " + scrollBounds.bottom +
+                        " " + svContainer.getTop() + " " + (svContainer.getTop() + svContainer.getHeight()));
+
+                if (scrollBounds.top <= top && scrollBounds.bottom >= bottom) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+
 
         ImagePagerAdapter viewPagerAdapter = new ImagePagerAdapter(ctx, 4, new Bitmap[]{
                 ((BitmapDrawable) ctx.getResources().getDrawable(R.drawable.promo_dummy1)).getBitmap(),
