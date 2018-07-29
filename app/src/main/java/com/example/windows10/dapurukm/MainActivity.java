@@ -425,7 +425,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
             if(presenter.isLogin())changePage(MainActivity.PAGE_PROFILE);
             else changePage(MainActivity.PAGE_INFORMASI_DATA);
         } else if (id == R.id.menu_penjualan) {
-            Log.d("NAVIGATIONDRAWER","PENJUALAN");
+//            Log.d("NAVIGATIONDRAWER","PENJUALAN");
+            changePage(PAGE_SHOPPING_CART);
         }else if (id == R.id.menu_keluar) {
             Log.d("NAVIGATIONDRAWER","KELUAR");
             presenter.saveItemInCart(getSavedProducts());
