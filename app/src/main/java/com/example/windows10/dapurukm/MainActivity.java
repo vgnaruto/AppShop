@@ -134,7 +134,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
                     case 3:
                         break;
                     case 4:
-                        changePage(MainActivity.PAGE_PROFILE);
+                        if(presenter.isLogin())changePage(MainActivity.PAGE_PROFILE);
+                        else changePage(MainActivity.PAGE_INFORMASI_DATA);
                         break;
                 }
             }
@@ -421,7 +422,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
             Log.d("NAVIGATIONDRAWER","FAVORIT");
         } else if (id == R.id.menu_lihat_profile) {
 //            Log.d("NAVIGATIONDRAWER","LIHAT PROFILE");
-            changePage(PAGE_PROFILE);
+            if(presenter.isLogin())changePage(MainActivity.PAGE_PROFILE);
+            else changePage(MainActivity.PAGE_INFORMASI_DATA);
         } else if (id == R.id.menu_penjualan) {
             Log.d("NAVIGATIONDRAWER","PENJUALAN");
         }else if (id == R.id.menu_keluar) {

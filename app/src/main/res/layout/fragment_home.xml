@@ -1,260 +1,445 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
     <RelativeLayout
-        android:gravity="center_vertical"
         android:id="@+id/ll_search"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:background="@drawable/border_with_shadow_orange"
+        android:gravity="center_vertical"
         android:paddingBottom="@dimen/_3sdp"
         android:paddingLeft="@dimen/_10sdp"
         android:paddingRight="@dimen/_10sdp"
         android:paddingTop="@dimen/_3sdp">
+
         <ImageButton
             android:id="@+id/btn_navigation"
-            android:layout_gravity="center_vertical"
             android:layout_width="@dimen/_23sdp"
             android:layout_height="@dimen/_23sdp"
-            android:src="@drawable/ic_navigation"
-            android:scaleType="fitCenter"
-            android:layout_marginRight="@dimen/_8sdp"
             android:layout_centerVertical="true"
-            android:background="@null"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_navigation" />
+
         <com.mancj.materialsearchbar.MaterialSearchBar
+            android:id="@+id/search_bar"
+            style="@style/MaterialSearchBarLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_toRightOf="@id/btn_navigation"
-            style="@style/MaterialSearchBarLight"
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            app:mt_hint="Kerajinan Rakyat | Cari"
             app:mt_maxSuggestionsCount="10"
-            app:mt_roundedSearchBarEnabled="true"
-            app:mt_hint="Kerajinan Rakyat | Cari" />
-        <!--<TextView-->
-            <!--android:id="@+id/tv_hint_search_bar"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Kerajinan Rakyat | Cari"-->
-            <!--android:paddingLeft="@dimen/_10sdp"-->
-            <!--android:textSize="@dimen/_14sdp"-->
-            <!--android:layout_alignLeft="@id/search_bar"/>-->
+            app:mt_roundedSearchBarEnabled="true" />
     </RelativeLayout>
 
     <ScrollView
+        android:id="@+id/sv_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ll_search"
         android:layout_above="@id/llmenu"
+        android:layout_below="@id/ll_search"
         android:fillViewport="true">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <android.support.v4.view.ViewPager
-                    android:background="@color/white"
-                    android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_160sdp" />
-                <me.relex.circleindicator.CircleIndicator
-                    android:id="@+id/indicator"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_alignBottom="@id/viewPager" />
-            </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_47sdp"
-                android:background="@drawable/border_with_shadow"
-                android:elevation="10dp"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/_5sdp"
-                android:paddingTop="@dimen/_5sdp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/viewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_160sdp"
+                        android:background="@color/white" />
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_alignBottom="@id/viewPager" />
+                </RelativeLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <ImageButton
-                            android:id="@+id/button_kategori"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:scaleType="fitCenter"
-                            android:background="@null"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_categories" />
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_47sdp"
+                    android:background="@drawable/border_with_shadow"
+                    android:elevation="10dp"
+                    android:layout_below="@id/ll_search"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:id="@+id/ll_leftover_menu">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Kategori"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentBottom="true"/>
-                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:id="@+id/button_kategori"
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@null"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_categories" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Kategori"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10sdp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:id="@+id/button_event"
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@null"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_event" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Event"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10sdp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:id="@+id/button_kurs"
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@null"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_kurs" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Kurs"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10sdp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:id="@+id/button_komoditi"
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@null"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_event" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Info Komoditi"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:id="@+id/button_loker"
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@null"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_categories" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Loker"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10sdp" />
+                        </RelativeLayout>
+                    </LinearLayout>
                 </LinearLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/white">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
                     <RelativeLayout
+                        android:id="@+id/rl_top"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <ImageButton
-                            android:id="@+id/button_event"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:scaleType="fitCenter"
-                            android:background="@null"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_event" />
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_bottom_thin"
+                        android:paddingBottom="@dimen/_4sdp"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_4sdp">
 
                         <TextView
+                            android:id="@+id/tv_judul_kategori"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Event"
+                            android:text="Produk"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentBottom="true"/>
-                    </RelativeLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <ImageButton
-                            android:id="@+id/button_kurs"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:scaleType="fitCenter"
-                            android:background="@null"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_kurs" />
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tv_clear"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Kurs"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentBottom="true"/>
+                            android:layout_alignParentRight="true"
+                            android:paddingRight="@dimen/_8sdp"
+                            android:text="bersihkan"
+                            android:textSize="@dimen/_12sdp" />
                     </RelativeLayout>
-                </LinearLayout>
 
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <ImageButton
-                            android:id="@+id/button_komoditi"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:scaleType="fitCenter"
-                            android:background="@null"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_event" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Info Komoditi"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentBottom="true"/>
-                    </RelativeLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <ImageButton
-                            android:id="@+id/button_loker"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:scaleType="fitCenter"
-                            android:background="@null"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_categories" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Loker"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentBottom="true"/>
-                    </RelativeLayout>
-                </LinearLayout>
+                    <com.example.windows10.dapurukm.ExpandableHeightGridView
+                        android:id="@+id/grid_view"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rl_top"
+                        android:gravity="center"
+                        android:numColumns="2" />
+                </RelativeLayout>
             </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_47sdp"
+        android:background="@drawable/border_with_shadow"
+        android:elevation="10dp"
+        android:layout_below="@id/ll_search"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/_5sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:id="@+id/ll_duplicate"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/white">
-                <RelativeLayout
-                    android:id="@+id/rl_top"
-                    android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@id/button_kategori"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_categories" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/_4sdp"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:paddingTop="@dimen/_4sdp"
-                    android:background="@drawable/border_bottom_thin">
-                    <TextView
-                        android:id="@+id/tv_judul_kategori"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Produk"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/tv_clear"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:text="bersihkan"
-                        android:textSize="@dimen/_12sdp"
-                        android:paddingRight="@dimen/_8sdp"/>
-                </RelativeLayout>
-                <com.example.windows10.dapurukm.ExpandableHeightGridView
-                    android:id="@+id/grid_view"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/rl_top"
-                    android:gravity="center"
-                    android:numColumns="2"/>
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="Kategori"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
             </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@id/button_event"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_event" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="Event"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@id/button_kurs"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_kurs" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="Kurs"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@id/button_komoditi"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_event" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="Info Komoditi"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8sdp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@id/button_loker"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_categories" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="Loker"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
 </RelativeLayout>
