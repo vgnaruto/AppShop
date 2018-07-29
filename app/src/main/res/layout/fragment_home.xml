@@ -301,7 +301,7 @@
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:id="@id/button_kategori"
+                    android:id="@+id/button_kategori_duplicate"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_centerHorizontal="true"
@@ -331,7 +331,7 @@
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:id="@id/button_event"
+                    android:id="@+id/button_event_duplicate"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_centerHorizontal="true"
@@ -361,7 +361,7 @@
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:id="@id/button_kurs"
+                    android:id="@+id/button_kurs_duplicate"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_centerHorizontal="true"
@@ -391,7 +391,7 @@
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:id="@id/button_komoditi"
+                    android:id="@+id/button_komoditi_duplicate"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_centerHorizontal="true"
@@ -421,7 +421,7 @@
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:id="@id/button_loker"
+                    android:id="@+id/button_loker_duplicate"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_centerHorizontal="true"
@@ -440,6 +440,4 @@
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
-
-
 </RelativeLayout>

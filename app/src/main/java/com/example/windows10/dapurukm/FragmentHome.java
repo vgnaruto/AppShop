@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.annotation.Dimension;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,8 +34,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
     private ImageButton btnNavigation;
     private TextView tvJudulKategori,tvClear;
     private ImageButton btnKategori,btnEvent,btnKurs,btnKomoditi,btnLoker;
+    private ImageButton btnKategoriDuplicate,btnEventDuplicate,btnKursDuplicate,btnKomoditiDuplicate,btnLokerDuplicate;
     private MaterialSearchBar searchBar;
-    private LinearLayout llDuplikat, llLeftoverMenu;
+    private LinearLayout llDuplikat, llNormal;
     private RelativeLayout llSearch;
     private ScrollView svContainer;
 
@@ -67,23 +67,31 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
         newsPager = view.findViewById(R.id.viewPager);
         tvJudulKategori = view.findViewById(R.id.tv_judul_kategori);
         btnNavigation = view.findViewById(R.id.btn_navigation);
+
         btnKategori = view.findViewById(R.id.button_kategori);
         btnEvent = view.findViewById(R.id.button_event);
         btnKurs = view.findViewById(R.id.button_kurs);
         btnKomoditi = view.findViewById(R.id.button_komoditi);
         btnLoker = view.findViewById(R.id.button_loker);
+
+        btnKategoriDuplicate = view.findViewById(R.id.button_kategori_duplicate);
+        btnEventDuplicate = view.findViewById(R.id.button_event_duplicate);
+        btnKursDuplicate = view.findViewById(R.id.button_kurs_duplicate);
+        btnKomoditiDuplicate = view.findViewById(R.id.button_komoditi_duplicate);
+        btnLokerDuplicate = view.findViewById(R.id.button_loker_duplicate);
+
         tvClear = view.findViewById(R.id.tv_clear);
         searchBar = view.findViewById(R.id.search_bar);
 
         llDuplikat = view.findViewById(R.id.ll_duplicate);
-        llLeftoverMenu = view.findViewById(R.id.ll_leftover_menu);
+        llNormal = view.findViewById(R.id.ll_leftover_menu);
         svContainer = view.findViewById(R.id.sv_container);
         llSearch = view.findViewById(R.id.ll_search);
 
         svContainer.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override
             public void onScrollChanged() {
-                /*if(isFullyVisible(llLeftoverMenu)){
+                /*if(isFullyVisible(llNormal)){
                     llDuplikat.setVisibility(View.INVISIBLE);
                 }
                 else{
@@ -94,7 +102,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
                 svContainer.getHitRect(scrollBounds);
 
                 int[] location = new int[2];
-                llLeftoverMenu.getLocationOnScreen(location);
+                llNormal.getLocationOnScreen(location);
                 Log.d("SCROLL",location[1]+" "+llSearch.getY()+" "+llSearch.getMeasuredHeight());
                 if(location[1] <= llSearch.getMeasuredHeight()+70){
                     llDuplikat.setVisibility(View.VISIBLE);
@@ -102,15 +110,13 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
                     llDuplikat.setVisibility(View.INVISIBLE);
                 }
 
-//                if(llLeftoverMenu.getLocalVisibleRect(scrollBounds)){
+//                if(llNormal.getLocalVisibleRect(scrollBounds)){
 //                    llDuplikat.setVisibility(View.INVISIBLE);
 //                }
 //                else{
 //                    llDuplikat.setVisibility(View.VISIBLE);
 //                }
             }
-
-
 
             public boolean isFullyVisible(View v){
                 Rect scrollBounds = new Rect();
@@ -156,6 +162,13 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
         btnKurs.setOnClickListener(this);
         btnKomoditi.setOnClickListener(this);
         btnLoker.setOnClickListener(this);
+
+        btnKategoriDuplicate.setOnClickListener(this);
+        btnEventDuplicate.setOnClickListener(this);
+        btnKursDuplicate.setOnClickListener(this);
+        btnKomoditiDuplicate.setOnClickListener(this);
+        btnLokerDuplicate.setOnClickListener(this);
+
         tvClear.setOnClickListener(this);
         return view;
     }
@@ -188,15 +201,15 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if(v == btnNavigation){
             ctx.openDrawer();
-        }else if(v == btnKategori){
+        }else if(v == btnKategori || v == btnKategoriDuplicate){
             ctx.changePage(MainActivity.PAGE_KATEGORI);
-        }else if(v == btnEvent){
+        }else if(v == btnEvent || v == btnEventDuplicate){
 
-        }else if(v == btnKurs){
+        }else if(v == btnKurs || v == btnKursDuplicate){
 
-        }else if(v == btnKomoditi){
+        }else if(v == btnKomoditi || v == btnKomoditiDuplicate){
 
-        }else if(v == btnLoker){
+        }else if(v == btnLoker || v == btnLokerDuplicate){
 
         }else if(v == tvClear){
             setSelectedKategori("");
