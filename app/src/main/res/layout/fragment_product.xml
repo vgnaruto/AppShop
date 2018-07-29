@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/_15sdp"
                 android:paddingTop="@dimen/_5sdp"
-                android:text="Price"
+                android:text="Harga"
                 android:background="@color/light_gray"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11sdp" />
@@ -155,7 +155,7 @@
                         android:layout_width="@dimen/_90sdp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:text="Weight"
+                        android:text="Berat"
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14sdp" />
@@ -185,7 +185,7 @@
                         android:layout_width="@dimen/_90sdp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:text="Total Order"
+                        android:text="Jumlah yang dibeli"
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14sdp" />
@@ -271,7 +271,7 @@
                         android:layout_width="@dimen/_90sdp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:text="Seller"
+                        android:text="Penjual"
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14sdp" />
@@ -311,7 +311,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Product Details"
+                        android:text="Keterangan Produk"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_13sdp"
                         android:textStyle="bold" />

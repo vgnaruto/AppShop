@@ -83,7 +83,7 @@
         android:paddingLeft="@dimen/_15sdp"
         android:paddingRight="@dimen/_15sdp"
         android:paddingTop="@dimen/_7sdp"
-        android:text="Notes for seller"
+        android:text="@string/catatan_untuk_penjual"
         android:textColor="@color/black"
         android:textStyle="bold" />
 

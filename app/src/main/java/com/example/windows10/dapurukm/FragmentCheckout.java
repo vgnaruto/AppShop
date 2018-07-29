@@ -45,8 +45,6 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
     private int administrationFee;
     private static boolean flag = false;
 
-    private int index =0;
-
     public FragmentCheckout(){
 
     }
@@ -202,13 +200,7 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
         tvTotalOrder.setText(presenter.formatRupiah(adapter.getTotal()));
         tvExpeditionFee.setText(presenter.formatRupiah(adapter.getTotalShipping()));
         tvTotalPayment.setText(presenter.formatRupiah(adapter.getTotal()+adapter.getTotalShipping()+administrationFee));
-        if((adapter.getCount()-1) == index){
-            index++;
-            checkoutButton.setEnabled(false);
-        }else {
-            checkoutButton.setEnabled(true);
-            index = 0;
-        }
+        checkoutButton.setEnabled(true);
     }
     public String formatPesan(Bank selected){
         User currentUser = presenter.getUser();

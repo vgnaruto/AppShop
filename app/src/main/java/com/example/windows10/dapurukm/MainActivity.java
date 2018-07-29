@@ -415,11 +415,13 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         if (id == R.id.menu_notifikasi) {
             Log.d("NAVIGATIONDRAWER","NOTIFIKASI");
         } else if (id == R.id.menu_transaksi) {
-            Log.d("NAVIGATIONDRAWER","TRANSAKSI");
+//            Log.d("NAVIGATIONDRAWER","TRANSAKSI");
+            changePage(PAGE_SHOPPING_CART);
         } else if (id == R.id.menu_favorit) {
             Log.d("NAVIGATIONDRAWER","FAVORIT");
         } else if (id == R.id.menu_lihat_profile) {
-            Log.d("NAVIGATIONDRAWER","LIHAT PROFILE");
+//            Log.d("NAVIGATIONDRAWER","LIHAT PROFILE");
+            changePage(PAGE_PROFILE);
         } else if (id == R.id.menu_penjualan) {
             Log.d("NAVIGATIONDRAWER","PENJUALAN");
         }else if (id == R.id.menu_keluar) {

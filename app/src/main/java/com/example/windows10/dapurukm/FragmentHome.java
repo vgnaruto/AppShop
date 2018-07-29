@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mancj.materialsearchbar.MaterialSearchBar;
+
 import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -28,6 +30,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
     private ImageButton btnNavigation;
     private TextView tvJudulKategori,tvClear;
     private ImageButton btnKategori,btnEvent,btnKurs,btnKomoditi,btnLoker;
+    private MaterialSearchBar searchBar;
 
     private MainPresenter presenter;
     private String selectedKategori = "";
@@ -52,6 +55,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         newsPager = view.findViewById(R.id.viewPager);
         tvJudulKategori = view.findViewById(R.id.tv_judul_kategori);
         btnNavigation = view.findViewById(R.id.btn_navigation);
@@ -61,6 +65,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
         btnKomoditi = view.findViewById(R.id.button_komoditi);
         btnLoker = view.findViewById(R.id.button_loker);
         tvClear = view.findViewById(R.id.tv_clear);
+        searchBar = view.findViewById(R.id.search_bar);
 
         ImagePagerAdapter viewPagerAdapter = new ImagePagerAdapter(ctx, 4, new Bitmap[]{
                 ((BitmapDrawable) ctx.getResources().getDrawable(R.drawable.promo_dummy1)).getBitmap(),
@@ -87,7 +92,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener{
         btnKomoditi.setOnClickListener(this);
         btnLoker.setOnClickListener(this);
         tvClear.setOnClickListener(this);
-
         return view;
     }
 

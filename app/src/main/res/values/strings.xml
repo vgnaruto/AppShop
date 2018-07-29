@@ -1,16 +1,15 @@
 <resources>
     <string name="app_name">Dapur UKM</string>
     <string name="API_KEY">8fed1a260ee55c265268ac137f7954dd</string>
-    <string name="catatan_untuk_penjual">Catatan untuk penjual</string>
-    <string name="shippingagent">Shipping\nAgent</string>
-    <string name="shipping_cost">Shipping\nCost</string>
+    <string name="shippingagent">Jenis\nPengiriman</string>
+    <string name="shipping_cost">Biaya\nPengiriman</string>
     <string name="subtotal">Subtotal</string>
     <string name="alamat_dummy">Vincent\n\nJln Abc No 123, Andir, Bandung\nJawa Barat, 40181,\n0822123456789</string>
-    <string name="ShippingType">Shipping\nService</string>
-
+    <string name="ShippingType">Jasa\nPengiriman</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="username_email">plokijuhygtfrdeswaqzxcvbnmm@gmail.com</string>
     <string name="password_email">1qaz2wsx..</string>
     <string name="text_transfer">Silahkan lakukan transfer ke rekening %1$s atas nama %2$s dengan total sebesar %3$s melalui bank %4$s.</string>
+    <string name="catatan_untuk_penjual">Catatan untuk penjual</string>
 </resources>

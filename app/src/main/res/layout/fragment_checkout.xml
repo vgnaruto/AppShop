@@ -68,7 +68,7 @@
                         android:layout_margin="@dimen/_2sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Address"
+                        android:text="Alamat Penerima"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="@dimen/_12sdp"
@@ -121,7 +121,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="Total Order"
+                        android:text="Total biaya"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_15sdp" />
 
@@ -146,7 +146,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="Expedition Fee"
+                        android:text="Biaya pengiriman"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_15sdp" />
 
@@ -171,7 +171,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="Administration Fee"
+                        android:text="Biaya administrasi"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_15sdp" />
 
@@ -196,7 +196,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="Total Payment"
+                        android:text="Total pembayaran"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_15sdp"
                         android:textStyle="bold" />
