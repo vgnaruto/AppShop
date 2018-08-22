@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_with_shadow">
+    <LinearLayout
+        android:id="@+id/lltop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom_thin"
+        android:gravity="center_vertical"
+        android:paddingTop="@dimen/_4sdp"
+        android:paddingBottom="@dimen/_4sdp">
+        <TextView
+            android:id="@+id/nama_perus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Nutrimart"
+            android:layout_weight="7"
+            android:paddingLeft="@dimen/_20sdp"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/black"/>
+        <ImageButton
+            android:id="@+id/trash_btn"
+            android:background="@null"
+            android:src="@drawable/ic_trash"
+            android:scaleType="fitCenter"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_alignParentRight="true"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lltop"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/gambar_prod"
+            android:layout_width="@dimen/_95sdp"
+            android:layout_height="@dimen/_95sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_2sdp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/gambar_prod">
+
+            <TextView
+                android:id="@+id/nama_prod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:text="TROPICANA SLIM CORN OIL COL 946ML"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp" />
+
+            <LinearLayout
+                android:id="@+id/llkotak"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_below="@id/nama_prod"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/layout_bg">
+
+                <TextView
+                    android:id="@+id/total_prod"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textSize="@dimen/_20sdp"
+                    android:textColor="@color/black"/>
+
+                <ImageButton
+                    android:id="@+id/btn_min"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:background="@drawable/border_left_thin"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_min" />
+
+                <ImageButton
+                    android:id="@+id/btn_add"
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:background="@drawable/border_left_thin"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_add" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/harga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llkotak"
+                android:text="Rp 765.000"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/_15sdp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

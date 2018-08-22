@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
     private Spinner spinnerProvinsi, spinnerKabupaten;
     private ImageButton backButton;
     private Button simpanButton;
+    private RadioButton pembeliRButton, penjualRButton;
 
     private ArrayList<Provinsi> listProvinsi = new ArrayList<>();
     private ArrayList<Kabupaten> listKabupaten = new ArrayList<>();
@@ -78,6 +80,9 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
 
         spinnerProvinsi = view.findViewById(R.id.spinner_provinsi);
         spinnerKabupaten = view.findViewById(R.id.spinner_kabupaten);
+
+        pembeliRButton = view.findViewById(R.id.radio_pembeli);
+        penjualRButton = view.findViewById(R.id.radio_penjual);
 
         String apiKey = getResources().getString(R.string.API_KEY);
         presenter.getProvinsi("https://api.rajaongkir.com/starter/province?key=" + apiKey, 0);
@@ -140,12 +145,19 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
                 String email = etEmail.getText().toString();
                 Provinsi provinsi = listProvinsi.get(spinnerProvinsi.getSelectedItemPosition());
                 Kabupaten kabupaten = listKabupaten.get(spinnerKabupaten.getSelectedItemPosition());
-                User user = new User(nama, alamat, provinsi, kabupaten, kodePos, noTelepon, email);
+                User user;
+                if(penjualRButton.isChecked()){
+                    user = new User(nama, alamat, provinsi, kabupaten, kodePos, noTelepon, email, true);
+                }
+                else{
+                    user = new User(nama, alamat, provinsi, kabupaten, kodePos, noTelepon, email, false);
+                }
                 presenter.setUser(user);
                 presenter.saveUser();
 
                 ctx.notifyUserChanged();
                 ctx.getFragmentProfile().notifyUserChanged();
+                ctx.hideAddProductMenu();
 
                 Toast toast = Toast.makeText(ctx, "Berhasil daftar!", Toast.LENGTH_SHORT);
                 toast.show();
@@ -172,6 +184,9 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
             return false;
         }
         if(!isValidEmail(etEmail.getText())){
+            return false;
+        }
+        if(!pembeliRButton.isChecked() && !penjualRButton.isChecked()){
             return false;
         }
         return true;

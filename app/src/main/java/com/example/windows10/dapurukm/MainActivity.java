@@ -1,5 +1,6 @@
 package com.example.windows10.dapurukm;
 
+import android.opengl.Visibility;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     private FragmentCheckout fragmentCheckout;
     private FragmentProfile fragmentProfile;
     private FragmentKategori fragmentKategori;
+    private FragmentInputBarang fragmentInputBarang;
+    private FragmentManageItem fragmentManageItem;
 
     private MainPresenter presenter;
     private ArrayList<Product> allProduct;
@@ -56,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     public static int PAGE_CHECKOUT = 4;
     public static int PAGE_KATEGORI = 5;
     public static int PAGE_PROFILE = 11;
+    public static int PAGE_INPUT_BARANG = 12;
+    public static int PAGE_MANAGE_ITEM = 13;
 
     public static MainActivity instance;
     private Product selected;
@@ -88,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         fragmentCheckout = FragmentCheckout.newInstance(this, "CHECKOUT FRAGMENT");
         fragmentProfile = FragmentProfile.newInstance(this, "PROFILE FRAGMENT");
         fragmentKategori = FragmentKategori.newInstance(this, "KATEGORI FRAGMENT");
+        fragmentInputBarang  = FragmentInputBarang.newInstance(this, "INPUT BARANG FRAGMENT");
+        fragmentManageItem = FragmentManageItem.newInstance(this, "MANAGE ITEM FRAGMENT");
 
         fragments.add(fragmentHome);
         fragments.add(fragmentProduct);
@@ -96,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         fragments.add(fragmentCheckout);
         fragments.add(fragmentKategori);
         fragments.add(fragmentProfile);
+        fragments.add(fragmentInputBarang);
+        fragments.add(fragmentManageItem);
 
         frameLayout = findViewById(R.id.fragment_container);
 
@@ -176,8 +186,43 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         this.index = new HashMap<>();
         allProduct = DataDummy.getProduct();
         for (int i = 0; i < allProduct.size(); i++) {
-            this.index.put(allProduct.get(i).getSeller().getName() + "-" + allProduct.get(i).getNama(), allProduct.get(i));
+            createHash(allProduct.get(i));
         }
+
+        hideAddProductMenu();
+        Log.d("MA12345", "onCreate terus-terusan");
+    }
+
+    public void hideAddProductMenu(){
+        if(!presenter.getUser().isPenjual()){
+            navigationView.getMenu().findItem(R.id.menu_atur_barang).setVisible(false);
+        }
+        else{
+            navigationView.getMenu().findItem(R.id.menu_atur_barang).setVisible(true);
+        }
+    }
+
+    public HashMap<String, Product> getIndex() {
+        return index;
+    }
+
+    public void createHash(Product product){
+        this.index.put(product.getSeller().getName() + "-" + product.getNama(), product);
+    }
+
+    public void removeHash(String productKey){
+        if(this.index.containsKey(productKey))
+        this.index.remove(productKey);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_main_drawer, menu);
+
+        Log.d("MA12345", "onCreate belakangan menu");
+        //menu.getItem(R.id.menu_atur_barang).setVisible(false);
+        return true;
     }
 
     public ArrayList<Product> getAllProduct() {
@@ -202,6 +247,10 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         fragmentCheckout.notifData();
         //fm.saveFile(fragmentShoppingCart.getAdapter().getSavedProducts());
         //Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void notifyManageItem() {
+        fragmentManageItem.notifData();
     }
 
     public void notifyHome(){
@@ -276,6 +325,22 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
                 ft.add(R.id.fragment_container, fragmentKategori).addToBackStack("fragment_kategori");
             }
             hideOtherFrag(fragmentKategori, ft);
+        } else if(page == PAGE_INPUT_BARANG){
+            hideNavBar();
+            if (fragmentInputBarang.isAdded()) {
+                ft.show(fragmentInputBarang);
+            } else {
+                ft.add(R.id.fragment_container, fragmentInputBarang).addToBackStack("fragment_input_barang");
+            }
+            hideOtherFrag(fragmentInputBarang, ft);
+        } else if(page == PAGE_MANAGE_ITEM){
+            hideNavBar();
+            if (fragmentManageItem.isAdded()) {
+                ft.show(fragmentManageItem);
+            } else {
+                ft.add(R.id.fragment_container, fragmentManageItem).addToBackStack("fragment_manage_item");
+            }
+            hideOtherFrag(fragmentManageItem, ft);
         }
         ft.commit();
     }
@@ -360,7 +425,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         Log.d("Main", "onPause12345");
         super.onPause();
         presenter.saveItemInCart(fragmentShoppingCart.getAdapter().getSavedProducts());
-        Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -439,6 +504,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
             Log.d("NAVIGATIONDRAWER","LOWONGAN KERJA");
         }else if (id == R.id.menu_trending_topic) {
             Log.d("NAVIGATIONDRAWER","TRENDING TOPIC");
+        }else if (id == R.id.menu_atur_barang) {
+            changePage(PAGE_MANAGE_ITEM);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -495,5 +562,18 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
 
     public void setSelectedKategori(String kategori){
         fragmentHome.setSelectedKategori(kategori);
+    }
+
+    public void addProduct(Product newProduct){
+        this.allProduct.add(newProduct);
+    }
+
+    public FragmentInputBarang getFragmentInputBarang() {
+        return fragmentInputBarang;
+    }
+
+    public void addProducttoSeller(Product newProduct){
+        fragmentManageItem.addProduct(newProduct);
+        fragmentManageItem.addProductHash(newProduct);
     }
 }

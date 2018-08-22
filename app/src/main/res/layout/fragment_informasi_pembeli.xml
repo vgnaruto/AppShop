@@ -68,7 +68,7 @@
                     app:met_textColor="@color/black"
                     app:met_floatingLabelTextColor="@color/purple"
                     app:met_underlineColor="@color/purple"
-                    android:hint="Nama Penerima"/>
+                    android:hint="Nama"/>
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/etAlamat"
                     android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                     app:met_textColor="@color/black"
                     app:met_floatingLabelTextColor="@color/purple"
                     app:met_underlineColor="@color/purple"
-                    android:hint="Alamat Penerima"/>
+                    android:hint="Alamat"/>
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                     app:met_textColor="@color/black"
                     app:met_floatingLabelTextColor="@color/purple"
                     app:met_underlineColor="@color/purple"
-                    android:hint="E-mail Penerima"/>
+                    android:hint="E-mail"/>
             </LinearLayout>
             <LinearLayout
                 android:background="@drawable/border_with_shadow"
@@ -158,6 +158,23 @@
                     android:inputType="number"
                     android:hint="Nomor Telepon Penerima"/>
             </LinearLayout>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton android:id="@+id/radio_pembeli"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pembeli"
+                    android:layout_weight="1"/>
+                <RadioButton android:id="@+id/radio_penjual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Penjual"
+                    android:layout_weight="1"/>
+            </RadioGroup>
+
             <Button
                 android:id="@+id/btn_simpan"
                 android:layout_width="match_parent"
@@ -167,6 +184,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"
                 android:padding="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_20sdp"/>
         </LinearLayout>
     </ScrollView>

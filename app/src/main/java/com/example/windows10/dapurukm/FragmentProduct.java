@@ -167,7 +167,7 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
             if(selected.isInCart()){
                 Product replacedSelected = new Product(selected.getFoto(), selected.getHarga(),
                         selected.getNama(), selected.getProductDetails(), selected.getKategori(), selected.getSeller(),
-                        selected.getRating(),Integer.parseInt(selected.getWeight()));
+                        selected.getRating(),Integer.parseInt(selected.getWeight()), selected.getStock());
                 replacedSelected.setInCart(selected.isInCart());
                 replacedSelected.setTotal(selected.getTotal());
                 Log.d("fp12345", "masuk sini");

@@ -12,4 +12,16 @@
     <string name="password_email">1qaz2wsx..</string>
     <string name="text_transfer">Silahkan lakukan transfer ke rekening %1$s atas nama %2$s dengan total sebesar %3$s melalui bank %4$s.</string>
     <string name="catatan_untuk_penjual">Catatan untuk penjual</string>
+
+    <string-array name="category_list">
+        <item>No category selected</item>
+        <item>Kategori 1</item>
+        <item>Kategori 2</item>
+        <item>Kategori 3</item>
+        <item>Kategori 4</item>
+        <item>Kategori 5</item>
+        <item>Kategori 6</item>
+        <item>Kategori 7</item>
+        <item>Kategori 8</item>
+    </string-array>
 </resources>

@@ -16,11 +16,13 @@ public class Product {
     private Seller seller;
     private int rating;
     private int total;
+    private int stock;
+    private double hargaAngka;
     private boolean inCart;
     private String weight;
     private String[] kategori;
 
-    public Product(ArrayList<Bitmap> foto, String harga, String nama, String productDetails, String[] kategori, Seller seller, int rating, int weight) {
+    public Product(ArrayList<Bitmap> foto, String harga, String nama, String productDetails, String[] kategori, Seller seller, int rating, int weight, int stock) {
         this.foto = new ArrayList<>();
         ByteArrayOutputStream baos;
         for (int i = 0; i < foto.size(); i++) {
@@ -38,6 +40,15 @@ public class Product {
         this.total = 1;
         inCart = false;
         this.weight = weight + "";
+        this.stock = stock;
+    }
+
+    public double getHargaAngka() {
+        return hargaAngka;
+    }
+
+    public void setHargaAngka(double hargaAngka) {
+        this.hargaAngka = hargaAngka;
     }
 
     public String getWeight() {
@@ -131,5 +142,13 @@ public class Product {
 
     public void setSeller(Seller seller) {
         this.seller = seller;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }

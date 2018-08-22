@@ -37,7 +37,8 @@ public class DataDummy {
                         new String[]{"Kategori 1","Kategori 2"},
                         new Seller("Nutrimart","Pagedangan, Tangerang"),
                         3,
-                        300),
+                        300,
+                        100),
                 new Product(dummy2,
                         "Rp 5.000",
                         "AQUA AIR PUTIH MINERAL",
@@ -45,7 +46,8 @@ public class DataDummy {
                         new String[]{"Kategori 2","Kategori 4"},
                         new Seller("BIZ MART","Pinang(penang), Tangerang"),
                         4,
-                        150),
+                        150,
+                        100),
                 new Product(dummy3,
                         "Rp 15.000",
                         "BENG BENG COKELAT",
@@ -53,7 +55,8 @@ public class DataDummy {
                         new String[]{"Kategori 3","Kategori 5"},
                         new Seller("Khaira Jaya","Penjaringang, Jakarta Utara"),
                         5,
-                        50),
+                        50,
+                        100),
                 new Product(dummy2,
                         "Rp 3.000",
                         "AIR MINERAL",
@@ -61,7 +64,8 @@ public class DataDummy {
                         new String[]{"Kategori 1","Kategori 4"},
                         new Seller("BIZ MART","Pinang(penang), Tangerang"),
                         4,
-                        150),
+                        150,
+                        5),
                 new Product(dummy1,
                         "Rp 20.000",
                         "BARANG 4",
@@ -69,7 +73,8 @@ public class DataDummy {
                         new String[]{"Kategori 1","Kategori 5"},
                         new Seller("BIZ MART","Pinang(penang), Tangerang"),
                         4,
-                        150)
+                        150,
+                        1)
         };
         ArrayList<Product> result = new ArrayList<>();
         result.addAll(Arrays.asList(products));
