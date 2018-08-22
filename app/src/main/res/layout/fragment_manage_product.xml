@@ -99,6 +99,7 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
 
+        <!--
         <Button
             android:id="@+id/simpan_btn"
             android:layout_width="match_parent"
@@ -106,8 +107,9 @@
             android:paddingTop="@dimen/_7sdp"
             android:background="@color/purple"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="Simpan"
+            android:text="Kembali"
             android:textColor="@color/white"
             android:textSize="@dimen/_18sdp"/>
+            -->
     </LinearLayout>
 </RelativeLayout>

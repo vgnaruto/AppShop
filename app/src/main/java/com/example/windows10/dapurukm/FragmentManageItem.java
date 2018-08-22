@@ -24,7 +24,7 @@ public class FragmentManageItem extends Fragment implements View.OnClickListener
     private MainActivity ctx;
     private ListView listView;
     private ManageItemAdapter adapter;
-    private Button simpanBtn;
+    //private Button simpanBtn;
     private TextView totalBarang;
     private ImageButton backButton;
     private MainPresenter presenter;
@@ -54,9 +54,10 @@ public class FragmentManageItem extends Fragment implements View.OnClickListener
 
         listView = view.findViewById(R.id.list_cart);
         listView.setAdapter(adapter);
+
         adapter.loadProducts();
 
-        simpanBtn = view.findViewById(R.id.simpan_btn);
+        //simpanBtn = view.findViewById(R.id.simpan_btn);
         backButton = view.findViewById(R.id.back_button);
         totalBarang = view.findViewById(R.id.tv_total_items);
         addProductFab = view.findViewById(R.id.fab_add_product);
@@ -65,7 +66,7 @@ public class FragmentManageItem extends Fragment implements View.OnClickListener
 
         addProductFab.setOnClickListener(this);
         backButton.setOnClickListener(this);
-        simpanBtn.setOnClickListener(this);
+        //simpanBtn.setOnClickListener(this);
         return view;
     }
     public void remove(Product product){
@@ -95,21 +96,26 @@ public class FragmentManageItem extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if(v == backButton){
-            ctx.onBackPressed();
-        }else if(v == simpanBtn){
             ArrayList<Product> products = adapter.getProducts();
+            Log.d("FMI", products.size() + "");
             ArrayList<String> productsHash = adapter.getProductsHash();
+            Log.d("FMI", ctx.getIndex().size() + "");
             for (int i = 0; i < products.size(); i++) {
                 Product product = products.get(i);
                 if(ctx.getIndex().containsKey(productsHash.get(i))){
                     ctx.removeHash(productsHash.get(i));
                     ctx.getAllProduct().remove(product);
+                    Log.d("FMI", ctx.getIndex().size() + "");
                 }
                 ctx.addProduct(product);
                 ctx.createHash(product);
+                Log.d("FMI", ctx.getIndex().size() + "");
             }
             ctx.onBackPressed();
         }
+        /*else if(v == simpanBtn){
+            ctx.onBackPressed();
+        }*/
         else if(v == addProductFab){
             ctx.getFragmentInputBarang().fillData(null);
             ctx.changePage(MainActivity.PAGE_INPUT_BARANG);

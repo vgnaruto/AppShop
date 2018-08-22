@@ -84,6 +84,15 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
         pembeliRButton = view.findViewById(R.id.radio_pembeli);
         penjualRButton = view.findViewById(R.id.radio_penjual);
 
+        if(presenter.getUser().isPenjual()){
+            pembeliRButton.setVisibility(View.GONE);
+            penjualRButton.setVisibility(View.GONE);
+        }
+        else{
+            pembeliRButton.setVisibility(View.VISIBLE);
+            penjualRButton.setVisibility(View.VISIBLE);
+        }
+
         String apiKey = getResources().getString(R.string.API_KEY);
         presenter.getProvinsi("https://api.rajaongkir.com/starter/province?key=" + apiKey, 0);
 
@@ -146,11 +155,11 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
                 Provinsi provinsi = listProvinsi.get(spinnerProvinsi.getSelectedItemPosition());
                 Kabupaten kabupaten = listKabupaten.get(spinnerKabupaten.getSelectedItemPosition());
                 User user;
-                if(penjualRButton.isChecked()){
-                    user = new User(nama, alamat, provinsi, kabupaten, kodePos, noTelepon, email, true);
+                if(pembeliRButton.isChecked()){
+                    user = new User(nama, alamat, provinsi, kabupaten, kodePos, noTelepon, email, false);
                 }
                 else{
-                    user = new User(nama, alamat, provinsi, kabupaten, kodePos, noTelepon, email, false);
+                    user = new User(nama, alamat, provinsi, kabupaten, kodePos, noTelepon, email, true);
                 }
                 presenter.setUser(user);
                 presenter.saveUser();
@@ -186,8 +195,10 @@ public class FragmentInformasiData extends Fragment implements View.OnClickListe
         if(!isValidEmail(etEmail.getText())){
             return false;
         }
-        if(!pembeliRButton.isChecked() && !penjualRButton.isChecked()){
-            return false;
+        if(!presenter.getUser().isPenjual()){
+            if(!pembeliRButton.isChecked() && !penjualRButton.isChecked()){
+                return false;
+            }
         }
         return true;
     }

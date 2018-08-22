@@ -64,6 +64,7 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
     private ArrayList<String> kategori;
 
     private Product product;
+
     private MainPresenter presenter;
 
     public FragmentInputBarang() {
@@ -151,14 +152,23 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
         return view;
     }
 
+    public void onResume(){
+        super.onResume();
+        fillData(this.product);
+    }
+
     public void fillData(Product product){
+        Log.d("FIB", "called");
+        this.product = product;
         if(product != null){
+            Log.d("FIB", product.getNama());
             this.gambar = product.getFoto();
+            Log.d("FIB", "called 2");
             this.imageButtonGambarProduk.setImageBitmap(this.gambar.get(0));
             this.etNama.setText(product.getNama());
             this.etHarga.setText(product.getHargaAngka() + "");
             this.etBerat.setText(product.getWeight());
-            this.etKuantitas.setText(product.getStock());
+            this.etKuantitas.setText(product.getStock() + "");
             this.etKeterangan.setText(product.getProductDetails());
             String[] kategori = product.getKategori();
             for (int i = 0; i < kategori.length; i++) {
@@ -173,6 +183,14 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v == backButton) {
+            this.etNama.setText("");
+            this.etHarga.setText("");
+            this.etBerat.setText("");
+            this.etKuantitas.setText("");
+            this.etKeterangan.setText("");
+            this.spKategori.setSelection(0);
+            this.llKategori.removeAllViews();
+            Log.d("FIB", "called 3");
             ctx.onBackPressed();
         } else if (v == simpanButton) {
             if (isDataValid()) {
@@ -195,15 +213,36 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
                 double hargaAngka = Double.parseDouble(harga);
                 Product newProduct = new Product(gambar, presenter.formatRupiah(hargaAngka), nama, keterangan, savedCategory, penjual, 0, berat, kuantitas);
                 newProduct.setHargaAngka(hargaAngka);
+                if(this.product != null){
+                    ctx.removeProducttoSeller(this.product);
+                    ctx.getAllProduct().remove(this.product);
+                    ctx.removeHash(this.product.getSeller().getName() + "-" + this.product.getNama());
+                }
                 ctx.addProducttoSeller(newProduct);
+                ctx.notifyManageItem();
                 //ctx.createHash(newProduct);
 
-                this.etNama.setHint(etNama.getHint());
-                this.etHarga.setHint(etHarga.getHint());
+
+                /*if(this.product != null){
+                    ctx.getAllProduct().remove(this.product);
+                }
+                ctx.addProduct(newProduct);
+                */
+
+                this.etNama.setText("");
+                this.etHarga.setText("");
+                this.etBerat.setText("");
+                this.etKuantitas.setText("");
+                this.etKeterangan.setText("");
+                this.spKategori.setSelection(0);
+                this.llKategori.removeAllViews();
+                Log.d("FIB", "called 4");
+
+                /*this.etHarga.setHint(etHarga.getHint());
                 this.etBerat.setHint(etBerat.getHint());
                 this.etKuantitas.setHint(etKuantitas.getHint());
                 this.etKeterangan.setHint(etKeterangan.getHint());
-                this.llKategori.removeAllViews();
+                */
 
                 Toast toast = Toast.makeText(ctx, "Berhasil simpan!", Toast.LENGTH_SHORT);
                 toast.show();
@@ -269,11 +308,4 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
         }
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
 }

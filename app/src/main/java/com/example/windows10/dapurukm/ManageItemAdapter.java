@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +17,7 @@ import java.util.HashMap;
 
 public class ManageItemAdapter extends BaseAdapter {
     private MainActivity ui;
-    private ArrayList<Product> products = new ArrayList<>();
+    private ArrayList<Product> products;
     private ArrayList<String> productsHash = new ArrayList<>();
     private ViewHolder vh;
     private MainPresenter presenter;
@@ -24,13 +25,14 @@ public class ManageItemAdapter extends BaseAdapter {
     public ManageItemAdapter(MainActivity ui) {
         this.ui = ui;
         presenter = ui.getPresenter();
+        products = new ArrayList<>();
     }
 
     public void loadProducts(){
         ArrayList<Product> allProducts = ui.getAllProduct();
         for (int i = 0; i < allProducts.size(); i++) {
             if(allProducts.get(i).getSeller().equals(presenter.getUser().getSeller())){
-                products.add(allProducts.get(i));
+                if(!products.contains(allProducts.get(i)))products.add(allProducts.get(i));
             }
         }
     }
@@ -68,9 +70,14 @@ public class ManageItemAdapter extends BaseAdapter {
         vh.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //to be removed
+                ui.getAllProduct().remove(products.get(position));
+                ui.removeHash(productsHash.get(position));
                 productsHash.remove(position);
                 products.remove(position);
                 ui.notifyManageItem();
+                ui.notifyHomeFragment();
+
             }
         });
         vh.btnMin.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +97,13 @@ public class ManageItemAdapter extends BaseAdapter {
                 products.get(position).setStock(products.get(position).getStock() + 1);
                 vh.updateView(products.get(position));
                 ui.notifyManageItem();
+            }
+        });
+        vh.rlContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ui.getFragmentInputBarang().fillData(products.get(position));
+                ui.changePage(MainActivity.PAGE_INPUT_BARANG);
             }
         });
         return convertView;
@@ -128,6 +142,7 @@ public class ManageItemAdapter extends BaseAdapter {
         protected TextView totalOrder;
         protected ImageButton btnMin, btnAdd, btnDelete;
         protected ImageView gambarProduct;
+        protected RelativeLayout rlContainer;
 
         public ViewHolder(View v) {
             namaPerus = v.findViewById(R.id.nama_perus);
@@ -138,6 +153,7 @@ public class ManageItemAdapter extends BaseAdapter {
             btnAdd = v.findViewById(R.id.btn_add);
             btnDelete = v.findViewById(R.id.trash_btn);
             gambarProduct = v.findViewById(R.id.gambar_prod);
+            rlContainer = v.findViewById(R.id.rl_item);
         }
 
         public void updateView(Product prod) {

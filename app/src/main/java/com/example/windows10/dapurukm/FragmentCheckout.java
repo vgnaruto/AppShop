@@ -113,6 +113,17 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
         if(v == backButton){
             ctx.onBackPressed();
         }else if(v == checkoutButton){
+            ArrayList<Product> cart = presenter.getProduct();
+            for (int i = 0; i < ctx.getAllProduct().size(); i++) {
+                for (int j = 0; j < cart.size(); j++) {
+                    if(ctx.getAllProduct().get(i).getNama().equals(cart.get(j).getNama()) &&
+                            ctx.getAllProduct().get(i).getSeller().equals(cart.get(j).getSeller())){
+                        ctx.getAllProduct().get(i).setStock(ctx.getAllProduct().get(i).getStock() - cart.get(j).getTotal());
+                        break;
+                    }
+                }
+            }
+
             final NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(ctx);
             final Bank selectedBank = banks[spinnerBank.getSelectedItemPosition()];
             dialogBuilder

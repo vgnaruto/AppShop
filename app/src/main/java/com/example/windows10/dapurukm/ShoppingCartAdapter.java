@@ -114,6 +114,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 int angka = products.get(position).getTotal();
+                if(angka >= products.get(position).getStock())angka = products.get(position).getStock() - 1;
                 products.get(position).setTotal(angka+1);
                 String toBeSaved = savedProducts.get(position).substring(
                         0, savedProducts.get(position).lastIndexOf('-') + 1);

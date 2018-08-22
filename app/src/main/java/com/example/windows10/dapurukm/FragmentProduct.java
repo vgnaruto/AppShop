@@ -24,7 +24,7 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
     private MainActivity ctx;
     private ViewPager imagePager;
     private ImageButton backButton, btnAdd, btnMin;
-    private TextView prodNama, prodPrice, prodWeight;
+    private TextView prodNama, prodPrice, prodWeight, prodStock;
     private ImageView[] bintang = new ImageView[5];
     private TextView totalOrder;
     private TextView sellerName, sellerAddress;
@@ -64,6 +64,7 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
         prodNama = view.findViewById(R.id.prod_nama);
         prodPrice = view.findViewById(R.id.prod_price);
         prodWeight = view.findViewById(R.id.prod_weight);
+        prodStock = view.findViewById(R.id.prod_stock);
         prodDeskripsi = (ExpandableTextView) view.findViewById(R.id.expand_tv).findViewById(R.id.expanded_text_view);
         for (int i = 0; i < bintang.length; i++) {
             switch (i) {
@@ -101,6 +102,7 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
         indicator.setViewPager(imagePager);
         imagePager.setAdapter(viewPagerAdapter);
         prodWeight.setText(selected.getWeight()+" gr");
+        prodStock.setText(selected.getStock() + "");
         sellerName.setText(selected.getSeller().getName());
         sellerAddress.setText(selected.getSeller().getAddress());
         prodNama.setText(selected.getNama());
@@ -181,7 +183,9 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
             ctx.changePage(MainActivity.PAGE_SHOPPING_CART);
         }else if(v == btnAdd){
             int angka = Integer.parseInt(totalOrder.getText().toString());
-            totalOrder.setText(angka + 1 + "");
+            if(angka >= selected.getStock()){
+                angka = selected.getStock() - 1;
+            }totalOrder.setText(angka + 1 + "");
             int harga = Integer.parseInt(selected.getHarga().substring(3).replaceAll("\\.", ""));
             int total = Integer.parseInt(totalOrder.getText().toString());
             priceTotal.setText(presenter.formatRupiah(harga * total));

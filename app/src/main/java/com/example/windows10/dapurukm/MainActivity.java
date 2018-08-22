@@ -564,8 +564,13 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         fragmentHome.setSelectedKategori(kategori);
     }
 
+    public void notifyHomeFragment(){
+        fragmentHome.getAdapter().notifyDataSetChanged();
+    }
+
     public void addProduct(Product newProduct){
         this.allProduct.add(newProduct);
+        notifyHomeFragment();
     }
 
     public FragmentInputBarang getFragmentInputBarang() {
@@ -575,5 +580,10 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     public void addProducttoSeller(Product newProduct){
         fragmentManageItem.addProduct(newProduct);
         fragmentManageItem.addProductHash(newProduct);
+    }
+
+    public void removeProducttoSeller(Product newProduct){
+        fragmentManageItem.remove(newProduct);
+        fragmentManageItem.removeHash(newProduct.getSeller().getName() + "-" + newProduct.getNama());
     }
 }
