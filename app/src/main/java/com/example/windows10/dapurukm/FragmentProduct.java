@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.math.BigInteger;
+
 import me.relex.circleindicator.CircleIndicator;
 
 public class FragmentProduct extends Fragment implements View.OnClickListener {
@@ -186,17 +188,23 @@ public class FragmentProduct extends Fragment implements View.OnClickListener {
             if(angka >= selected.getStock()){
                 angka = selected.getStock() - 1;
             }totalOrder.setText(angka + 1 + "");
-            int harga = Integer.parseInt(selected.getHarga().substring(3).replaceAll("\\.", ""));
-            int total = Integer.parseInt(totalOrder.getText().toString());
-            priceTotal.setText(presenter.formatRupiah(harga * total));
+//            int harga = Integer.parseInt(selected.getHarga().substring(3).replaceAll("\\.", ""));
+//            int total = Integer.parseInt(totalOrder.getText().toString());
+            BigInteger harga = new BigInteger(selected.getHarga().substring(3).replaceAll("\\.", ""));
+            harga = harga.multiply(BigInteger.valueOf(Integer.parseInt(totalOrder.getText().toString())));
+//            priceTotal.setText(presenter.formatRupiah(""+(harga * total)));
+            priceTotal.setText(presenter.formatRupiah(harga.toString()));
         }else if(v == btnMin){
             int angka = Integer.parseInt(totalOrder.getText().toString());
             if (angka != 1) {
                 totalOrder.setText(angka - 1 + "");
             }
-            int harga = Integer.parseInt(selected.getHarga().substring(3).replaceAll("\\.", ""));
-            int total = Integer.parseInt(totalOrder.getText().toString());
-            priceTotal.setText(presenter.formatRupiah(harga * total));
+//            int harga = Integer.parseInt(selected.getHarga().substring(3).replaceAll("\\.", ""));
+//            int total = Integer.parseInt(totalOrder.getText().toString());
+            BigInteger harga = new BigInteger(selected.getHarga().substring(3).replaceAll("\\.", ""));
+            harga = harga.multiply(BigInteger.valueOf(Integer.parseInt(totalOrder.getText().toString())));
+//            priceTotal.setText(presenter.formatRupiah(""+(harga * total)));
+            priceTotal.setText(presenter.formatRupiah(harga.toString()));
         }
     }
 }

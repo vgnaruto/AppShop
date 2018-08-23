@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class CheckoutAdapter extends BaseAdapter {
@@ -21,7 +22,7 @@ public class CheckoutAdapter extends BaseAdapter {
     private MainActivity ui;
     private ViewHolder vh;
     private MainPresenter presenter;
-    private ArrayList<Integer> totalOrder;
+    private ArrayList<String> totalOrder;
     private ArrayList<Integer> shippingCost;
     private boolean updateService = false;
     private int currentPosisi = 0;
@@ -35,7 +36,7 @@ public class CheckoutAdapter extends BaseAdapter {
         shippingCost = new ArrayList<>();
         for (int i = 0; i < products.size(); i++) {
             agents.add(null);
-            totalOrder.add(0);
+            totalOrder.add("0");
             shippingCost.add(0);
         }
     }
@@ -97,20 +98,18 @@ public class CheckoutAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public ArrayList<Integer> getTotalOrder() {
+    public ArrayList<String> getTotalOrder() {
         return totalOrder;
     }
 
-    public void setTotalOrder(ArrayList<Integer> totalOrder) {
-        this.totalOrder = totalOrder;
-    }
-
-    public int getTotal() {
-        int result = 0;
-        for (int total : totalOrder) {
-            result += total;
+    public String getTotal() {
+//        int result = 0;
+        BigInteger result = new BigInteger("0");
+        for (String total : totalOrder) {
+//            result += total;
+            result.add(BigInteger.valueOf(Long.parseLong(total)));
         }
-        return result;
+        return result.toString();
     }
 
     public ArrayList<Integer> getShippingCost() {
@@ -185,11 +184,13 @@ public class CheckoutAdapter extends BaseAdapter {
             tvNamaToko.setText(product.getSeller().getName());
             tvJudulProduct.setText(product.getNama());
             tvTotalBarang.setText(product.getTotal() + " pcs");
-            final int total = product.getTotal();
-            final int harga = Integer.parseInt(product.getHarga().substring(3).replaceAll("\\.", ""));
-            tvTotalHarga.setText(presenter.formatRupiah(total * harga));
+//            final int total = product.getTotal();
+//            final int harga = Integer.parseInt(product.getHarga().substring(3).replaceAll("\\.", ""));
+            final BigInteger harga = new BigInteger(product.getHarga().substring(3).replaceAll("\\.", ""));
+            harga.multiply(BigInteger.valueOf(product.getTotal()));
+            tvTotalHarga.setText(presenter.formatRupiah(harga.toString()));
 
-            totalOrder.set(posisi, total * harga);
+            totalOrder.set(posisi,harga.toString());
 
 
             spinnerAgent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -221,14 +222,18 @@ public class CheckoutAdapter extends BaseAdapter {
                             String etd = costs.getCosts()[0].getEtd();
                             etd = etd.replaceAll(" HARI", "");
                             int total = product.getTotal();
-                            int harga = Integer.parseInt(product.getHarga().substring(3).replaceAll("\\.", ""));
+//                            BigInteger harga = Integer.parseInt(product.getHarga().substring(3).replaceAll("\\.", ""));
+                            BigInteger harga = new BigInteger(product.getHarga().substring(3).replaceAll("\\.", ""));
 
                             shippingCost.set(posisi, Integer.parseInt(costs.getCosts()[0].getValue()));
 
                             presenter.notifyCheckout();
                             tvETD.setText(etd + " hari");
-                            tvShippingCost.setText("" + presenter.formatRupiah(Integer.parseInt(costs.getCosts()[0].getValue())));
-                            tvSubtotal.setText(presenter.formatRupiah(total * harga + Integer.parseInt(costs.getCosts()[0].getValue())));
+                            tvShippingCost.setText("" + presenter.formatRupiah(costs.getCosts()[0].getValue()));
+                            harga = harga.multiply(BigInteger.valueOf(total));
+                            harga = harga.add(BigInteger.valueOf(Integer.parseInt(costs.getCosts()[0].getValue())));
+//                            tvSubtotal.setText(presenter.formatRupiah("" + (total * harga + Integer.parseInt(costs.getCosts()[0].getValue()))));
+                            tvSubtotal.setText(presenter.formatRupiah(harga.toString()));
                             flag = 0;
 
                         }

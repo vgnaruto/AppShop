@@ -34,11 +34,11 @@ public class MainPresenter {
         userManager.setUser(saveDataManager.loadUser());
     }
 
-    public String formatRupiah(double angka){
+    public String formatRupiah(String angka){
         String result = "";
         boolean first = true;
-        String angkas = angka+"";
-        angkas = angkas.substring(0,angkas.length()-2);
+        String angkas = angka;
+//        angkas = angkas.substring(0,angkas.length()-2);
         int index = angkas.length();
         while(index > 0){
             int start;

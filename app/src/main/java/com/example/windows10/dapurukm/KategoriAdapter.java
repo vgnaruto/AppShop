@@ -12,9 +12,9 @@ public class KategoriAdapter extends BaseAdapter{
     private ViewHolder vh;
     private MainPresenter presenter;
     private MainActivity activity;
-    private ArrayList<String> listOfKategori;
+    private String[] listOfKategori;
 
-    public KategoriAdapter(ArrayList<String> listOfKategori, MainActivity activity){
+    public KategoriAdapter(String[] listOfKategori, MainActivity activity){
         this.activity = activity;
         this.presenter = this.activity.getPresenter();
         this.listOfKategori = listOfKategori;
@@ -22,12 +22,12 @@ public class KategoriAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return listOfKategori.size();
+        return listOfKategori.length;
     }
 
     @Override
     public String getItem(int position) {
-        return listOfKategori.get(position);
+        return listOfKategori[position];
     }
 
     @Override

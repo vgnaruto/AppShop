@@ -39,12 +39,7 @@ public class FragmentKategori extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_kategori, container, false);
 
-        ArrayList<String> listOfKategori = new ArrayList<>();
-        listOfKategori.add("Kategori 1");
-        listOfKategori.add("Kategori 2");
-        listOfKategori.add("Kategori 3");
-        listOfKategori.add("Kategori 4");
-        listOfKategori.add("Kategori 5");
+        String[] listOfKategori = getResources().getStringArray(R.array.category_list);
 
         backButton = view.findViewById(R.id.back_button);
         listKategori = view.findViewById(R.id.list_kategori);

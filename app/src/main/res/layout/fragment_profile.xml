@@ -84,7 +84,7 @@
                     android:layout_weight="1"
                     android:text="Nama"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/tv_nama_profile"
@@ -121,7 +121,7 @@
                     android:layout_weight="1"
                     android:text="E-mail"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -147,7 +147,7 @@
                     android:layout_weight="1"
                     android:text="Nomor Telepon"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -185,7 +185,7 @@
                     android:layout_weight="1"
                     android:text="Alamat"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -210,7 +210,7 @@
                     android:layout_weight="1"
                     android:text="Provinsi"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -235,7 +235,7 @@
                     android:layout_weight="1"
                     android:text="Kota/Kabupaten"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
 
                 <TextView

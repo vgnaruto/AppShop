@@ -18,6 +18,7 @@ import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Properties;
@@ -104,7 +105,7 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
         checkoutButton.setOnClickListener(this);
         checkoutButton.setEnabled(false);
 
-        tvAdministrationFee.setText(presenter.formatRupiah(administrationFee));
+        tvAdministrationFee.setText(presenter.formatRupiah(""+administrationFee));
         return view;
     }
 
@@ -128,7 +129,7 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
             final Bank selectedBank = banks[spinnerBank.getSelectedItemPosition()];
             dialogBuilder
                     .withTitle(null)
-                    .withMessage(String.format(getResources().getString(R.string.text_transfer),selectedBank.getNoRek(),"YYY",presenter.formatRupiah(adapter.getTotal()+adapter.getTotalShipping()+administrationFee),selectedBank.getNamaBank()))
+                    .withMessage(String.format(getResources().getString(R.string.text_transfer),selectedBank.getNoRek(),"YYY",presenter.formatRupiah("" +(adapter.getTotal()+adapter.getTotalShipping()+administrationFee)),selectedBank.getNamaBank()))
                     .withMessageColor("#FFFFFF")
                     .withDialogColor("#e6005c")
                     .withEffect(Effectstype.Fadein)
@@ -209,8 +210,11 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
     }
     public void updatePayment(){
         tvTotalOrder.setText(presenter.formatRupiah(adapter.getTotal()));
-        tvExpeditionFee.setText(presenter.formatRupiah(adapter.getTotalShipping()));
-        tvTotalPayment.setText(presenter.formatRupiah(adapter.getTotal()+adapter.getTotalShipping()+administrationFee));
+        tvExpeditionFee.setText(presenter.formatRupiah(""+adapter.getTotalShipping()));
+        BigInteger total = new BigInteger(adapter.getTotal());
+        total = total.add(BigInteger.valueOf(adapter.getTotalShipping())).add(BigInteger.valueOf(administrationFee));
+//        tvTotalPayment.setText(presenter.formatRupiah(""+(adapter.getTotal()+adapter.getTotalShipping()+administrationFee)));
+        tvTotalPayment.setText(presenter.formatRupiah(total.toString()));
         checkoutButton.setEnabled(true);
     }
     public String formatPesan(Bank selected){
@@ -225,13 +229,13 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
             int jumlah = current.getTotal();
             double harga = presenter.uangToInteger(current.getHarga()) * jumlah;
             result += (i+1)+"."+nb+"\n";
-            result+="  Jumlah: "+jumlah+"\n  Harga :"+presenter.formatRupiah(harga)+"\n\n";
+            result+="  Jumlah: "+jumlah+"\n  Harga :"+presenter.formatRupiah(""+harga)+"\n\n";
             totalHargaProduct += harga;
         }
-        result+="\n\nTotal Harga Produk : "+presenter.formatRupiah(totalHargaProduct)+"\n";
-        result+="Ongkos Kirim : "+presenter.formatRupiah(adapter.getTotalShipping())+"\n";
-        result+="Ongkos Administrasi : "+presenter.formatRupiah(administrationFee)+"\n";
-        result+="Total Pembayaran : "+presenter.formatRupiah(totalHargaProduct+adapter.getTotalShipping()+administrationFee)+"\n\n";
+        result+="\n\nTotal Harga Produk : "+presenter.formatRupiah(""+totalHargaProduct)+"\n";
+        result+="Ongkos Kirim : "+presenter.formatRupiah(""+adapter.getTotalShipping())+"\n";
+        result+="Ongkos Administrasi : "+presenter.formatRupiah(""+administrationFee)+"\n";
+        result+="Total Pembayaran : "+presenter.formatRupiah(""+(totalHargaProduct+adapter.getTotalShipping()+administrationFee))+"\n\n";
 
         result += "Tujuan Pengiriman:\n\n"
                 +currentUser.getNama()+"\n"
@@ -240,7 +244,7 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
                 +"Telp: "+currentUser.getNomorTelepon()+"\n\n";
 
         result += "Silahkan lakukan transfer ke bank "+selected.getNamaBank() +" atas nama YYY dengan nomor rekening "+selected.getNoRek()+"\n";
-        result += "Dengan total sebesar "+presenter.formatRupiah(totalHargaProduct+adapter.getTotalShipping()+administrationFee)+"\n";
+        result += "Dengan total sebesar "+presenter.formatRupiah(""+(totalHargaProduct+adapter.getTotalShipping()+administrationFee))+"\n";
         result += "Batas waktu untuk transfer 24 jam dari sekarang\nTerima kasih.";
         return result;
     }

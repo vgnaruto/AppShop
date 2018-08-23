@@ -54,7 +54,7 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
     private ImageButton backButton;
     private Button simpanButton;
     private EditText etNama, etBerat, etHarga, etKuantitas, etKeterangan;
-    private TextView tvNamaPenjual, tvAlamatPenjual;
+    private TextView tvNamaPenjual, tvAlamatPenjual, tvAturan;
     private Spinner spKategori;
     private LinearLayout llKategori;
 
@@ -103,11 +103,14 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
         imageButtonGallery = view.findViewById(R.id.ib_gallery);
         spKategori = view.findViewById(R.id.sp_kategori);
         llKategori = view.findViewById(R.id.ll_kategori);
+        tvAturan = view.findViewById(R.id.text_aturan);
+
+        tvAturan.setVisibility(View.GONE);
 
         gambar = new ArrayList<>();
         kategori = new ArrayList<>();
         tvNamaPenjual.setText(presenter.getUser().getSeller().getName());
-        tvAlamatPenjual.setText(presenter.getUser().getSeller().getAddress());
+        tvAlamatPenjual.setText(presenter.getUser().getSeller().getKabupaten().getCity_name()+","+presenter.getUser().getSeller().getProvinsi().getProvince());
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.category_list, R.layout.support_simple_spinner_dropdown_item);
@@ -120,6 +123,9 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
                 if(spKategori.getSelectedItemPosition() > 0 && !kategori.contains(spKategori.getSelectedItem().toString())) {
+                    if(kategori.isEmpty()){
+                        tvAturan.setVisibility(View.VISIBLE);
+                    }
                     String selectedCategory = spKategori.getSelectedItem().toString();
                     TextView tvKategori = new TextView(ctx);
                     tvKategori.setTextSize(15);
@@ -132,6 +138,9 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
                         public void onClick(View v) {
                             kategori.remove(((TextView) v).getText());
                             llKategori.removeView(v);
+                            if(kategori.isEmpty()){
+                                tvAturan.setVisibility(View.GONE);
+                            }
                         }
                     });
                 }
@@ -166,7 +175,7 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
             Log.d("FIB", "called 2");
             this.imageButtonGambarProduk.setImageBitmap(this.gambar.get(0));
             this.etNama.setText(product.getNama());
-            this.etHarga.setText(product.getHargaAngka() + "");
+            this.etHarga.setText(product.getHarga());
             this.etBerat.setText(product.getWeight());
             this.etKuantitas.setText(product.getStock() + "");
             this.etKeterangan.setText(product.getProductDetails());
@@ -183,14 +192,15 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v == backButton) {
-            this.etNama.setText("");
-            this.etHarga.setText("");
-            this.etBerat.setText("");
-            this.etKuantitas.setText("");
-            this.etKeterangan.setText("");
-            this.spKategori.setSelection(0);
-            this.llKategori.removeAllViews();
-            Log.d("FIB", "called 3");
+//            this.etNama.setText("");
+//            this.etHarga.setText("");
+//            this.etBerat.setText("");
+//            this.etKuantitas.setText("");
+//            this.etKeterangan.setText("");
+//            this.spKategori.setSelection(0);
+//            this.llKategori.removeAllViews();
+            reset();
+//            Log.d("FIB", "called 3");
             ctx.onBackPressed();
         } else if (v == simpanButton) {
             if (isDataValid()) {
@@ -210,9 +220,9 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
                 harga = myFormatter.format(harga);
                 */
 
-                double hargaAngka = Double.parseDouble(harga);
-                Product newProduct = new Product(gambar, presenter.formatRupiah(hargaAngka), nama, keterangan, savedCategory, penjual, 0, berat, kuantitas);
-                newProduct.setHargaAngka(hargaAngka);
+//                double hargaAngka = Double.parseDouble(harga);
+                Product newProduct = new Product(gambar, presenter.formatRupiah(harga), nama, keterangan, savedCategory, penjual, 0, berat, kuantitas);
+//                newProduct.setHargaAngka(hargaAngka);
                 if(this.product != null){
                     ctx.removeProducttoSeller(this.product);
                     ctx.getAllProduct().remove(this.product);
@@ -229,14 +239,15 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
                 ctx.addProduct(newProduct);
                 */
 
-                this.etNama.setText("");
-                this.etHarga.setText("");
-                this.etBerat.setText("");
-                this.etKuantitas.setText("");
-                this.etKeterangan.setText("");
-                this.spKategori.setSelection(0);
-                this.llKategori.removeAllViews();
-                Log.d("FIB", "called 4");
+//                this.etNama.setText("");
+//                this.etHarga.setText("");
+//                this.etBerat.setText("");
+//                this.etKuantitas.setText("");
+//                this.etKeterangan.setText("");
+//                this.spKategori.setSelection(0);
+//                this.llKategori.removeAllViews();
+                reset();
+//                Log.d("FIB", "called 4");
 
                 /*this.etHarga.setHint(etHarga.getHint());
                 this.etBerat.setHint(etBerat.getHint());
@@ -248,6 +259,8 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
                 toast.show();
                 ctx.hideKeyboard();
                 ctx.onBackPressed();
+            }else{
+                Toast.makeText(ctx,"Tolong lengkapi data di atas!",Toast.LENGTH_LONG).show();
             }
         } else if (v == imageButtonGallery || v == imageButtonGambarProduk) {
             Intent intent = new Intent();
@@ -257,6 +270,16 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
             }
         }
+    }
+    private void reset(){
+        this.etNama.setText("");
+        this.etHarga.setText("");
+        this.etBerat.setText("");
+        this.etKuantitas.setText("");
+        this.etKeterangan.setText("");
+        this.spKategori.setSelection(0);
+        this.llKategori.removeAllViews();
+        this.tvAturan.setVisibility(View.GONE);
     }
 
     public boolean isDataValid() {
@@ -303,7 +326,7 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
                 this.gambar.add(img);
             } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(ctx, "Failed!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "Gagal!", Toast.LENGTH_SHORT).show();
             }
         }
     }

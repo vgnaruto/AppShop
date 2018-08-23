@@ -17,7 +17,7 @@ public class Product {
     private int rating;
     private int total;
     private int stock;
-    private double hargaAngka;
+//    private double hargaAngka;
     private boolean inCart;
     private String weight;
     private String[] kategori;
@@ -43,13 +43,13 @@ public class Product {
         this.stock = stock;
     }
 
-    public double getHargaAngka() {
-        return hargaAngka;
-    }
+//    public double getHargaAngka() {
+//        return hargaAngka;
+//    }
 
-    public void setHargaAngka(double hargaAngka) {
-        this.hargaAngka = hargaAngka;
-    }
+//    public void setHargaAngka(double hargaAngka) {
+//        this.hargaAngka = hargaAngka;
+//    }
 
     public String getWeight() {
         return weight;

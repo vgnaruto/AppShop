@@ -159,8 +159,8 @@ public class ManageItemAdapter extends BaseAdapter {
         public void updateView(Product prod) {
             namaPerus.setText(prod.getSeller().getName());
             judulProduct.setText(prod.getNama());
-            int harga = Integer.parseInt(prod.getHarga().substring(3).replaceAll("\\.", "").trim());
-            hargaProduct.setText(presenter.formatRupiah(harga));
+//            int harga = Integer.parseInt(prod.getHarga().substring(3).replaceAll("\\.", "").trim());
+            hargaProduct.setText(presenter.formatRupiah(prod.getHarga().substring(3).replaceAll("\\.", "").trim()));
             totalOrder.setText(prod.getStock()+"");
             gambarProduct.setImageBitmap(prod.getFoto().get(0));
         }

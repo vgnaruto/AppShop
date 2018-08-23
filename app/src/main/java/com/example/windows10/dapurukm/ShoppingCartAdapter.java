@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -53,7 +54,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
             int harga = Integer.parseInt(p.getHarga().substring(3).replaceAll("\\.","").trim());
             total += harga * p.getTotal();
         }
-        return presenter.formatRupiah(total);
+        return presenter.formatRupiah(""+total);
     }
 
     @Override
@@ -207,9 +208,12 @@ public class ShoppingCartAdapter extends BaseAdapter {
         public void updateView(Product prod) {
             namaPerus.setText(prod.getSeller().getName());
             judulProduct.setText(prod.getNama());
-            int harga = Integer.parseInt(prod.getHarga().substring(3).replaceAll("\\.", "").trim());
-            int total = prod.getTotal();
-            hargaProduct.setText(presenter.formatRupiah(harga * total));
+//            int harga = Integer.parseInt(prod.getHarga().substring(3).replaceAll("\\.", "").trim());
+//            int total = prod.getTotal();
+            BigInteger harga = new BigInteger(prod.getHarga().substring(3).replaceAll("\\.", "").trim());
+            harga = harga.multiply(BigInteger.valueOf(prod.getTotal()));
+//            hargaProduct.setText(presenter.formatRupiah(""+(harga * total)));
+            hargaProduct.setText(presenter.formatRupiah(harga.toString()));
             totalOrder.setText(prod.getTotal()+"");
             gambarProduct.setImageBitmap(prod.getFoto().get(0));
         }
