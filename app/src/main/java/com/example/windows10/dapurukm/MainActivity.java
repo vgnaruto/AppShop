@@ -586,4 +586,12 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         fragmentManageItem.remove(newProduct);
         fragmentManageItem.removeHash(newProduct.getSeller().getName() + "-" + newProduct.getNama());
     }
+
+    public FragmentShoppingCart getFragmentShoppingCart() {
+        return fragmentShoppingCart;
+    }
+
+    public FragmentCheckout getFragmentCheckout() {
+        return fragmentCheckout;
+    }
 }

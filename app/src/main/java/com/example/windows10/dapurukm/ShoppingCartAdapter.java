@@ -49,9 +49,9 @@ public class ShoppingCartAdapter extends BaseAdapter {
     }
 
     public String getTotalHarga(){
-        int total = 0;
+        long total = 0;
         for(Product p : products){
-            int harga = Integer.parseInt(p.getHarga().substring(3).replaceAll("\\.","").trim());
+            long harga = Long.parseLong(p.getHarga().substring(3).replaceAll("\\.","").trim());
             total += harga * p.getTotal();
         }
         return presenter.formatRupiah(""+total);

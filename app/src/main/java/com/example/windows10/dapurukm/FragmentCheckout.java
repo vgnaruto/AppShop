@@ -114,22 +114,11 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
         if(v == backButton){
             ctx.onBackPressed();
         }else if(v == checkoutButton){
-            ArrayList<Product> cart = presenter.getProduct();
-            for (int i = 0; i < ctx.getAllProduct().size(); i++) {
-                for (int j = 0; j < cart.size(); j++) {
-                    if(ctx.getAllProduct().get(i).getNama().equals(cart.get(j).getNama()) &&
-                            ctx.getAllProduct().get(i).getSeller().equals(cart.get(j).getSeller())){
-                        ctx.getAllProduct().get(i).setStock(ctx.getAllProduct().get(i).getStock() - cart.get(j).getTotal());
-                        break;
-                    }
-                }
-            }
-
             final NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(ctx);
             final Bank selectedBank = banks[spinnerBank.getSelectedItemPosition()];
             dialogBuilder
                     .withTitle(null)
-                    .withMessage(String.format(getResources().getString(R.string.text_transfer),selectedBank.getNoRek(),"YYY",presenter.formatRupiah("" +(adapter.getTotal()+adapter.getTotalShipping()+administrationFee)),selectedBank.getNamaBank()))
+                    .withMessage(String.format(getResources().getString(R.string.text_transfer),selectedBank.getNoRek(),"YYY",presenter.formatRupiah("" +(Long.parseLong(adapter.getTotal())+adapter.getTotalShipping()+administrationFee)),selectedBank.getNamaBank()))
                     .withMessageColor("#FFFFFF")
                     .withDialogColor("#e6005c")
                     .withEffect(Effectstype.Fadein)
@@ -139,6 +128,21 @@ public class FragmentCheckout extends Fragment implements View.OnClickListener{
                     .setButton1Click(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
+                            //REDUCE STOCK
+                            ArrayList<Product> cart = presenter.getProduct();
+                            for (int i = 0; i < ctx.getAllProduct().size(); i++) {
+                                for (int j = 0; j < cart.size(); j++) {
+                                    if(ctx.getAllProduct().get(i).getNama().equals(cart.get(j).getNama()) &&
+                                            ctx.getAllProduct().get(i).getSeller().equals(cart.get(j).getSeller())){
+                                        ctx.getAllProduct().get(i).setStock(ctx.getAllProduct().get(i).getStock() - cart.get(j).getTotal());
+                                        break;
+                                    }
+                                }
+                            }
+
+                            ctx.notifyHomeFragment();
+
                             //SEND EMAIL
                             final String username = getResources().getString(R.string.username_email);
                             final String password = getResources().getString(R.string.password_email);

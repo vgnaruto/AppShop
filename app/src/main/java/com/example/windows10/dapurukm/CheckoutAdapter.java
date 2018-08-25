@@ -107,7 +107,7 @@ public class CheckoutAdapter extends BaseAdapter {
         BigInteger result = new BigInteger("0");
         for (String total : totalOrder) {
 //            result += total;
-            result.add(BigInteger.valueOf(Long.parseLong(total)));
+            result = result.add(BigInteger.valueOf(Long.parseLong(total)));
         }
         return result.toString();
     }
@@ -186,8 +186,8 @@ public class CheckoutAdapter extends BaseAdapter {
             tvTotalBarang.setText(product.getTotal() + " pcs");
 //            final int total = product.getTotal();
 //            final int harga = Integer.parseInt(product.getHarga().substring(3).replaceAll("\\.", ""));
-            final BigInteger harga = new BigInteger(product.getHarga().substring(3).replaceAll("\\.", ""));
-            harga.multiply(BigInteger.valueOf(product.getTotal()));
+            BigInteger harga = new BigInteger(product.getHarga().substring(3).replaceAll("\\.", ""));
+            harga = harga.multiply(BigInteger.valueOf(product.getTotal()));
             tvTotalHarga.setText(presenter.formatRupiah(harga.toString()));
 
             totalOrder.set(posisi,harga.toString());

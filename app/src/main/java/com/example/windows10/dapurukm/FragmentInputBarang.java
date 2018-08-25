@@ -175,7 +175,7 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
             Log.d("FIB", "called 2");
             this.imageButtonGambarProduk.setImageBitmap(this.gambar.get(0));
             this.etNama.setText(product.getNama());
-            this.etHarga.setText(product.getHarga());
+            this.etHarga.setText(presenter.revertHargaNumber(product.getHarga()));
             this.etBerat.setText(product.getWeight());
             this.etKuantitas.setText(product.getStock() + "");
             this.etKeterangan.setText(product.getProductDetails());
@@ -200,6 +200,8 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
 //            this.spKategori.setSelection(0);
 //            this.llKategori.removeAllViews();
             reset();
+            ctx.getFragmentCheckout().notifData();
+            ctx.getFragmentShoppingCart().notifData();
 //            Log.d("FIB", "called 3");
             ctx.onBackPressed();
         } else if (v == simpanButton) {
@@ -330,5 +332,4 @@ public class FragmentInputBarang extends Fragment implements View.OnClickListene
             }
         }
     }
-
 }

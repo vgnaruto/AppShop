@@ -75,6 +75,20 @@ public class MainPresenter {
         return "Rp "+result;
     }
 
+
+    public String revertHargaNumber(String harga){
+        String result = "";
+        String temp = harga.substring(3);
+        int idx;
+        while (temp.length() > 3){
+            idx = temp.length()-3;
+            result = temp.substring(idx) + result;
+            temp = temp.substring(0, idx - 1);
+        }
+        result = temp + result;
+        return result;
+    }
+
     public void notifyUserChanged(){
         activity.notifyUserChanged();
     }

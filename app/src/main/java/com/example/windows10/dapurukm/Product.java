@@ -72,6 +72,7 @@ public class Product {
     }
 
     public void setTotal(int total) {
+        if(total > this.stock)total = this.stock;
         this.total = total;
     }
 

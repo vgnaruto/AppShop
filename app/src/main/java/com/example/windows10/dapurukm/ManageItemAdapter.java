@@ -71,6 +71,15 @@ public class ManageItemAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //to be removed
+                ArrayList<Product> shoppingCartProducts = ui.getFragmentShoppingCart().getProduct();
+                for (int i = 0; i < shoppingCartProducts.size(); i++) {
+                    if (shoppingCartProducts.get(i).getSeller().equals(products.get(position).getSeller())) {
+                        if (shoppingCartProducts.get(i).getNama().equals(products.get(position).getNama())) {
+                            ui.getFragmentShoppingCart().getProduct().remove(i);
+                            break;
+                        }
+                    }
+                }
                 ui.getAllProduct().remove(products.get(position));
                 ui.removeHash(productsHash.get(position));
                 productsHash.remove(position);
